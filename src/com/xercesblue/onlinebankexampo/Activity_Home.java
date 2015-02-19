@@ -34,14 +34,26 @@ public class Activity_Home extends Activity_Parent {
 		setFooterAndHeader(R.id.imgBtnFooterHome,getResources().getString(R.string.header_home));	
 		createDynamicControls();
 		Custom_ConnectionDetector cd = new Custom_ConnectionDetector(this);
+		
+		Boolean popUpShown = false;
 		if(cd.isConnectingToInternet()){
-			Custom_AppRater.app_launched(this);
+			if(Globals.current_version_code>Globals.getversion_code())
+			{
+				popUpShown = Custom_Versionchek.app_launched(this);
+			}
 			
-			Custom_AppShare cas = new Custom_AppShare();
-			cas.app_launched(this, savedInstanceState);
+			if(!popUpShown)
+				popUpShown = Custom_AppRater.app_launched(this);
+			
+			if(!popUpShown){
+				Custom_AppShare cas = new Custom_AppShare();
+				cas.app_launched(this, savedInstanceState);
+			}
 		}
 		
-		Custom_AppRegistration.app_launched(this);
+		if(!popUpShown)
+			Custom_AppRegistration.app_launched(this);
+		
 		Custom_AppEulaClass eula = new Custom_AppEulaClass(this);
 		eula.show();
 	}

@@ -11,6 +11,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
@@ -18,6 +20,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -50,11 +53,11 @@ public class Globals {
 	public static final int ADD_TYPE_VSERV= 2;
 	public static final int ADD_TYPE_STARTAPP= 3;
 	
-	public final static  String SHARE_LINK_GENERIC ="http://xercesblue.in/download/androidApp.php?id=5";
-	public final static  String SHARE_LINK_WhatsApp ="http://xercesblue.in/download/androidApp.php?id=4";
-	public final static  String SHARE_LINK_Facebook ="http://xercesblue.in/download/androidApp.php?id=3";
-	public final static String SHARE_APP_MSG = "Friends, check out this awesome app for Bank PO / Clerical exams preparation. ";
+	private static EditText etAlerrtMessage;
+	private static int version_code;
+	public static int current_version_code=9;
 	@SuppressLint("NewApi")
+
 	static public Point getScreenSize(Activity currentActivity){
 		Display display = currentActivity.getWindowManager().getDefaultDisplay();
 		Point size = new Point();
@@ -187,7 +190,53 @@ static public void showAlertDialogOneButton(String title,String msg,Context cont
 		alertDialog.show();
 		
 	}
+	
+static public void showAlertDialogEditText(String title,String msg,Context context,String positiveButtonText,DialogInterface.OnClickListener listnerPositive,String negativeButtonText ,DialogInterface.OnClickListener listnerNegative,Boolean isCancelable){
+		
+		AlertDialog alertDialog = new AlertDialog.Builder(
+				context).create();
+		
+		etAlerrtMessage = new EditText(context);
+		etAlerrtMessage.setHint("Type Your Message");
 
+		alertDialog.setTitle(title);
+		alertDialog.setMessage(msg);
+		alertDialog.setView(etAlerrtMessage);
+		alertDialog.setCancelable(isCancelable);
+		alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+		alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,positiveButtonText,listnerPositive);
+		
+		if(negativeButtonText!= null && !negativeButtonText.equals("")){
+			alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,negativeButtonText,listnerNegative);
+		}
+		alertDialog.show();
+		
+	}
+
+public static String getAlertMessage(){
+	
+	String msg ="";
+	
+	if(etAlerrtMessage != null)
+		if(etAlerrtMessage.getText() != null){
+			
+			msg = etAlerrtMessage.getText().toString();
+			etAlerrtMessage = null;
+		}
+	
+	
+	
+	return msg;
+}
+
+public static void setversion_name(int s)
+{
+	version_code=s;
+}
+public static int getversion_code()
+{
+	return version_code;
+}
 	public static Integer getOptimalSlotSize(Activity ctxt) {
 		 Display display = ((WindowManager) ctxt
 		 .getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();

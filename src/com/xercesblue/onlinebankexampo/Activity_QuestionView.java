@@ -11,6 +11,8 @@ import com.android.volley.toolbox.StringRequest;
 
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,8 +22,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -44,6 +48,8 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 	private Boolean isPractice;
 	private ArrayList<Integer>arrayQuesNoAnsShown;
 	long totalmillisec = 0;
+	ScrollView scrollConatinerSolutions ;
+	
 
 	
 	
@@ -53,8 +59,12 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 		setContentView(R.layout.activity_question_view);	
 		
 		isPractice = Activity_Select_Exam_Category.isPractice;
+		scrollConatinerSolutions = (ScrollView)findViewById(R.id.scrolViewSolution);
 		initializeControls();
 		resizeImageButtons(true);	
+		
+		
+		
 	}
 
 	@Override
@@ -125,6 +135,7 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 		TextView txtHeader = (TextView)findViewById(R.id.txtHeader);
 		txtHeader.setText(quesCatObj.name);	
 		TextView txtQ = (TextView)findViewById(R.id.txtQuestion);
+	
 		txtQ.setTextColor(getResources().getColor(R.color.app_white));
 		txtQ.setTextSize( Globals.getAppFontSize(this));
 
@@ -412,7 +423,9 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 			currentQues = objQ;
 			if(isPractice)
 				currentQues.isAnsShown = isAnsShown(currentQues.questionNo);
+			
 			setQuestionView();
+			
 		}else{
 			//Globals.showAlertDialogError(this,"No more questions available, Download more from settings.");
 			DialogInterface.OnClickListener listenerP = new DialogInterface.OnClickListener() {
@@ -521,27 +534,64 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 		}
 
 		setCurrentQuestion(objQ, catId);
+		setSolution();
+	}
+	private void setSolution()
+	{
+		if(currentQues != null){
+	
+			if(currentQues.isAnsShown)
+			{
+				if(!currentQues.solution.equals(""))
+				{
+					
+					TextView txtsol =(TextView)findViewById(R.id.txtSolution);
+					txtsol.setTextSize(Globals.getAppFontSize(this));
+					txtsol.setText("Solution :\n"+currentQues.solution);
+					
+					scrollConatinerSolutions.setVisibility(View.VISIBLE);
+				}
+				
+			}
+			else
+			{
+				scrollConatinerSolutions.setVisibility(View.GONE);
+			}
+			
+		}
+		
 	}
 	public void onClickNext(View v){
-
+		
+	
 		int qNo = 1;
 		if(currentQues != null){
 			qNo = currentQues.questionNo+1;
 		}
 
 		if(qNo <= quesCatObj.totalQues)
+		{
 			setCurrentQuestionWithNumber(qNo);
 
+		}
+	
+	
 	}
 	public void onClickPrev(View v){
-
+		
+		
+	
+		//scrollConatinerSolutions.setVisibility(View.VISIBLE);
 		int qNo = 1;
 
 		if(currentQues != null){
 			qNo = currentQues.questionNo-1;
 		}
 		if(qNo > 0)
+		{
 			setCurrentQuestionWithNumber(qNo);
+		}
+		
 
 	}
 	public void onClickStop(View v){
@@ -564,7 +614,22 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 			if(!currentQues.isAnsShown){
 				currentQues.isAnsShown = true;
 				v.setSelected(true);
+			
 				setOptions();
+				
+				Boolean haveSolution =false;
+				if(!currentQues.solution.equals(""))
+				{
+					TextView txtsol =(TextView)findViewById(R.id.txtSolution);
+					txtsol.setTextSize(Globals.getAppFontSize(this));
+					txtsol.setText("Solution :  \n"+currentQues.solution);
+					haveSolution =true;
+					
+				}
+				if(haveSolution)
+					scrollConatinerSolutions.setVisibility(View.VISIBLE);
+				else
+					scrollConatinerSolutions.setVisibility(View.GONE);
 				arrayQuesNoAnsShown.add(Integer.valueOf(currentQues.questionNo));
 			}
 
@@ -602,7 +667,7 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 				// Write your code here to execute after dialog closed
 				
 					
-					String url = "http://xercesblue.in/onlinexamserver/liquid_data/bugReport/reportQuestion.php";
+					String url = ServerURL.getBug_Report_Wrong_Question_link();
 					StringRequest postRequest = new StringRequest(Request.Method.POST, url, 
 					    new Response.Listener<String>() 
 					    {
@@ -630,6 +695,7 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 					            Map<String, String>  params = new HashMap<String, String>();  
 					            params.put("quesID", currentQues.quesId+"");  
 					            params.put("gcmID", Globals.GCM_REG_ID);  
+					            params.put("bugDetail", Globals.getAlertMessage()); 
 					            
 					            return params;  
 					    }
@@ -639,8 +705,9 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 				dialog.cancel();
 			}
 		};
+		final EditText et = new EditText(this);
 		
-		Globals.showAlertDialog("Wrong Question", "If you find any error in question or its options or given solution, please report this question. We will correct it in next update, Thanks for your support.", this, "REPORT", listener, "CANCEL", null, false);
+		Globals.showAlertDialogEditText("Wrong Question", "If you find any error in question or its options or given solution, please report this question. We will correct it in next update, Thanks for your support.", this, "REPORT", listener, "CANCEL", null, false);
 	
 	}
 	private String getTimeString(long milliSecs){

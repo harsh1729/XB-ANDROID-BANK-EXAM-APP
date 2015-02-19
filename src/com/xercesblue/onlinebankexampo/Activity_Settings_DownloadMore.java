@@ -138,8 +138,8 @@ public class Activity_Settings_DownloadMore extends Activity_Parent_IntertialAds
 
 		Custom_ConnectionDetector cd = new Custom_ConnectionDetector(getApplicationContext());
 		if(cd.isConnectingToInternet()){
-			shareOnFaceBook();
-			//downloadQuestions();
+			//shareOnFaceBook();
+			downloadQuestions();
 		}
 		else{
 			Log.i("HARSH", "NO INTERNET");
@@ -186,7 +186,7 @@ public class Activity_Settings_DownloadMore extends Activity_Parent_IntertialAds
 			// Publish the post using the Share Dialog
 			Log.i("HARSH", "FacebookDialog");
 			FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(
-					this).setLink(Globals.SHARE_LINK_Facebook).setDescription("Globals.SHARE_APP_MSG").setName("Online Bank Exam Practice")
+					this).setLink(ServerURL.getShareLinkFacebook()).setDescription("Globals.SHARE_APP_MSG").setName("Online Bank Exam Practice")
 					.build();
 			//.setApplicationName("Bank PO Online Exam")
 			uiHelper.trackPendingDialogCall(shareDialog.present());
@@ -240,8 +240,8 @@ public class Activity_Settings_DownloadMore extends Activity_Parent_IntertialAds
 		Bundle params = new Bundle();
 		params.putString("name", "Bank Online Exam Practice");
 		params.putString("caption", "Android app");
-		params.putString("description", Globals.SHARE_APP_MSG);
-		params.putString("link",Globals.SHARE_LINK_Facebook);
+		params.putString("description", ServerURL.getShareAppMsg());
+		params.putString("link",ServerURL.getShareLinkFacebook());
 		//params.putString("picture", "https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
 
 		WebDialog feedDialog = (
@@ -461,7 +461,7 @@ public class Activity_Settings_DownloadMore extends Activity_Parent_IntertialAds
 			try 
 			{
 				HttpClient httpClient = new DefaultHttpClient();
-				HttpGet httpGet = new HttpGet("http://www.xercesblue.in/onlinexamserver/liquid_data/xport_xml.php?lastQuestionNumber="+qusNumber+"&appId="+Globals.APP_ID+"&deviceIMEI="+deviceImei+"&LangCode="+langCode+"&gcmId="+Globals.GCM_REG_ID);
+				HttpGet httpGet = new HttpGet(ServerURL.getDownload_question_link(qusNumber,deviceImei,langCode));
 
 				HttpResponse response = httpClient.execute(httpGet);
 
@@ -481,7 +481,8 @@ public class Activity_Settings_DownloadMore extends Activity_Parent_IntertialAds
 				*/
 
 				System.out.println("length of file:"+lengthOfFile);
-
+				
+				Log.i("HARSH", "File Input is "+response.toString());
 				InputStream inputStream = new BufferedInputStream(response.getEntity().getContent(),32);
 				OutputStream output = new FileOutputStream( Environment.getExternalStorageDirectory().toString()+"/qusDatabase.xml" );
 				byte packet[] = new byte[2];
@@ -536,14 +537,17 @@ public class Activity_Settings_DownloadMore extends Activity_Parent_IntertialAds
 			} 
 			catch (ClientProtocolException e) 
 			{
+				Log.i("HARSH", "Exception in downloading 1");
 				e.printStackTrace();
 			} 
 			catch (IOException e) 
 			{
+				Log.i("HARSH", "Exception in downloading 2");
 				e.printStackTrace();
 			}
 			catch (Exception e) 
 			{
+				Log.i("HARSH", "Exception in downloading 3");
 				e.printStackTrace();
 			}
 

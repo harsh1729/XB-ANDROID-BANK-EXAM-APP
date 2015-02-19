@@ -159,7 +159,47 @@
                 android:fadeScrollbars="false" >
             </ListView>
         </LinearLayout>
+        <LinearLayout 
+             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            
+            android:orientation="vertical">
+              <ScrollView
+            android:id="@+id/scrolViewSolution"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            
+            android:background="@color/app_lightgray"
+            android:visibility="gone"
+            android:fadeScrollbars="false" >
 
+            <LinearLayout
+                android:id="@+id/llytSolution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp" >
+
+                <TextView
+                    android:id="@+id/txtSolution"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_black"
+                    
+                    android:scrollHorizontally="true"
+                    android:singleLine="false"
+                    android:text="TextView" />
+
+                <ImageView
+                    android:id="@+id/imgViewSolution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="Image" />
+            </LinearLayout>
+        </ScrollView>
+        </LinearLayout>
+		
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -261,6 +301,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/selector_question_stop" />
         </RelativeLayout>
+       
     </LinearLayout>
 
     <!-- Footer aligned to bottom -->

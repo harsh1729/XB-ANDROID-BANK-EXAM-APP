@@ -172,7 +172,7 @@ public class Activity_Current_GK_Test extends Activity_Parent_Banner_Ads {
         mDialog.setCancelable(false);
         mDialog.show();
         
-		final String url = "http://xercesblue.in/onlinexamserver/liquid_data/CurrentGKCenter/getGKQuestions.php?QuestionNo="+qNo+"&langCode="+langCode+"&date="+date+"&month="+month+"&year="+year; 
+		final String url = ServerURL.getCurrent_GK_Test_link(qNo,langCode,date,month,year); 
 		Log.i("HARSH", "URL IS -->" + url);
 		
 		// prepare the Request

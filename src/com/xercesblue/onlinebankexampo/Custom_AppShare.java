@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,14 +35,16 @@ public class Custom_AppShare {
     public final static int LAUNCHES_UNTIL_PROMPT = 7;
     private UiLifecycleHelper uiHelper;
     private Activity activity;
+  
     
-    public void app_launched(Activity mContext , Bundle savedInstanceState) {
+    public boolean app_launched(Activity mContext , Bundle savedInstanceState) {
+    	Boolean returnStatus = false;
     	this.activity = mContext; 
     	uiHelper = new UiLifecycleHelper(activity, null);
 		uiHelper.onCreate(savedInstanceState);
 		
         SharedPreferences prefs = mContext.getSharedPreferences("appsharer", 0);
-        if (prefs.getBoolean("dontshowagain_share", false)) { return ; }
+        if (prefs.getBoolean("dontshowagain_share", false)) { return returnStatus; }
         
         SharedPreferences.Editor editor = prefs.edit();
         
@@ -61,10 +64,12 @@ public class Custom_AppShare {
             if (System.currentTimeMillis() >= date_firstLaunch + 
                     (DAYS_UNTIL_PROMPT * 24 * 60 * 60 * 1000)) {
                 showShareDialog(editor);
+                returnStatus = true;
             }
         }
         
         editor.commit();
+        return returnStatus;
     }   
     
     public  void showShareDialog( final SharedPreferences.Editor editor) {
@@ -109,6 +114,8 @@ public class Custom_AppShare {
         });
         ll.addView(b2);
         
+      
+        
         Button b3 = new Button(activity);
         b3.setText("Remind me later");
         b3.setOnClickListener(new OnClickListener() {
@@ -152,7 +159,7 @@ public class Custom_AppShare {
 			// Publish the post using the Share Dialog
 			Log.i("HARSH", "FacebookDialog");
 			FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(
-					activity).setLink(Globals.SHARE_LINK_Facebook).setDescription(Globals.SHARE_APP_MSG).setName("Online Bank Exam")
+					activity).setLink(ServerURL.getShareLinkFacebook()).setDescription(ServerURL.getShareAppMsg()).setName("Online Bank Exam")
 					.build();
 			//.setApplicationName("Bank PO Online Exam")
 			uiHelper.trackPendingDialogCall(shareDialog.present());
@@ -212,8 +219,8 @@ public class Custom_AppShare {
 		Bundle params = new Bundle();
 		params.putString("name", "Bank Online Exam Practice");
 		params.putString("caption", "Android app");
-		params.putString("description", Globals.SHARE_APP_MSG);
-		params.putString("link", Globals.SHARE_LINK_Facebook);
+		params.putString("description", ServerURL.getShareAppMsg());
+		params.putString("link", ServerURL.getShareLinkFacebook());
 		//params.putString("picture", "https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
 
 		WebDialog feedDialog = (
@@ -259,7 +266,7 @@ public class Custom_AppShare {
 		
     	Intent sendIntent = new Intent();
 		sendIntent.setAction(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_TEXT,Globals.SHARE_APP_MSG+ "\n "+Globals.SHARE_LINK_WhatsApp);
+		sendIntent.putExtra(Intent.EXTRA_TEXT,ServerURL.getShareAppMsg()+ "\n "+ServerURL.getShareLinkWhatsapp());
 		sendIntent.setPackage("com.whatsapp");
 		sendIntent.setType("text/plain");
 		if(activity != null)

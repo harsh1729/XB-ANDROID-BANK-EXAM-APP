@@ -142,7 +142,7 @@ public class Activity_ExamAlert extends Activity_Parent
 			{
 				
 				HttpClient httpClient = new DefaultHttpClient();
-				HttpGet httpGet = new HttpGet("http://www.xercesblue.in/onlinexamserver/liquid_data/xamalertdatabase/xamupdate.php");
+				HttpGet httpGet = new HttpGet(ServerURL.getExam_Alert_link());
 				HttpResponse response = httpClient.execute(httpGet);
 				
 				Activity_ExamAlert.xmlStream = response.getEntity().getContent();

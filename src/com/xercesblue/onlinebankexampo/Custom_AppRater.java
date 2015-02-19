@@ -19,10 +19,12 @@ public class Custom_AppRater {
 	private final static int DAYS_UNTIL_PROMPT = 0;
 	public final static int LAUNCHES_UNTIL_PROMPT = 3;
 
-	public static void app_launched(Context mContext) {
+	public static boolean app_launched(Context mContext) {
+		Boolean returnStatus = false;
+		
 		SharedPreferences prefs = mContext.getSharedPreferences("apprater", 0);
 		if (prefs.getBoolean("dontshowagain", false)) {
-			return;
+			return returnStatus;
 		}
 
 		SharedPreferences.Editor editor = prefs.edit();
@@ -44,10 +46,13 @@ public class Custom_AppRater {
 				if (System.currentTimeMillis() >= date_firstLaunch
 						+ (DAYS_UNTIL_PROMPT * 24 * 60 * 60 * 1000)) {
 					showRateDialog(mContext, editor);
+					returnStatus = true;
 				}
 			}
 
 		editor.commit();
+		
+		return returnStatus;
 	}
 
 	public static void showRateDialog(final Context mContext,
@@ -78,7 +83,7 @@ public class Custom_AppRater {
 			}
 		});
 		ll.addView(b1);
-
+		
 		Button b2 = new Button(mContext);
 		b2.setText("Remind me later");
 		b2.setOnClickListener(new OnClickListener() {

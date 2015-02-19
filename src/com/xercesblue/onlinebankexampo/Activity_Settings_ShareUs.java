@@ -69,7 +69,7 @@ public class Activity_Settings_ShareUs extends Activity_Parent {
 		
 		Intent sendIntent = new Intent();
 		sendIntent.setAction(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_TEXT, Globals.SHARE_APP_MSG+ "\n "+Globals.SHARE_LINK_GENERIC);
+		sendIntent.putExtra(Intent.EXTRA_TEXT, ServerURL.getShareAppMsg()+ "\n "+ServerURL.getShareLinkGeneric());
 		//sendIntent.setPackage("com.whatsapp");
 		sendIntent.setType("text/plain");
 		startActivity(sendIntent);

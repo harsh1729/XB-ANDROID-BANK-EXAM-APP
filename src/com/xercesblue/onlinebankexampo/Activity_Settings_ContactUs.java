@@ -116,7 +116,7 @@ public class Activity_Settings_ContactUs extends Activity_Parent {
 		    protected String doInBackground(String... params) {
 		         try{
 		        	//http://xercesblue.in/OnlineXamServer/liquid_data/userreview/myreview.php?deviceId=222222222&msg=jaspalsingh
-		             String address = "http://xercesblue.in/OnlineXamServer/liquid_data/userreview/myreview.php";
+		             String address = ServerURL.getContactUs_link();
 		 			
 		 			HttpClient client = new DefaultHttpClient();
 		 			HttpPost post = new HttpPost(address);

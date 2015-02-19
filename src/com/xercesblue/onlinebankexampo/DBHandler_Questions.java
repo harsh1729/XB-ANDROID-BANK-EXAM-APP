@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBHandler_Questions extends SQLiteOpenHelper {
 
@@ -385,7 +386,7 @@ public class DBHandler_Questions extends SQLiteOpenHelper {
 			valuePairs.put(KEY_SOLUTION_IMAGE, question.solutionImage);
 
 			long rowinsert = db.insert(TABLE_NAME_QUES, null, valuePairs);
-			System.out.println("inserted row : "+rowinsert);
+			Log.i("HARSH", "inserted row Id: "+rowinsert);
 
 			//////////********************INSERT OPTIONS DETAILS IN OPTIONS TABLE  			*******************/////////////////
 			valuePairs.clear();
@@ -398,13 +399,15 @@ public class DBHandler_Questions extends SQLiteOpenHelper {
 				valuePairs.put(DBHandler_Options.KEY_OPTIONS_IMAGE,option.image);
 				
 				long optionInsert = db.insert(DBHandler_Options.TABLE_NAME_OPTIONS, null, valuePairs);
-				System.out.println("option inserted : "+optionInsert);
+				
+				Log.i("HARSH", "option inserted with Id: "+optionInsert);
 			}
 			db.setTransactionSuccessful();
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			Log.i("HARSH", "Eror whi8ole inserting -- "+e.getMessage());
 		}
 		finally
 		{

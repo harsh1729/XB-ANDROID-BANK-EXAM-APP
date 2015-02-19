@@ -1,6 +1,7 @@
 package com.xercesblue.onlinebankexampo;
 
 import java.util.ArrayList;
+
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +63,9 @@ public class Custom_ArrayAdaptor_Options extends ArrayAdapter<Object_Row_Item_Op
         		row.setBackgroundResource(R.drawable.bg_row_item_options_wrong);
         	}else{
         		row.setBackgroundResource(R.drawable.bg_row_item_options_unselect);
+        		
         	}
+        
         }else{
         	if(item.isSelected){
         		row.setBackgroundResource(R.drawable.bg_row_item_options_select);

@@ -15,6 +15,8 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import android.util.Log;
+
 
 public class Custom_XMLPullParserHandler 
 {
@@ -129,6 +131,7 @@ public class Custom_XMLPullParserHandler
 							}else if(parser.getAttributeName(i).equalsIgnoreCase("Number"))
 							{
 								objOption.optionNo = Integer.parseInt( parser.getAttributeValue(i) );
+								Log.i("HARSH", "Option No is "+objOption.optionNo);
 							}
 						}
 					}
@@ -162,6 +165,7 @@ public class Custom_XMLPullParserHandler
 					}
 					else if(tagName.equalsIgnoreCase("Question_Text"))
 					{
+						Log.i("HARSH", "Question Text is "+text);
 						question.question = text;
 					}
 					else if(tagName.equalsIgnoreCase("Options"))
@@ -173,6 +177,7 @@ public class Custom_XMLPullParserHandler
 					{
 						//System.out.println("option_"+optionsCounter+" End!");
 						//options[optionsCounter-1] = text;
+						Log.i("HARSH", "Option Text is "+text);
 						objOption.optionText = text;
 						if(options!= null){
 							options.add(objOption);
@@ -180,7 +185,7 @@ public class Custom_XMLPullParserHandler
 					}
 					else if(tagName.equalsIgnoreCase("Answer"))
 					{
-						//System.out.println("answer End!");
+						Log.i("HARSH", "Solution Text is "+text);
 						question.solution = text;
 					}
 					break;

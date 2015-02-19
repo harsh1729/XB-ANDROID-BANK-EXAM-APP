@@ -12,6 +12,8 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
@@ -27,6 +29,8 @@ import com.google.android.gcm.GCMRegistrar;
 public class Activity_Splash extends Activity {
 
 	private final int SPLASH_TIME_OUT = 1000;
+	int version_code;
+	
 	Thread_RegisterOnPhpServer thread_RegisterOnPhpServer ;
 	Thread_GetAppConfigFromServer thread_GetConfig;
 	
@@ -50,6 +54,18 @@ public class Activity_Splash extends Activity {
 			Globals.showAlertDialogError(this, "Failed to load questions .");
 			return;
 		}
+		// find version name and set it to globle
+				PackageInfo pInfo=null;
+				try 
+				{
+					pInfo= getPackageManager().getPackageInfo(getPackageName(), 0);
+				}
+				catch (NameNotFoundException e) 
+				{
+				   e.printStackTrace();
+				}
+				version_code = pInfo.versionCode;
+				Globals.setversion_name(version_code);
 		registerDeviceOnServer();
 		getAppConfigFromServer();
 		hideScreenAfterTimeOut();
@@ -190,8 +206,8 @@ public class Activity_Splash extends Activity {
     		try 
     		{
     			httpClient =  AndroidHttpClient.newInstance("Android");
-    			HttpGet httpGet = new HttpGet("http://www.xercesblue.in/onlinexamserver/liquid_data/PushNotificationDatabase/registerUser.php?regId="+regId+"&AppId="+AppId);
-    			Log.i("HARSH","ADDress is : "+"http://www.xercesblue.in/onlinexamserver/liquid_data/PushNotificationDatabase/registerUser.php?regId="+regId+"&AppId="+AppId);			
+    			HttpGet httpGet = new HttpGet(ServerURL.getPushnotificationRegisteruser_link(regId,AppId));
+    			Log.i("HARSH","ADDress is : "+ServerURL.getPushnotificationRegisteruser_link(regId,AppId));			
     			HttpResponse response = httpClient.execute(httpGet);
     			String data = Globals.convertInputStreamToString(response.getEntity().getContent());
     			if(data.equalsIgnoreCase("registered"))
@@ -247,7 +263,7 @@ public class Activity_Splash extends Activity {
 	    		{
 	    			//Fetch AppConfig
 	    			HttpClient httpClient = new DefaultHttpClient();
-					HttpGet httpGetAppConfig = new HttpGet("http://xercesblue.in/onlinexamserver/liquid_data/AdvtControlCenter/getAdvtjsonNew.php?appId="+AppId);
+					HttpGet httpGetAppConfig = new HttpGet(ServerURL.getAdvertisement_link(AppId));
 					HttpResponse responseAppConfig = httpClient.execute(httpGetAppConfig);
 					
 					String jsonResponce = Globals.convertInputStreamToString(responseAppConfig.getEntity().getContent());

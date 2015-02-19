@@ -25,6 +25,7 @@ public class Activity_Parent_Banner_Ads extends Activity_Parent_IntertialAds {
 	
 	@Override
 		protected void onCreate(Bundle savedInstanceState) {
+			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
 			
 			if(Globals.getAppConfig(this).showAdds ==Globals.APP_TRUE){
@@ -37,6 +38,7 @@ public class Activity_Parent_Banner_Ads extends Activity_Parent_IntertialAds {
 	
 	@Override
 	protected void onResume() {
+		// TODO Auto-generated method stub
 		super.onResume();
 		setAddsVisibility();
 	}

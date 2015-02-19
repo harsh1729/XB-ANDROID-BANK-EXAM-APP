@@ -66,8 +66,9 @@ public class Activity_Settings_Registration extends Activity_Parent implements T
 	public void btnRegisterClick(View v){
 		
 		if(validate()){
-	
-			String url = "http://xercesblue.in/onlinexamserver/liquid_data/AppRegisteredUsers/registerUser.php";
+			Button btn = (Button)findViewById(R.id.btnRegister);
+			btn.setEnabled(false);
+			String url = ServerURL.getRegistration_link();
 			StringRequest postRequest = new StringRequest(Request.Method.POST, url, 
 			    new Response.Listener<String>() 
 			    {

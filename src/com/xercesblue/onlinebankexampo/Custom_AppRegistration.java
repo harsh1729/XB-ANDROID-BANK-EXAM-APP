@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,10 +15,12 @@ public class Custom_AppRegistration {
 
 	private final static int LAUNCHES_UNTIL_PROMPT = 10;
 
-	public static void app_launched(Context mContext) {
+
+	public static boolean app_launched(Context mContext) {
+		Boolean returnStatus = false;
 		SharedPreferences prefs = mContext.getSharedPreferences("appregister", 0);
 		if (prefs.getBoolean("register_dontshowagain", false)) {
-			return;
+			return returnStatus;
 		}
 
 		SharedPreferences.Editor editor = prefs.edit();
@@ -34,10 +37,11 @@ public class Custom_AppRegistration {
 				if (launch_count %LAUNCHES_UNTIL_PROMPT == 0) {
 				
 					showRegisterDialog(mContext, editor);
-				
+				returnStatus = true;
 				}
 
 		editor.commit();
+		return returnStatus;
 	}
 
 	public static void showRegisterDialog(final Context mContext,
@@ -72,7 +76,9 @@ public class Custom_AppRegistration {
 			}
 		});
 		ll.addView(b1);
-
+		
+	
+		
 		Button b2 = new Button(mContext);
 		b2.setText("Remind me later");
 		b2.setOnClickListener(new OnClickListener() {
