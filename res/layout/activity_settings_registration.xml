@@ -1,0 +1,158 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient_light_to_dark"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <!-- Header aligned to top -->
+
+    <include layout="@layout/app_header" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7.8" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp" >
+
+             <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Register with us for free study material, exam updates and monthly GK updates as PDF file."
+                    android:textColor="@color/app_green"
+                    android:textSize="@dimen/txt_app_labels_fontsize" 
+                    android:layout_marginBottom="10dp"/>
+             
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5.0"
+                    android:text="Name"
+                    android:textColor="@color/app_white"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+
+                <EditText
+                    android:id="@+id/edtName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5.0"
+                    android:ems="10"
+                    android:textColor="@color/app_black"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5.0"
+                    android:text="City"
+                    android:textColor="@color/app_white"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+
+                <EditText
+                    android:id="@+id/edtCity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5.0"
+                    android:ems="10"
+                    android:textColor="@color/app_black"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5.0"
+                    android:text="Mobile No"
+                    android:textColor="@color/app_white"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+
+                <EditText
+                    android:id="@+id/edtPhone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5.0"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textColor="@color/app_black"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5.0"
+                    android:text="Email Id"
+                    android:textColor="@color/app_white"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+
+                <EditText
+                    android:id="@+id/edtEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5.0"
+                    android:ems="10"
+                    android:textColor="@color/app_black"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:padding="10dp" >
+
+                <Button
+                    android:id="@+id/btnRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_white_black_border"
+                    android:onClick="btnRegisterClick"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingTop="5dp"
+                    android:text="Register"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <!-- Footer aligned to bottom -->
+
+    <include layout="@layout/app_footer" />
+
+</LinearLayout>

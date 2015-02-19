@@ -1,0 +1,100 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.xercesblue.onlinebankexampo.Activity_ContectUs" >
+
+    <!-- Header aligned to top -->
+
+    <include layout="@layout/app_header" />
+
+    <!-- Scrollable Content below header and above footer -->
+
+    <ScrollView
+        android:id="@+id/scrollableContents"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7.8"
+        android:background="@drawable/bg_gradient_light_to_dark" >
+
+        <LinearLayout
+            android:id="@+id/llytMainBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/txtCompanyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Xerces Blue Software Solutions Pvt. Ltd."
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/app_white" />
+
+            <TextView
+                android:id="@+id/txtWebsite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="www.xercesblue.in"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/app_white" />
+
+            <TextView
+                android:id="@+id/txtPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Ph : 01542470701"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/app_white" />
+
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Email: support@xercesblue.in"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/app_white" />
+
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="25dp"
+                android:ems="10"
+                android:gravity="top"
+                android:hint="your email id or mobile no.." >
+            </EditText>
+            <EditText
+                android:id="@+id/edtMessage"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:gravity="top"
+                android:hint="write a message to us ..." >
+            </EditText>
+
+            <Button
+                android:id="@+id/btnSendMesage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_white_black_border"
+                android:onClick="onClickSendMessage"
+                android:text="Send"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/app_footer" />
+
+</LinearLayout>

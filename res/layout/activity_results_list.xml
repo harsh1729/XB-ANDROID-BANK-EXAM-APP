@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.xercesblue.onlinebankexampo.Activity_Results_List" >
+
+    <!-- Header aligned to top -->
+
+    <include layout="@layout/app_header" />
+
+    <LinearLayout
+        android:id="@+id/llytMainBody"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7.8"
+        android:background="@drawable/bg_gradient_light_to_dark"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_gray"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"              
+                android:layout_marginRight="1dp"
+                android:gravity="center"
+                android:textSize="@dimen/txt_app_labels_fontsize"
+                android:text="@string/result_exam_name"
+                android:textColor="@color/app_white" />      
+     		
+            <TextView
+                android:id="@+id/txtType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1.2"
+                android:gravity="center"
+                android:textSize="@dimen/txt_app_labels_fontsize"
+                android:text="@string/result_exam_type"
+                android:textColor="@color/app_white" />      
+     		
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:textSize="@dimen/txt_app_labels_fontsize"
+                android:text="@string/result_exam_date"
+                android:textColor="@color/app_white" />       
+     		
+            <TextView
+                android:id="@+id/txtMarks"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="@dimen/txt_app_labels_fontsize"
+                android:text="@string/result_exam_marks"
+                android:textColor="@color/app_white" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listResults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_black"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp" >
+        </ListView>
+    </LinearLayout>
+
+    <!-- Footer aligned to bottom -->
+
+    <include layout="@layout/app_footer" />
+
+</LinearLayout>

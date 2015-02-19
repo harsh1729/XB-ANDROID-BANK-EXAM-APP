@@ -1,0 +1,106 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.xercesblue.onlinebankexampo.Activity_Current_GK_Read" >
+
+    <!-- Header aligned to top -->
+
+    <include layout="@layout/app_header" />
+    <!-- Scrollable Content below header and above footer -->
+
+    <LinearLayout
+        android:id="@+id/llytMainBody"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7.8"
+        android:background="@drawable/bg_gradient_light_to_dark"
+        android:orientation="vertical" >
+
+        <ScrollView
+            android:id="@+id/scrollableContents"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9" >
+
+            <LinearLayout
+                android:id="@+id/llytMainBodyExamAlertDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:orientation="vertical" >
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/app_lightgray" >
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/rlytNextPrev"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp" >
+
+            <ImageButton
+                android:id="@+id/imgBtnPrev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:onClick="onClickPrev"
+                android:scaleType="centerCrop"
+                android:src="@drawable/selector_question_prev" />
+
+            <ImageButton
+                android:id="@+id/imgBtnNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:onClick="onClickNext"
+                android:scaleType="centerCrop"
+                android:src="@drawable/selector_question_next" />
+
+            <TextView
+                android:id="@+id/txtPageNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="Page 1"
+                android:textColor="@color/app_white"
+                android:textSize="@dimen/txt_app_notes_fontsize" />
+        </RelativeLayout>
+    </LinearLayout>
+    <!-- Footer aligned to bottom -->
+
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/app_white" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llytAdd"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

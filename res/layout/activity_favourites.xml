@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity_Favourites" >
+
+    <!-- Header aligned to top -->
+
+    <LinearLayout
+        android:id="@+id/llytHeader1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.2"
+        android:background="@color/app_black"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/rlytHeaderChild"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9.5"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/txtHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="Tutorial"
+                android:textColor="@color/app_white"
+                android:textSize="@dimen/txt_app_header_fontsize" />
+
+            <ImageButton
+                android:id="@+id/imgBtnHeaderPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imgBtnHeaderPopup"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:onClick="onClickPlus"
+                android:scaleType="fitCenter"
+                android:src="@drawable/selector_header_button_plus" />
+        </RelativeLayout>
+
+       
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:background="@color/app_green" >
+        </LinearLayout>
+    </LinearLayout>
+    <!-- Scrollable Content below header and above footer -->
+
+	 <TextView
+                android:id="@+id/txtTopicHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@drawable/bg_gradient_light_to_dark"
+                android:padding="10dp"
+                android:textColor="@color/app_white"
+                android:textSize="@dimen/txt_app_labels_large_fontsize" 
+                />
+    <ListView
+                android:id="@+id/listQuestionsFourites"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+        		android:layout_weight="7.8"
+        		android:background="@drawable/bg_gradient_light_to_dark"
+                android:orientation="vertical">
+                
+     </ListView>
+
+    <!-- Footer aligned to bottom -->
+
+    <include layout="@layout/app_footer" />
+
+</LinearLayout>

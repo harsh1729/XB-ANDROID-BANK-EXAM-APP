@@ -1,0 +1,148 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient_light_to_dark"
+    android:orientation="vertical"
+    tools:context="com.xercesblue.onlinebankexampo.Activity_Settings_ConfigureExam" >
+
+    <!-- Header aligned to top -->
+
+    <include layout="@layout/app_header" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7.8" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5.5"
+                    android:text="Category"
+                    android:textColor="@color/app_white"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+
+                <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5.5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6.0"
+                    android:text="No. of Questions"
+                    android:textColor="@color/app_white"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+
+                <EditText
+                    android:id="@+id/edtNoOfQuestions"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.0"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textColor="@color/app_black"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6.0"
+                    android:text="Hours"
+                    android:textColor="@color/app_white"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+
+                <EditText
+                    android:id="@+id/edtHours"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.0"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textColor="@color/app_black"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6.0"
+                    android:text="Minutes"
+                    android:textColor="@color/app_white"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+
+                <EditText
+                    android:id="@+id/edtMinutes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.0"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textColor="@color/app_black"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:padding="10dp" >
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_white_black_border"
+                    android:onClick="Edit"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingTop="5dp"
+                    android:text="Save"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <!-- Footer aligned to bottom -->
+
+    <include layout="@layout/app_footer" />
+
+</LinearLayout>

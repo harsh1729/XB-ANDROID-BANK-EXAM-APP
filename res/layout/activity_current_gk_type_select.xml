@@ -1,0 +1,88 @@
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient_light_to_dark"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <!-- Header aligned to top -->
+    
+   <include layout="@layout/app_header" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7.8" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Month"
+                    android:textColor="@color/app_white"
+                    android:textSize="@dimen/txt_app_labels_fontsize" />
+
+                <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:padding="10dp" >
+
+                <Button
+                    android:id="@+id/btnTestGk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_white_black_border"
+                    android:onClick="btnTestGkClick"
+                    android:text="Test GK"
+                    android:textStyle="bold" />
+                
+                <Button
+                    android:id="@+id/btnReadGk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_white_black_border"
+                    android:onClick="btnReadGkClick"
+                    android:text="Read GK"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <TextView 
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textColor="@color/app_green"
+                 android:textSize="@dimen/txt_app_notes_fontsize"
+                 android:layout_marginTop="5dp"
+                 android:text="* Current GK feature requires an active internet connection."
+                 />
+            
+        </LinearLayout>
+    </ScrollView>
+    <!-- Footer aligned to bottom -->
+
+    <include layout="@layout/app_footer" />
+
+</LinearLayout>

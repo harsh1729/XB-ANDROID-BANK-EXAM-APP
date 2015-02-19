@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.xercesblue.onlinebankexampo.Activity_DownloadMore">
+    
+     <!-- Header aligned to top -->
+
+    <include layout="@layout/app_header" />
+ 
+     <!-- Scrollable Content below header and above footer -->
+
+    <ScrollView
+        android:id="@+id/scrollableContents"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7.8"
+        android:background="@drawable/bg_gradient_light_to_dark" >
+            <LinearLayout
+                android:id="@+id/llytMainBodyDownload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"  
+                android:orientation="vertical">
+
+               
+                
+            </LinearLayout>
+
+    </ScrollView>
+    
+    <include layout="@layout/app_footer" />
+    
+</LinearLayout>
+

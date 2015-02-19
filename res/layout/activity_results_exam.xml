@@ -1,0 +1,222 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity_Results_Exam" >
+
+    <!-- Header aligned to top -->
+
+    <include layout="@layout/app_header" />
+    
+    <!-- Content below header and above footer -->
+
+    <LinearLayout
+        android:id="@+id/llytMainBody"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7.8"
+        android:background="@drawable/bg_gradient_light_to_dark"      
+        android:orientation="vertical" >
+        <ScrollView
+        android:id="@+id/scrollableContents"
+        android:layout_width="match_parent"
+        android:fadeScrollbars="false"
+        android:layout_height="0dp"
+        android:layout_weight="8"       
+        android:paddingTop="15dp"
+        >
+        <RelativeLayout 
+         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+            <TextView 
+                android:id="@+id/txtLang"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_alignParentTop="true"
+        		android:layout_alignParentLeft="true"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="Exam Language"/>
+            <TextView 
+                android:id="@+id/txtLangValue"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_toRightOf="@+id/txtLang"
+        		android:layout_marginLeft="20dp"
+        		android:layout_alignBaseline="@+id/txtLang"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="200"/>
+            
+            <TextView 
+                android:id="@+id/txtCategory"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="10dp"
+        		android:layout_below="@+id/txtLang"
+        		android:layout_alignLeft="@+id/txtLang"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="Exam Category"/>
+            <TextView 
+                android:id="@+id/txtCategoryValue"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="10dp"
+        		android:layout_below="@+id/txtLangValue"
+        		android:layout_alignLeft="@+id/txtLangValue"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="All"/>
+            
+            <TextView 
+                android:id="@+id/txtTotalQues"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="10dp"
+        		android:layout_below="@+id/txtCategory"
+        		android:layout_alignLeft="@+id/txtCategory"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="Total Questions"/>
+            
+            <TextView 
+                android:id="@+id/txtTotalQuesValue"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="10dp"
+        		android:layout_below="@+id/txtCategoryValue"
+        		android:layout_alignLeft="@+id/txtCategoryValue"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="200"/>
+
+            <TextView 
+                android:id="@+id/txtAttemptedQues"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="10dp"
+        		android:layout_below="@+id/txtTotalQues"
+        		android:layout_alignLeft="@+id/txtTotalQues"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="Attempted"/>
+            
+            <TextView 
+                android:id="@+id/txtAttemptedQuesValue"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="10dp"
+        		android:layout_below="@+id/txtTotalQuesValue"
+        		android:layout_alignLeft="@+id/txtTotalQuesValue"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="120"/>
+            
+            <TextView 
+                android:id="@+id/txtCorrectQues"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="10dp"
+        		android:layout_below="@+id/txtAttemptedQues"
+        		android:layout_alignLeft="@+id/txtAttemptedQues"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="Correct"/>
+            
+            <TextView 
+                android:id="@+id/txtCorrectQuesValue"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="10dp"
+        		android:layout_below="@+id/txtAttemptedQuesValue"
+        		android:layout_alignLeft="@+id/txtAttemptedQuesValue"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="100"/>
+            
+            <TextView 
+                android:id="@+id/txtTotalMarks"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="10dp"
+        		android:layout_below="@+id/txtCorrectQues"
+        		android:layout_alignLeft="@+id/txtCorrectQues"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="Total Marks"/>
+            
+            <TextView 
+                android:id="@+id/txtTotalMarksValue"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="10dp"
+        		android:layout_below="@+id/txtCorrectQuesValue"
+        		android:layout_alignLeft="@+id/txtCorrectQuesValue"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="100"/>
+            
+            <TextView 
+                android:id="@+id/txtMarks"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="10dp"
+        		android:layout_below="@+id/txtTotalMarks"
+        		android:layout_alignLeft="@+id/txtTotalMarks"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="Marks Scored"/>
+            
+            <TextView 
+                android:id="@+id/txtMarksValue"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="10dp"
+        		android:layout_below="@+id/txtTotalMarksValue"
+        		android:layout_alignLeft="@+id/txtTotalMarksValue"
+        		android:textSize="@dimen/txt_app_labels_large_fontsize"
+        		android:textStyle="bold"
+        		android:text="100"/>
+        </RelativeLayout>
+        
+        </ScrollView>
+        
+         <LinearLayout 
+	    android:id="@+id/llytButtonContainer"
+	    android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:gravity="center|center_vertical"
+        android:orientation="horizontal" >
+	 <Button
+                 android:id="@+id/btnDeleteExam"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center_horizontal"
+                 android:background="@drawable/bg_white_black_border"
+                 android:onClick="onClickDeleteExam"
+                 android:textStyle="bold"
+                 android:text="Delete" />
+	 
+	  <Button
+                 android:id="@+id/btnDetailsExam"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center_horizontal"
+                 android:background="@drawable/bg_white_black_border"
+                 android:onClick="onClickShowDetails"
+                 android:layout_marginLeft="20dp"
+                 android:textStyle="bold"
+                 android:text="Show Details" />
+       </LinearLayout>
+
+   </LinearLayout>
+
+    <!-- Footer aligned to bottom -->
+
+    <include layout="@layout/app_footer" />
+
+</LinearLayout>

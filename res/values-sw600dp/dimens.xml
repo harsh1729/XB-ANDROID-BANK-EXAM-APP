@@ -1,0 +1,12 @@
+<resources>
+
+    <!--
+         Customize dimensions originally defined in res/values/dimens.xml (such as
+         screen margins) for sw600dp devices (e.g. 7" tablets) here.
+    -->
+    
+    <dimen name="txt_app_header_fontsize">34sp</dimen>
+    <dimen name="txt_app_labels_fontsize">22sp</dimen>
+	<dimen name="txt_app_notes_fontsize">16sp</dimen>
+
+</resources>
