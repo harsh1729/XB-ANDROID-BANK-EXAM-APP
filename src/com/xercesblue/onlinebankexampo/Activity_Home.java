@@ -37,7 +37,7 @@ public class Activity_Home extends Activity_Parent {
 		
 		Boolean popUpShown = false;
 		if(cd.isConnectingToInternet()){
-			if(Globals.current_version_code>Globals.getversion_code())
+			if(Globals.current_version_code>Globals.getversion_code(this))
 			{
 				popUpShown = Custom_Versionchek.app_launched(this);
 			}

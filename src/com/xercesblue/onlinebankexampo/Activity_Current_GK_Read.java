@@ -267,9 +267,9 @@ private void resizeImageButtons(Boolean hide) {
 				String month = Activity_Current_GK_Type_Select.getSelectedMonth();
 				String year = Activity_Current_GK_Type_Select.getSelectedYear();
 				Log.i("HARSH",
-						"URL is : "+ ServerURL.getCurrent_GK_Read_link(pageNo,langCode,AppId,date,month,year));
+						"URL is : "+ ServerURL.getCurrent_GK_Read_link(pageNo,langCode,AppId,date,month,year,Activity_Current_GK_Read.this));
 				
-				HttpGet httpGet = new HttpGet(ServerURL.getCurrent_GK_Read_link(pageNo,langCode,AppId,date,month,year));
+				HttpGet httpGet = new HttpGet(ServerURL.getCurrent_GK_Read_link(pageNo,langCode,AppId,date,month,year,Activity_Current_GK_Read.this));
 				HttpResponse response = httpClient.execute(httpGet);
 
 				String jsonResponce = Globals

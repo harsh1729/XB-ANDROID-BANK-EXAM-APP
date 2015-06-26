@@ -54,7 +54,7 @@ public class Globals {
 	public static final int ADD_TYPE_STARTAPP= 3;
 	
 	private static EditText etAlerrtMessage;
-	private static int version_code;
+	//private static int version_code;
 	public static int current_version_code=9;
 	@SuppressLint("NewApi")
 
@@ -229,13 +229,24 @@ public static String getAlertMessage(){
 	return msg;
 }
 
-public static void setversion_name(int s)
+
+public static int getversion_code(Context con)
 {
-	version_code=s;
-}
-public static int getversion_code()
-{
-	return version_code;
+	PackageInfo pInfo=null;
+	try 
+	{
+		pInfo= con.getPackageManager().getPackageInfo(con.getPackageName(), 0);
+	}
+	catch (NameNotFoundException e) 
+	{
+	   e.printStackTrace();
+	}
+	if(pInfo != null){
+		return pInfo.versionCode;
+	}else{
+		return 0;
+	}
+	
 }
 	public static Integer getOptimalSlotSize(Activity ctxt) {
 		 Display display = ((WindowManager) ctxt

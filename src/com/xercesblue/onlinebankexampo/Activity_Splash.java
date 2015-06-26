@@ -29,7 +29,6 @@ import com.google.android.gcm.GCMRegistrar;
 public class Activity_Splash extends Activity {
 
 	private final int SPLASH_TIME_OUT = 1000;
-	int version_code;
 	
 	Thread_RegisterOnPhpServer thread_RegisterOnPhpServer ;
 	Thread_GetAppConfigFromServer thread_GetConfig;
@@ -54,18 +53,7 @@ public class Activity_Splash extends Activity {
 			Globals.showAlertDialogError(this, "Failed to load questions .");
 			return;
 		}
-		// find version name and set it to globle
-				PackageInfo pInfo=null;
-				try 
-				{
-					pInfo= getPackageManager().getPackageInfo(getPackageName(), 0);
-				}
-				catch (NameNotFoundException e) 
-				{
-				   e.printStackTrace();
-				}
-				version_code = pInfo.versionCode;
-				Globals.setversion_name(version_code);
+		
 		registerDeviceOnServer();
 		getAppConfigFromServer();
 		hideScreenAfterTimeOut();
@@ -206,8 +194,8 @@ public class Activity_Splash extends Activity {
     		try 
     		{
     			httpClient =  AndroidHttpClient.newInstance("Android");
-    			HttpGet httpGet = new HttpGet(ServerURL.getPushnotificationRegisteruser_link(regId,AppId));
-    			Log.i("HARSH","ADDress is : "+ServerURL.getPushnotificationRegisteruser_link(regId,AppId));			
+    			HttpGet httpGet = new HttpGet(ServerURL.getPushnotificationRegisteruser_link(regId,AppId,Activity_Splash.this));
+    			Log.i("HARSH","ADDress is : "+ServerURL.getPushnotificationRegisteruser_link(regId,AppId,Activity_Splash.this));			
     			HttpResponse response = httpClient.execute(httpGet);
     			String data = Globals.convertInputStreamToString(response.getEntity().getContent());
     			if(data.equalsIgnoreCase("registered"))
@@ -263,7 +251,7 @@ public class Activity_Splash extends Activity {
 	    		{
 	    			//Fetch AppConfig
 	    			HttpClient httpClient = new DefaultHttpClient();
-					HttpGet httpGetAppConfig = new HttpGet(ServerURL.getAdvertisement_link(AppId));
+					HttpGet httpGetAppConfig = new HttpGet(ServerURL.getAdvertisement_link(AppId,Activity_Splash.this));
 					HttpResponse responseAppConfig = httpClient.execute(httpGetAppConfig);
 					
 					String jsonResponce = Globals.convertInputStreamToString(responseAppConfig.getEntity().getContent());

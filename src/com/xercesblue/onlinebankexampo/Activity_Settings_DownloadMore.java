@@ -461,7 +461,7 @@ public class Activity_Settings_DownloadMore extends Activity_Parent_IntertialAds
 			try 
 			{
 				HttpClient httpClient = new DefaultHttpClient();
-				HttpGet httpGet = new HttpGet(ServerURL.getDownload_question_link(qusNumber,deviceImei,langCode));
+				HttpGet httpGet = new HttpGet(ServerURL.getDownload_question_link(qusNumber,deviceImei,langCode,Activity_Settings_DownloadMore.this));
 
 				HttpResponse response = httpClient.execute(httpGet);
 

@@ -3,7 +3,7 @@
     android:id="@+id/llytHeader"
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="1.2"
+    android:layout_weight="0.7"
     android:background="@color/app_black"
     android:gravity="center"
     android:orientation="vertical" >

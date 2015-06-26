@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="txt_app_header_fontsize">30sp</dimen>
+    <dimen name="txt_app_header_fontsize">26sp</dimen>
     <dimen name="txt_app_labels_fontsize">18sp</dimen>  
     <dimen name="txt_app_labels_large_fontsize">22sp</dimen>
     <dimen name="txt_app_notes_fontsize">12sp</dimen>

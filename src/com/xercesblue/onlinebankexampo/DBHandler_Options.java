@@ -38,7 +38,7 @@ public class DBHandler_Options extends SQLiteOpenHelper {
 	public ArrayList<Object_Options> getOptions(long quesId){
 
 		String sqlQuery = "SELECT * FROM "+TABLE_NAME_OPTIONS+" WHERE "+KEY_OPTIONS_QUES_ID+" = "+quesId;
-		sqlQuery+=" ORDER BY "+KEY_OPTIONS_OPTION_NO+ " ASC;";
+		sqlQuery+=" GROUP BY "+ KEY_OPTIONS_OPTION_NO +" ORDER BY "+KEY_OPTIONS_OPTION_NO+ " ASC;";
 		ArrayList<Object_Options> list = new ArrayList<Object_Options>();
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery(sqlQuery, null);

@@ -11,7 +11,7 @@
         android:id="@+id/llytHeader"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.2"
+        android:layout_weight="1"
         android:background="@color/app_black"
         android:gravity="center"
         android:orientation="vertical" >
@@ -85,7 +85,7 @@
         android:id="@+id/llytMainBody"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7.6"
+        android:layout_weight="7.8"
         android:background="@drawable/bg_gradient_light_to_dark"
         android:orientation="vertical" >
 

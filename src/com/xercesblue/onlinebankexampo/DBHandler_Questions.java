@@ -391,6 +391,7 @@ public class DBHandler_Questions extends SQLiteOpenHelper {
 			//////////********************INSERT OPTIONS DETAILS IN OPTIONS TABLE  			*******************/////////////////
 			valuePairs.clear();
 			//for(int i=0;i<question.arrayOptions.size();i++)
+			if(rowinsert > -1) // -1 is for error
 			for( Object_Options option : question.arrayOptions)
 			{
 				valuePairs.put(DBHandler_Options.KEY_OPTIONS_QUES_ID, question.quesId);

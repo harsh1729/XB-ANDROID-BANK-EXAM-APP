@@ -172,7 +172,7 @@ public class Activity_Current_GK_Test extends Activity_Parent_Banner_Ads {
         mDialog.setCancelable(false);
         mDialog.show();
         
-		final String url = ServerURL.getCurrent_GK_Test_link(qNo,langCode,date,month,year); 
+		final String url = ServerURL.getCurrent_GK_Test_link(qNo,langCode,date,month,year,Activity_Current_GK_Test.this); 
 		Log.i("HARSH", "URL IS -->" + url);
 		
 		// prepare the Request

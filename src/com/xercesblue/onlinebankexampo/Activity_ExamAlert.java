@@ -142,7 +142,7 @@ public class Activity_ExamAlert extends Activity_Parent
 			{
 				
 				HttpClient httpClient = new DefaultHttpClient();
-				HttpGet httpGet = new HttpGet(ServerURL.getExam_Alert_link());
+				HttpGet httpGet = new HttpGet(ServerURL.getExam_Alert_link(Activity_ExamAlert.this));
 				HttpResponse response = httpClient.execute(httpGet);
 				
 				Activity_ExamAlert.xmlStream = response.getEntity().getContent();

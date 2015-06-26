@@ -11,8 +11,6 @@ import com.android.volley.toolbox.StringRequest;
 
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,7 +23,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -667,7 +664,7 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 				// Write your code here to execute after dialog closed
 				
 					
-					String url = ServerURL.getBug_Report_Wrong_Question_link();
+					String url = ServerURL.getBug_Report_Wrong_Question_link(Activity_QuestionView.this);
 					StringRequest postRequest = new StringRequest(Request.Method.POST, url, 
 					    new Response.Listener<String>() 
 					    {
