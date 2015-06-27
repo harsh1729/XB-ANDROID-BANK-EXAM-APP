@@ -1,6 +1,8 @@
 package com.xercesblue.onlinebankexampo;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -72,25 +74,36 @@ public class Custom_AppShare {
         return returnStatus;
     }   
     
-    public  void showShareDialog( final SharedPreferences.Editor editor) {
+    @SuppressLint("NewApi")
+	public  void showShareDialog( final SharedPreferences.Editor editor) {
     	if(activity == null){
 			return;
 		}
     	
-        final Dialog dialog = new Dialog(activity);
-        dialog.setTitle("Share Online Bank Exam App" );
+    	AlertDialog.Builder dialogBuilder;
+		if (android.os.Build.VERSION.SDK_INT >= 11) 
+		{
+			dialogBuilder = new AlertDialog.Builder(
+				 activity ,AlertDialog.THEME_HOLO_LIGHT);
+		}else{
+			dialogBuilder = new AlertDialog.Builder(
+					activity);
+		}
+		
+		dialogBuilder.setTitle("Share Online Bank Exam App" );
+		
+		final Dialog dialog = dialogBuilder.create();
+		LinearLayout ll = new LinearLayout(activity);
+		ll.setOrientation(LinearLayout.VERTICAL);
+		ll.setBackgroundResource(R.color.app_darkoffwhite);
+		ll.setPadding(30, 20, 30, 20);
 
-        LinearLayout ll = new LinearLayout(activity);
-        int screenWidth = Globals.getScreenSize(activity).x;
-        LayoutParams lp = new LayoutParams(3*screenWidth/2, LayoutParams.WRAP_CONTENT);
-        ll.setLayoutParams(lp);
-        
-        ll.setOrientation(LinearLayout.VERTICAL);
         
         TextView tv = new TextView(activity);
         tv.setText("If you liked this app and our efforts, please take a moment to share this app with your friends.");
         tv.setWidth(240);
         tv.setPadding(4, 0, 4, 10);
+        tv.setTextColor(activity.getResources().getColor(R.color.app_darkblue));
         ll.addView(tv);
         
         Button b1 = new Button(activity);
@@ -139,8 +152,9 @@ public class Custom_AppShare {
         });
         ll.addView(b4);
          
-        dialog.setContentView(ll);        
-        dialog.show();        
+                
+        dialog.show();   
+        dialog.setContentView(ll);
     }
     
     private  void shareOnFacebook(){

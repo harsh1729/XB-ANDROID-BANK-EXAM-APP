@@ -57,7 +57,7 @@ public class Activity_Instructions extends Activity_Parent {
 		btn.setBackgroundResource(R.drawable.bg_white_black_border);
 		btn.setText(btnText);
 		btn.setTextSize(  Globals.getAppFontSize(this));
-		btn.setTextColor(this.getResources().getColor(R.color.app_black));
+		btn.setTextColor(this.getResources().getColor(R.color.app_white));
 		btn.setTypeface(null, Typeface.BOLD);
 		btn.setOnClickListener(btnClickListener);
 		btn.setOnTouchListener(new Custom_ButtonOnTouchListener_GreenBG(btn, this));
@@ -187,7 +187,7 @@ public class Activity_Instructions extends Activity_Parent {
 			TextView txtView = new TextView(this);
 
 			txtView.setText((cnt+1)+"."+instruction);
-			txtView.setTextColor(getResources().getColor(R.color.app_white));
+			txtView.setTextColor(getResources().getColor(R.color.app_black));
 			//txtView.setTextSize( getResources().getDimension(R.dimen.txt_app_buttons_name_fontsize));
 			txtView.setTextSize( Globals.getAppFontSize(this));
 			LayoutParams txtParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
@@ -216,7 +216,7 @@ public class Activity_Instructions extends Activity_Parent {
 			TextView txtView = new TextView(this);
 
 			txtView.setText(arrayImagesDescrition[j]);
-			txtView.setTextColor(getResources().getColor(R.color.app_white));
+			txtView.setTextColor(getResources().getColor(R.color.app_black));
 			//txtView.setTextSize( getResources().getDimension(R.dimen.txt_app_buttons_name_fontsize));
 			txtView.setTextSize( Globals.getAppFontSize(this));
 			LayoutParams txtParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);

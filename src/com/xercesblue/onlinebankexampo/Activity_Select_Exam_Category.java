@@ -103,7 +103,7 @@ public class Activity_Select_Exam_Category extends Activity_Parent {
 				TextView txtView = new TextView(this);
 				System.out.println("Text is "+cat.name);
 				txtView.setText(cat.name);
-				txtView.setTextColor(getResources().getColor(R.color.app_white));
+				txtView.setTextColor(getResources().getColor(R.color.app_black));
 				txtView.setTextSize( Globals.getAppFontSize(this));
 				LayoutParams txtParams = new LayoutParams(btnWidth,LayoutParams.WRAP_CONTENT);
 				//txtParams.leftMargin = btnPadding;

@@ -14,7 +14,7 @@
         android:id="@+id/txtExamAlert1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/app_white"
+        android:textColor="@color/app_black"
         android:textSize="@dimen/txt_app_labels_large_fontsize"
     
         android:text="TextView" />
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
      
-        android:textColor="@color/app_green"
+        android:textColor="@color/app_darkblue"
         android:textSize="@dimen/txt_app_labels_fontsize"
         android:text="TextView" />
 

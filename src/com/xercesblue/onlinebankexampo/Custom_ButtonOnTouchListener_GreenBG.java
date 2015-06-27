@@ -30,14 +30,14 @@ public class Custom_ButtonOnTouchListener_GreenBG implements OnTouchListener {
 
 			case MotionEvent.ACTION_UP: 
 				//view.setBackgroundResource(0);
-				btn.setTextColor(this.context.getResources().getColor(R.color.app_black));
+				btn.setTextColor(this.context.getResources().getColor(R.color.app_white));
 				//btn.setBackgroundResource(R.drawable.bg_white_square);
 				//btn.setBackgroundColor(this.context.getResources().getColor(R.color.app_green));
 				btn.setBackgroundResource(R.drawable.bg_white_black_border);
 				break;
 
 			case MotionEvent.ACTION_CANCEL: 
-				btn.setTextColor(this.context.getResources().getColor(R.color.app_black));
+				btn.setTextColor(this.context.getResources().getColor(R.color.app_white));
 				//btn.setBackgroundResource(R.drawable.bg_white_square);
 				//btn.setBackgroundColor(this.context.getResources().getColor(R.color.app_green));
 				btn.setBackgroundResource(R.drawable.bg_white_black_border);

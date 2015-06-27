@@ -37,10 +37,10 @@ public class Activity_Home extends Activity_Parent {
 		
 		Boolean popUpShown = false;
 		if(cd.isConnectingToInternet()){
-			if(Globals.current_version_code>Globals.getversion_code(this))
-			{
-				popUpShown = Custom_Versionchek.app_launched(this);
-			}
+			//if(Globals.current_version_code>Globals.getversion_code(this))
+			//{
+				//popUpShown = Custom_Versionchek.app_launched(this);
+			//}
 			
 			if(!popUpShown)
 				popUpShown = Custom_AppRater.app_launched(this);
@@ -49,10 +49,12 @@ public class Activity_Home extends Activity_Parent {
 				Custom_AppShare cas = new Custom_AppShare();
 				cas.app_launched(this, savedInstanceState);
 			}
+			
+			if(!popUpShown)
+				Custom_AppRegistration.app_launched(this);
 		}
 		
-		if(!popUpShown)
-			Custom_AppRegistration.app_launched(this);
+		
 		
 		Custom_AppEulaClass eula = new Custom_AppEulaClass(this);
 		eula.show();
@@ -131,7 +133,7 @@ public class Activity_Home extends Activity_Parent {
 				TextView txtView = new TextView(this);
 				System.out.println("Text is "+cat.name);
 				txtView.setText(cat.name);
-				txtView.setTextColor(getResources().getColor(R.color.app_white));
+				txtView.setTextColor(getResources().getColor(R.color.app_black));
 				//txtView.setTextSize( getResources().getDimension(R.dimen.txt_app_buttons_name_fontsize));
 				txtView.setTextSize( Globals.getAppFontSize(this));
 				LayoutParams txtParams = new LayoutParams(btnWidth,LayoutParams.WRAP_CONTENT);

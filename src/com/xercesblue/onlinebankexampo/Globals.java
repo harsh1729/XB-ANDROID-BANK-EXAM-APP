@@ -173,10 +173,19 @@ static public void showAlertDialogOneButton(String title,String msg,Context cont
 		Globals.showAlertDialog(title,msg ,context,positiveButtonText, listnerPositive,null,null,isCancelable);
 	}
 
+	@SuppressLint("NewApi")
 	static public void showAlertDialog(String title,String msg,Context context,String positiveButtonText,DialogInterface.OnClickListener listnerPositive,String negativeButtonText ,DialogInterface.OnClickListener listnerNegative,Boolean isCancelable){
 		
-		AlertDialog alertDialog = new AlertDialog.Builder(
-				context).create();
+		AlertDialog alertDialog ;
+		
+		if (android.os.Build.VERSION.SDK_INT >= 11) 
+		{
+		 alertDialog = new AlertDialog.Builder(
+				context ,AlertDialog.THEME_HOLO_LIGHT).create();
+		}else{
+			alertDialog = new AlertDialog.Builder(
+					context).create();
+		}
 
 		alertDialog.setTitle(title);
 		alertDialog.setMessage(msg);
@@ -191,10 +200,19 @@ static public void showAlertDialogOneButton(String title,String msg,Context cont
 		
 	}
 	
+@SuppressLint("NewApi")
 static public void showAlertDialogEditText(String title,String msg,Context context,String positiveButtonText,DialogInterface.OnClickListener listnerPositive,String negativeButtonText ,DialogInterface.OnClickListener listnerNegative,Boolean isCancelable){
 		
-		AlertDialog alertDialog = new AlertDialog.Builder(
+	AlertDialog alertDialog ;
+	
+	if (android.os.Build.VERSION.SDK_INT >= 11) 
+	{
+	 alertDialog = new AlertDialog.Builder(
+			context ,AlertDialog.THEME_HOLO_LIGHT).create();
+	}else{
+		alertDialog = new AlertDialog.Builder(
 				context).create();
+	}
 		
 		etAlerrtMessage = new EditText(context);
 		etAlerrtMessage.setHint("Type Your Message");

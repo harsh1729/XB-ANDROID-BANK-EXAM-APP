@@ -71,7 +71,7 @@ public class Activity_Current_GK_Read extends Activity_Parent_Banner_Ads {
 				+ ". Please wait .....");
 		txtWaitMsg.setTextSize(Globals.getAppFontSize_Large(this));
 		txtWaitMsg
-				.setTextColor(this.getResources().getColor(R.color.app_white));
+				.setTextColor(this.getResources().getColor(R.color.app_black));
 		txtWaitMsg.setPadding(10, 0, 10, 10);
 		txtWaitMsg.setLayoutParams(lp);
 		parentLayout.addView(txtWaitMsg);

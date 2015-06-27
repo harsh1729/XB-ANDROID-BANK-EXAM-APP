@@ -20,7 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/app_gray"
+            android:background="@color/app_lightgray"
             android:orientation="horizontal"
             android:padding="10dp" >
 
@@ -33,7 +33,7 @@
                 android:gravity="center"
                 android:textSize="@dimen/txt_app_labels_fontsize"
                 android:text="@string/result_exam_name"
-                android:textColor="@color/app_white" />      
+                android:textColor="@color/app_black" />      
      		
             <TextView
                 android:id="@+id/txtType"
@@ -45,7 +45,7 @@
                 android:gravity="center"
                 android:textSize="@dimen/txt_app_labels_fontsize"
                 android:text="@string/result_exam_type"
-                android:textColor="@color/app_white" />      
+                android:textColor="@color/app_black" />      
      		
             <TextView
                 android:id="@+id/txtDate"
@@ -57,7 +57,7 @@
                 android:gravity="center"
                 android:textSize="@dimen/txt_app_labels_fontsize"
                 android:text="@string/result_exam_date"
-                android:textColor="@color/app_white" />       
+                android:textColor="@color/app_black" />       
      		
             <TextView
                 android:id="@+id/txtMarks"
@@ -68,16 +68,15 @@
                 android:gravity="center"
                 android:textSize="@dimen/txt_app_labels_fontsize"
                 android:text="@string/result_exam_marks"
-                android:textColor="@color/app_white" />
+                android:textColor="@color/app_black" />
         </LinearLayout>
 
         <ListView
             android:id="@+id/listResults"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/app_black"
-            android:paddingBottom="2dp"
-            android:paddingTop="2dp" >
+            android:divider="@null"
+             >
         </ListView>
     </LinearLayout>
 

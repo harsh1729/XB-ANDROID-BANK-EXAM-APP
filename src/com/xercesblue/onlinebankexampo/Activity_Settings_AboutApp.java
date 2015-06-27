@@ -34,7 +34,7 @@ static ArrayList<String> arrayAboutApp=null;
 		 tv.setText(message);
 		 tv.setPadding(0, 10, 0, 10);
 		tv.setTextSize(Globals.getAppFontSize_Large(this));
-		tv.setTextColor(this.getResources().getColor(R.color.app_white));
+		tv.setTextColor(this.getResources().getColor(R.color.app_black));
 		tv.setLayoutParams(lp);
 		l1.addView(tv);
 		

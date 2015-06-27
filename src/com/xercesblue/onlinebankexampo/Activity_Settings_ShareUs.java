@@ -36,7 +36,7 @@ public class Activity_Settings_ShareUs extends Activity_Parent {
 		Point sceenSize = Globals.getScreenSize(this);
 		TextView tv = new TextView(this);
 		tv.setText("If you liked our efforts, please take a moment to share the link of this app with your friends");
-		tv.setTextColor(this.getResources().getColor(R.color.app_white));
+		tv.setTextColor(this.getResources().getColor(R.color.app_black));
 		tv.setTextSize(Globals.getAppFontSize(this));
 
 		tv.setLayoutParams(lp);
@@ -55,7 +55,7 @@ public class Activity_Settings_ShareUs extends Activity_Parent {
 		});
 		btnShare.setText("Share App");
 		btnShare.setTypeface(null, Typeface.BOLD);
-		btnShare.setTextColor(this.getResources().getColor(R.color.app_black));
+		btnShare.setTextColor(this.getResources().getColor(R.color.app_white));
 		btnShare.setLayoutParams(lpbtn);
 		btnShare.setTextSize(Globals.getAppFontSize_Large(this));
 		btnShare.setBackgroundResource(R.drawable.bg_white_black_border);

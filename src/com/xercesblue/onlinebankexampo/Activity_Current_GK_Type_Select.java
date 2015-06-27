@@ -118,12 +118,16 @@ public class Activity_Current_GK_Type_Select extends Activity_Parent {
 		btn.getLayoutParams().width = btnSize.x;
 		btn.getLayoutParams().height = btnSize.y;
 		btn.setTextSize( Globals.getAppFontSize_Large(this));
+		btn.setBackgroundResource(R.drawable.bg_white_black_border);
+		btn.setTextColor(this.getResources().getColor(R.color.app_white));
 		btn.setOnTouchListener(new Custom_ButtonOnTouchListener_GreenBG(btn, this));
 		
 		
 		Button btn2=(Button)findViewById(R.id.btnReadGk);
 		btn2.getLayoutParams().width = btnSize.x;
 		btn2.getLayoutParams().height = btnSize.y;
+		btn2.setBackgroundResource(R.drawable.bg_white_black_border);
+		btn2.setTextColor(this.getResources().getColor(R.color.app_white));
 		btn2.setTextSize( Globals.getAppFontSize_Large(this));
 		btn2.setOnTouchListener(new Custom_ButtonOnTouchListener_GreenBG(btn2, this));
 	}

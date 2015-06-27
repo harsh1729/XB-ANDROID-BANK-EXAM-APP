@@ -51,6 +51,8 @@ public class Activity_Settings_ContactUs extends Activity_Parent {
 		Point btnSize = Globals.getAppButtonSize(this);
 		btnSendMessage.getLayoutParams().width = btnSize.x;
 		btnSendMessage.getLayoutParams().height = btnSize.y;
+		btnSendMessage.setBackgroundResource(R.drawable.bg_white_black_border);
+		btnSendMessage.setTextColor(this.getResources().getColor(R.color.app_white));
 		btnSendMessage.setOnTouchListener(new Custom_ButtonOnTouchListener_GreenBG(btnSendMessage, this));
 		btnSendMessage.setTextSize(Globals.getAppFontSize(this));
 		

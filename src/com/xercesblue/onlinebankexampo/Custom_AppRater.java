@@ -1,5 +1,8 @@
 package com.xercesblue.onlinebankexampo;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.LinearLayout.LayoutParams;
 
 public class Custom_AppRater {
 
@@ -19,7 +23,7 @@ public class Custom_AppRater {
 	private final static int DAYS_UNTIL_PROMPT = 0;
 	public final static int LAUNCHES_UNTIL_PROMPT = 3;
 
-	public static boolean app_launched(Context mContext) {
+	public static boolean app_launched(Activity mContext) {
 		Boolean returnStatus = false;
 		
 		SharedPreferences prefs = mContext.getSharedPreferences("apprater", 0);
@@ -55,17 +59,33 @@ public class Custom_AppRater {
 		return returnStatus;
 	}
 
-	public static void showRateDialog(final Context mContext,
+	@SuppressLint("NewApi")
+	public static void showRateDialog(final Activity mContext,
 			final SharedPreferences.Editor editor) {
-		final Dialog dialog = new Dialog(mContext);
-		dialog.setTitle("Rate " + APP_TITLE);
-
+		
+		AlertDialog.Builder dialogBuilder;
+		if (android.os.Build.VERSION.SDK_INT >= 11) 
+		{
+			dialogBuilder = new AlertDialog.Builder(
+				 mContext ,AlertDialog.THEME_HOLO_LIGHT);
+		}else{
+			dialogBuilder = new AlertDialog.Builder(
+					mContext);
+		}
+		
+		dialogBuilder.setTitle("Rate " + APP_TITLE);
+		
+		final Dialog dialog = dialogBuilder.create();
 		LinearLayout ll = new LinearLayout(mContext);
 		ll.setOrientation(LinearLayout.VERTICAL);
+		ll.setBackgroundResource(R.color.app_darkoffwhite);
+		
+		ll.setPadding(30, 20, 30, 20);
 
 		TextView tv = new TextView(mContext);
-		tv.setText("If you liked this app and our efforts, please take a moment to rate it. Thanks for your support!");
+		tv.setText("If you liked this app and our efforts, please take a moment to rate it five stars. Thanks for your support!");
 		tv.setWidth(240);
+		tv.setTextColor(mContext.getResources().getColor(R.color.app_darkblue));
 		tv.setPadding(4, 0, 4, 10);
 		ll.addView(tv);
 
@@ -105,8 +125,9 @@ public class Custom_AppRater {
 			}
 		});
 		ll.addView(b3);
-
-		dialog.setContentView(ll);
+		
 		dialog.show();
+		dialog.setContentView(ll);
+		
 	}
 }

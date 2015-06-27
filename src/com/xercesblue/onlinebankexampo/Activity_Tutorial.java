@@ -70,8 +70,8 @@ public class Activity_Tutorial extends Activity_Parent {
 			tv1.setText(objc.name);
 		tv1.setPadding(10, 10, 10, 10);
 		tv1.setGravity(Gravity.CENTER);
-		tv1.setBackgroundResource(R.drawable.bg_gradient_light_to_dark);
-		tv1.setTextColor(getResources().getColor(R.color.app_white));
+		tv1.setBackgroundResource(R.color.app_darkoffwhite);
+		tv1.setTextColor(getResources().getColor(R.color.app_black));
 		tv1.setTextSize( Globals.getAppFontSize_Large(this));
 		tv1.setLayoutParams(txtParams);
 
@@ -85,7 +85,7 @@ public class Activity_Tutorial extends Activity_Parent {
 
 			TextView t1=new TextView(this);
 			t1.setText(count+". "+ obj.TopicName);
-			t1.setTextColor(getResources().getColor(R.color.app_green));
+			t1.setTextColor(getResources().getColor(R.color.app_darkblue));
 			t1.setTextSize( Globals.getAppFontSize_Large(this));
 			DBHandler_Tutorial dbh =new DBHandler_Tutorial(this);
 			listTutorialTopicDetail =dbh.getTutorialTopicDetails(obj.Id);
@@ -96,7 +96,7 @@ public class Activity_Tutorial extends Activity_Parent {
 			for(Object_TutorialTopicDetails obj1:listTutorialTopicDetail){
 				TextView t2=new TextView(this);
 				t2.setText(obj1.TopicDetailName);
-				t2.setTextColor(getResources().getColor(R.color.app_white));
+				t2.setTextColor(getResources().getColor(R.color.app_black));
 				t2.setTextSize( Globals.getAppFontSize(this));
                  lt2.leftMargin=20;
 

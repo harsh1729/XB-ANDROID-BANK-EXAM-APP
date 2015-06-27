@@ -27,7 +27,7 @@
             android:id="@+id/llytMainBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/app_white"
+            android:background="@color/app_darkoffwhite"
             android:padding="5dp"
             android:orientation="vertical" >
 

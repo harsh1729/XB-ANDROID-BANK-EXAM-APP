@@ -33,7 +33,7 @@ public class Activity_Settings_Upgrade extends Activity_Parent {
        Point sceenSize = Globals.getScreenSize(this);
        TextView tv=new TextView(this);
        tv.setText("Annoyed with ads ?\nClick on below button to upgrade app with NO ADS and download unlimited number of questions for only Rs 10.\nAmount will be charged to your mobile service provider, no CARD required.");
-       tv.setTextColor(this.getResources().getColor(R.color.app_white));
+       tv.setTextColor(this.getResources().getColor(R.color.app_black));
        tv.setTextSize( Globals.getAppFontSize(this));
      
        tv.setLayoutParams(lp);
@@ -48,12 +48,11 @@ public class Activity_Settings_Upgrade extends Activity_Parent {
        });
        btn.setText("Upgrade");
        btn.setTypeface(null, Typeface.BOLD);
-       btn.setTextColor(this.getResources().getColor(R.color.app_black));
+       btn.setTextColor(this.getResources().getColor(R.color.app_white));
       
        lpbtn.gravity = Gravity.CENTER;
        lpbtn.topMargin = sceenSize.y/10; // only for first button
-		
-       
+
        btn.setLayoutParams(lpbtn);
        
        btn.setTextSize(Globals.getAppFontSize_Large(this));

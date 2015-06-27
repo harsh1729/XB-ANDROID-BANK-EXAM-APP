@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7.8"
+        android:divider="@null"
         android:background="@drawable/bg_gradient_light_to_dark"
         android:orientation="vertical" >
     </ListView>

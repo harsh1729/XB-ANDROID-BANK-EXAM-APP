@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Register with us for free study material, exam updates and monthly GK updates as PDF file."
-                    android:textColor="@color/app_green"
+                    android:textColor="@color/app_darkblue"
                     android:textSize="@dimen/txt_app_labels_fontsize" 
                     android:layout_marginBottom="10dp"/>
              
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="5.0"
                     android:text="Name"
-                    android:textColor="@color/app_white"
+                    android:textColor="@color/app_black"
                     android:textSize="@dimen/txt_app_labels_fontsize" />
 
                 <EditText
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="5.0"
                     android:text="City"
-                    android:textColor="@color/app_white"
+                    android:textColor="@color/app_black"
                     android:textSize="@dimen/txt_app_labels_fontsize" />
 
                 <EditText
@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="5.0"
                     android:text="Mobile No"
-                    android:textColor="@color/app_white"
+                    android:textColor="@color/app_black"
                     android:textSize="@dimen/txt_app_labels_fontsize" />
 
                 <EditText
@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="5.0"
                     android:text="Email Id"
-                    android:textColor="@color/app_white"
+                    android:textColor="@color/app_black"
                     android:textSize="@dimen/txt_app_labels_fontsize" />
 
                 <EditText

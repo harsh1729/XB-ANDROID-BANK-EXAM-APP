@@ -1,5 +1,7 @@
 package com.xercesblue.onlinebankexampo;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -44,17 +46,32 @@ public class Custom_AppRegistration {
 		return returnStatus;
 	}
 
+	@SuppressLint("NewApi")
 	public static void showRegisterDialog(final Context mContext,
 			final SharedPreferences.Editor editor) {
-		final Dialog dialog = new Dialog(mContext);
-		dialog.setTitle("Register With Us For Free" );
 
+		AlertDialog.Builder dialogBuilder;
+		if (android.os.Build.VERSION.SDK_INT >= 11) 
+		{
+			dialogBuilder = new AlertDialog.Builder(
+				 mContext ,AlertDialog.THEME_HOLO_LIGHT);
+		}else{
+			dialogBuilder = new AlertDialog.Builder(
+					mContext);
+		}
+		
+		dialogBuilder.setTitle("Register With Us For Free" );
+		
+		final Dialog dialog = dialogBuilder.create();
 		LinearLayout ll = new LinearLayout(mContext);
 		ll.setOrientation(LinearLayout.VERTICAL);
+		ll.setBackgroundResource(R.color.app_darkoffwhite);
+		ll.setPadding(30, 20, 30, 20);
 
 		TextView tv = new TextView(mContext);
 		tv.setText("Dear User, you have been using this app for a while. If you like you can register with us and we will sent you free study material and monthly current affairs PDF");
 		tv.setWidth(240);
+		tv.setTextColor(mContext.getResources().getColor(R.color.app_darkblue));
 		tv.setPadding(4, 0, 4, 10);
 		ll.addView(tv);
 
@@ -101,8 +118,9 @@ public class Custom_AppRegistration {
 		});
 		ll.addView(b3);
 
-		dialog.setContentView(ll);
+		
 		dialog.show();
+		dialog.setContentView(ll);
 	}
 }
 

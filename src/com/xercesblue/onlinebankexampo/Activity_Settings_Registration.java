@@ -37,6 +37,8 @@ public class Activity_Settings_Registration extends Activity_Parent implements T
 		btn.getLayoutParams().width = btnSize.x;
 		btn.getLayoutParams().height = btnSize.y;
 		btn.setTextSize( Globals.getAppFontSize_Large(this));
+		btn.setBackgroundResource(R.drawable.bg_white_black_border);
+		btn.setTextColor(this.getResources().getColor(R.color.app_white));
 		btn.setOnTouchListener(new Custom_ButtonOnTouchListener_GreenBG(btn, this));
 		
 		 edtName = (EditText)findViewById(R.id.edtName);

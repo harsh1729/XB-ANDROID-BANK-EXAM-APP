@@ -42,7 +42,7 @@ public class Activity_ExamAlertDetail extends Activity_Parent {
 		TextView tv2=new TextView(this);
 		tv2.setText(ExamDetails.getDetails());
 		tv2.setTextSize(Globals.getAppFontSize_Large(this));
-		tv2.setTextColor(this.getResources().getColor(R.color.app_white));
+		tv2.setTextColor(this.getResources().getColor(R.color.app_black));
 		
 
 		tv2.setLayoutParams(lp2);

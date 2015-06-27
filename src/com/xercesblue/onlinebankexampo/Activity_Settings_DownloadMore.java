@@ -105,7 +105,7 @@ public class Activity_Settings_DownloadMore extends Activity_Parent_IntertialAds
 		Point sceenSize = Globals.getScreenSize(this);
 		TextView tv = new TextView(this);
 		tv.setText("Need new questions for exam ?\nClick below to share on facebook first and then download more questions.");
-		tv.setTextColor(this.getResources().getColor(R.color.app_white));
+		tv.setTextColor(this.getResources().getColor(R.color.app_black));
 		tv.setTextSize(Globals.getAppFontSize(this));
 
 		tv.setLayoutParams(lp);
@@ -124,7 +124,7 @@ public class Activity_Settings_DownloadMore extends Activity_Parent_IntertialAds
 		});
 		btnShare.setText("Share & Download");
 		btnShare.setTypeface(null, Typeface.BOLD);
-		btnShare.setTextColor(this.getResources().getColor(R.color.app_black));
+		btnShare.setTextColor(this.getResources().getColor(R.color.app_white));
 		btnShare.setLayoutParams(lpbtn);
 		btnShare.setTextSize(Globals.getAppFontSize_Large(this));
 		btnShare.setBackgroundResource(R.drawable.bg_white_black_border);

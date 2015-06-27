@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:textSize="@dimen/txt_app_notes_fontsize" 
-        android:textColor="@color/app_white"
+        android:textColor="@color/app_black"
          />
 
 </LinearLayout>

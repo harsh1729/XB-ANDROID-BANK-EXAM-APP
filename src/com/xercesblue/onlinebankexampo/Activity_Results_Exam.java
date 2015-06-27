@@ -59,12 +59,16 @@ public class Activity_Results_Exam extends Activity_Parent {
 		Point btnSize = Globals.getAppButtonSize(this);
 		btnDelete.getLayoutParams().width = btnSize.x;
 		btnDelete.getLayoutParams().height = btnSize.y;
+		btnDelete.setBackgroundResource(R.drawable.bg_white_black_border);
+		btnDelete.setTextColor(this.getResources().getColor(R.color.app_white));
 		btnDelete.setOnTouchListener(new Custom_ButtonOnTouchListener_GreenBG(btnDelete, this));
 		btnDelete.setTextSize(Globals.getAppFontSize(this));
 		
 		Button btnDetails = (Button)findViewById(R.id.btnDetailsExam);
 		btnDetails.getLayoutParams().width = btnSize.x;
 		btnDetails.getLayoutParams().height = btnSize.y;
+		btnDetails.setBackgroundResource(R.drawable.bg_white_black_border);
+		btnDetails.setTextColor(this.getResources().getColor(R.color.app_white));
 		btnDetails.setOnTouchListener(new Custom_ButtonOnTouchListener_GreenBG(btnDetails, this));
 		btnDetails.setTextSize(Globals.getAppFontSize(this));
 	

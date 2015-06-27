@@ -17,7 +17,7 @@
         android:gravity="center_vertical"
         android:textSize="@dimen/txt_app_labels_fontsize"
         android:background="@drawable/selector_row_item_exam_category"
-        android:textColor="@color/app_white"/>
+        android:textColor="@color/app_black"/>
 
       <TextView android:id="@+id/txtEmpty"
         android:layout_width="0dp"

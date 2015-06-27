@@ -9,6 +9,7 @@ package com.xercesblue.onlinebankexampo;
  * so next time this will not show, until next upgrade.
  */
  
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -38,7 +39,8 @@ public class Custom_AppEulaClass {
         return info;
     }
  
-    public void show() {
+    @SuppressLint("NewApi")
+	public void show() {
         PackageInfo versionInfo = getPackageInfo();
  
         // The eulaKey changes every time you increment the version number in
@@ -61,8 +63,18 @@ public class Custom_AppEulaClass {
             // reinitialization
             mContext.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
  
-            AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
-                    .setTitle(title)
+            AlertDialog.Builder builder ;
+        	
+        	if (android.os.Build.VERSION.SDK_INT >= 11) 
+        	{
+        		builder = new AlertDialog.Builder(
+        			 mContext ,AlertDialog.THEME_HOLO_LIGHT);
+        	}else{
+        		builder = new AlertDialog.Builder(
+        				mContext);
+        	}
+        	
+            builder.setTitle(title)
                     .setMessage(message)
                     .setPositiveButton("Accept",
                             new Dialog.OnClickListener() {

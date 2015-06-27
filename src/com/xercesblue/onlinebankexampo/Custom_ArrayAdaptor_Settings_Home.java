@@ -54,7 +54,7 @@ public class Custom_ArrayAdaptor_Settings_Home extends ArrayAdapter<Object_Row_I
         holder.txtTitle.setTextSize(Globals.getAppFontSize(context));
         holder.imgIcon.setImageBitmap(item.iconBitmap);
         
-		int rowHeight =parent.getHeight()/8;
+		int rowHeight =parent.getHeight()/10;
 		
 		row.getLayoutParams().height = rowHeight;
 		

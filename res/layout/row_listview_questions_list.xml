@@ -19,6 +19,6 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:gravity="center_vertical"
-        android:textColor="@color/app_white"/>
+        android:textColor="@color/app_black"/>
 
 </LinearLayout>

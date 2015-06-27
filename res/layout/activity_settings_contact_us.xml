@@ -34,7 +34,7 @@
                 android:layout_marginTop="5dp"
                 android:text="Xerces Blue Software Solutions Pvt. Ltd."
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/app_white" />
+                android:textColor="@color/app_black" />
 
             <TextView
                 android:id="@+id/txtWebsite"
@@ -43,7 +43,7 @@
                 android:layout_marginTop="5dp"
                 android:text="www.xercesblue.in"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/app_white" />
+                android:textColor="@color/app_black" />
 
             <TextView
                 android:id="@+id/txtPhone"
@@ -52,7 +52,7 @@
                 android:layout_marginTop="5dp"
                 android:text="Ph : 01542470701"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/app_white" />
+                android:textColor="@color/app_black" />
 
             <TextView
                 android:id="@+id/txtEmail"
@@ -61,7 +61,7 @@
                 android:layout_marginTop="5dp"
                 android:text="Email: support@xercesblue.in"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/app_white" />
+                android:textColor="@color/app_black" />
 
             <EditText
                 android:id="@+id/edtEmail"
