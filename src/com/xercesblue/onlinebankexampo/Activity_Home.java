@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory.Options;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -27,6 +28,8 @@ public class Activity_Home extends Activity_Parent {
 	final int KEY_FAVORITE_CAT_ID = 5;
 	final int KEY_DOWNLOAD_MORE_ID = 50;
 	final int KEY_CURRENT_GK_ID = 49;
+	
+	static String promotionalText = "";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,8 +56,6 @@ public class Activity_Home extends Activity_Parent {
 			if(!popUpShown)
 				Custom_AppRegistration.app_launched(this);
 		}
-		
-		
 		
 		Custom_AppEulaClass eula = new Custom_AppEulaClass(this);
 		eula.show();
@@ -148,6 +149,15 @@ public class Activity_Home extends Activity_Parent {
 			}
 		}
 		
+		TextView txtPromotoinal = (TextView)findViewById(R.id.txtPromotional);
+		if(!promotionalText.isEmpty()){
+
+			txtPromotoinal.setText(promotionalText);
+			txtPromotoinal.setVisibility(View.VISIBLE);
+		}else{
+			txtPromotoinal.setText("");
+			txtPromotoinal.setVisibility(View.GONE);
+		}
 	}
 
 	OnClickListener btnClickListener = new OnClickListener() {

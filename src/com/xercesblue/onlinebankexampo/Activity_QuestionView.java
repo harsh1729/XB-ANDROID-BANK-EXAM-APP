@@ -146,22 +146,9 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 				if(currentQues.isAnsShown){
 					return;
 				}
-				/*
-				if(selectedOptionPos == pos){
-					//view.setSelected(false);
-					selectedOptionPos = -1;// in db it will enter 0 means deselect all
-				}else{
-					view.setSelected(true);
-					selectedOptionPos = pos;
-
-				}*/
-				//updateOptionSelection(selectedOptionPos);
+				
 				updateOptionSelection(pos);
-				/* No need to unselect it does automatically
-				for(int i =0;i<lv.getChildCount();i++){
-					//lv.getChildAt(i).setSelected(false);
-				}*/
-
+				
 			}
 		});
 

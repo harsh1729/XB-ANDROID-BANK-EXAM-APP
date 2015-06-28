@@ -54,7 +54,7 @@ public class Custom_ArrayAdaptor_Result_Question_Options extends ArrayAdapter<Ob
         holder.txtTitle.setTextSize(Globals.getAppFontSize(context));
         holder.imgIcon.setImageBitmap(item.iconBitmap);
         if(item.isCorrect)
-        	row.setBackgroundResource(R.drawable.bg_row_item_options_select);
+        	row.setBackgroundResource(R.drawable.bg_row_item_questions_options_select);
         else if(item.isWrong)
         	row.setBackgroundResource(R.drawable.bg_row_item_options_wrong);
         else

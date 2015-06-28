@@ -58,7 +58,7 @@ public class Custom_ArrayAdaptor_Options extends ArrayAdapter<Object_Row_Item_Op
         
         if(this.isAnsShown){
         	if(item.isCorrect){
-        		row.setBackgroundResource(R.drawable.bg_row_item_options_select);
+        		row.setBackgroundResource(R.drawable.bg_row_item_questions_options_select);
         	}else if(item.isWrong){
         		row.setBackgroundResource(R.drawable.bg_row_item_options_wrong);
         	}else{
@@ -68,7 +68,7 @@ public class Custom_ArrayAdaptor_Options extends ArrayAdapter<Object_Row_Item_Op
         
         }else{
         	if(item.isSelected){
-        		row.setBackgroundResource(R.drawable.bg_row_item_options_select);
+        		row.setBackgroundResource(R.drawable.bg_row_item_questions_options_select);
         	}else{
         		row.setBackgroundResource(R.drawable.bg_row_item_options_unselect);
         	}

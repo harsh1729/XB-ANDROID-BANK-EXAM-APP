@@ -266,6 +266,7 @@ public class Activity_Splash extends Activity {
 					    int adTypeIntertialId = obj.getInt("AdvtIntertialId");
 					    Log.i("HARSH", "showAds, adTypeId , adTypeIntertialId ::"+ showAds +","+ adTypeId +","+ adTypeIntertialId);
 					    
+					    Activity_Home.promotionalText = obj.getString("promotional_text");
 					    DBHandler_AppConfig dbH = new DBHandler_AppConfig(context);
 					    dbH.updateAppConfigurationAds(showAds,adTypeId,adTypeIntertialId);
 					} catch (Exception ex) {

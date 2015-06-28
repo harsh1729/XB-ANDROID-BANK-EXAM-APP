@@ -15,9 +15,9 @@ import android.util.Log;
 public class DBHandler_Main extends SQLiteOpenHelper {
 
 	public  final static int DB_VERSION = 1;
-	public static final String DB_NAME = "OnlineExamDB1.3.sqlite";
+	public static final String DB_NAME = "OnlineExamDB1.4.sqlite";
 	private  String DB_PATH = "";
-	public static final String DB_NAME_OLD = "OnlineExamDB1.2.sqlite";
+	public static final String DB_NAME_OLD = "OnlineExamDB1.3.sqlite";
 	private  String DB_PATH_OLD = "";
 	private  Context myContext;
 
