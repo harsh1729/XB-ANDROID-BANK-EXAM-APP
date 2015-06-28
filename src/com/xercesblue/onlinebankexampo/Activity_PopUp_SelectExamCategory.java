@@ -55,6 +55,9 @@ public class Activity_PopUp_SelectExamCategory extends Activity {
 		lv.setAdapter(adp);
 	}
 
+	public void onClickPopView(View v){
+		this.finish();
+	}
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub

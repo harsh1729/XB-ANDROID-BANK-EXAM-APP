@@ -119,7 +119,7 @@ public class Activity_Favourites extends Activity_Parent {
 		RelativeLayout rlytHeader = (RelativeLayout)findViewById(R.id.rlytHeaderChild);
 		ImageButton imgBtnPlus = (ImageButton)findViewById(R.id.imgBtnHeaderPlus);
 
-		int headerImageXY = rlytHeader.getHeight() *5/10;
+		int headerImageXY = rlytHeader.getHeight() *7/10;
 		imgBtnPlus.getLayoutParams().height = headerImageXY;
 		imgBtnPlus.getLayoutParams().width = headerImageXY;
 

@@ -28,7 +28,7 @@ import com.google.android.gcm.GCMRegistrar;
 
 public class Activity_Splash extends Activity {
 
-	private final int SPLASH_TIME_OUT = 1000;
+	private final int SPLASH_TIME_OUT = 2000;
 	
 	Thread_RegisterOnPhpServer thread_RegisterOnPhpServer ;
 	Thread_GetAppConfigFromServer thread_GetConfig;
@@ -123,22 +123,22 @@ public class Activity_Splash extends Activity {
 		thread_GetConfig.start();
 	}
 	private void resizeImages(){
-		ImageView imgViewLogo = (ImageView)findViewById(R.id.imgLogo);
-		ImageView imgViewName = (ImageView)findViewById(R.id.imgLogoName);
+		ImageView imgViewLogo = (ImageView)findViewById(R.id.imgLogoXB);
+		//ImageView imgViewName = (ImageView)findViewById(R.id.imgLogoName);
 
 		int screenWidth = Globals.getScreenSize(this).x;
-		int logoWidth = screenWidth/100 * 20 ;// 17%
-		int nameWidth = screenWidth/100 * 78 ;// 64%
+		int logoWidth = screenWidth/100 * 60 ;// 17%
+		//int nameWidth = screenWidth/100 * 78 ;// 64%
 
 		Options options = new BitmapFactory.Options();
 		options.inScaled = false;
-		Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.logo_butterfly, options);
+		Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.xb, options);
 		logo = Globals.scaleToWidth(logo,logoWidth);
-		Bitmap name = BitmapFactory.decodeResource(getResources(), R.drawable.logo_name, options);
-		name = Globals.scaleToWidth(name,nameWidth);
+		//Bitmap name = BitmapFactory.decodeResource(getResources(), R.drawable.logo_name, options);
+		//name = Globals.scaleToWidth(name,nameWidth);
 
 		imgViewLogo.setImageBitmap(logo);
-		imgViewName.setImageBitmap(name);
+		//imgViewName.setImageBitmap(name);
 	}
 	private void hideScreenAfterTimeOut(){
 		new Handler().postDelayed(new Runnable() {

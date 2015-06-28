@@ -26,7 +26,7 @@ public class Activity_Results_Exam_Questions_List extends Activity_Parent {
 		ListView lv = (ListView)findViewById(R.id.listQuestionsResult);
 		
 		DBHandler_Questions dbH = new DBHandler_Questions(this);
-		ArrayList<Object_Question> listQues = dbH.getExamQuestions(objExam.examId);
+		ArrayList<Object_Question> listQues = dbH.getExamQuestionsWithText(objExam.examId);
 		ArrayList<Object_Row_Item_Questions_List> listItem = new ArrayList<Object_Row_Item_Questions_List>();
 		
 		for(Object_Question objQ : listQues){
@@ -59,6 +59,7 @@ public class Activity_Results_Exam_Questions_List extends Activity_Parent {
 
 		Object_Row_Item_Questions_List item=new Object_Row_Item_Questions_List();
 		item.quesNo = objQues.questionNo;
+		item.quesText = objQues.question;
 		item.attemptLater = objQues.attemptLater;
 		item.selectedOptionNo = objQues.optionSelected;
 		item.noOfOptions = objQues.arrayOptions.size();

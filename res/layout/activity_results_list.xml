@@ -17,59 +17,59 @@
         android:background="@drawable/bg_gradient_light_to_dark"
         android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/app_lightgray"
-            android:orientation="horizontal"
-            android:padding="10dp" >
+<!--         <LinearLayout -->
+<!--             android:layout_width="match_parent" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:background="@color/app_white" -->
+<!--             android:orientation="horizontal" -->
+<!--             android:padding="10dp" > -->
 
-            <TextView
-                android:id="@+id/txtName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.2"              
-                android:layout_marginRight="1dp"
-                android:gravity="center"
-                android:textSize="@dimen/txt_app_labels_fontsize"
-                android:text="@string/result_exam_name"
-                android:textColor="@color/app_black" />      
+<!--             <TextView -->
+<!--                 android:id="@+id/txtName" -->
+<!--                 android:layout_width="0dp" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:layout_weight="1.2"               -->
+<!--                 android:layout_marginRight="1dp" -->
+<!--                 android:gravity="center" -->
+<!--                 android:textSize="@dimen/txt_app_labels_fontsize" -->
+<!--                 android:text="@string/result_exam_name" -->
+<!--                 android:textColor="@color/app_black" />       -->
      		
-            <TextView
-                android:id="@+id/txtType"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_weight="1.2"
-                android:gravity="center"
-                android:textSize="@dimen/txt_app_labels_fontsize"
-                android:text="@string/result_exam_type"
-                android:textColor="@color/app_black" />      
+<!--             <TextView -->
+<!--                 android:id="@+id/txtType" -->
+<!--                 android:layout_width="0dp" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:layout_marginLeft="1dp" -->
+<!--                 android:layout_marginRight="1dp" -->
+<!--                 android:layout_weight="1.2" -->
+<!--                 android:gravity="center" -->
+<!--                 android:textSize="@dimen/txt_app_labels_fontsize" -->
+<!--                 android:text="@string/result_exam_type" -->
+<!--                 android:textColor="@color/app_black" />       -->
      		
-            <TextView
-                android:id="@+id/txtDate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:textSize="@dimen/txt_app_labels_fontsize"
-                android:text="@string/result_exam_date"
-                android:textColor="@color/app_black" />       
+<!--             <TextView -->
+<!--                 android:id="@+id/txtDate" -->
+<!--                 android:layout_width="0dp" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:layout_marginLeft="1dp" -->
+<!--                 android:layout_marginRight="1dp" -->
+<!--                 android:layout_weight="1.5" -->
+<!--                 android:gravity="center" -->
+<!--                 android:textSize="@dimen/txt_app_labels_fontsize" -->
+<!--                 android:text="@string/result_exam_date" -->
+<!--                 android:textColor="@color/app_black" />        -->
      		
-            <TextView
-                android:id="@+id/txtMarks"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="@dimen/txt_app_labels_fontsize"
-                android:text="@string/result_exam_marks"
-                android:textColor="@color/app_black" />
-        </LinearLayout>
+<!--             <TextView -->
+<!--                 android:id="@+id/txtMarks" -->
+<!--                 android:layout_width="0dp" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:layout_marginLeft="1dp" -->
+<!--                 android:layout_weight="1" -->
+<!--                 android:gravity="center" -->
+<!--                 android:textSize="@dimen/txt_app_labels_fontsize" -->
+<!--                 android:text="@string/result_exam_marks" -->
+<!--                 android:textColor="@color/app_black" /> -->
+<!--         </LinearLayout> -->
 
         <ListView
             android:id="@+id/listResults"

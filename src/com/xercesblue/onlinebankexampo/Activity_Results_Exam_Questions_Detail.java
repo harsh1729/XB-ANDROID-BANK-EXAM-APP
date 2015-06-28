@@ -6,8 +6,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -37,6 +39,13 @@ public class Activity_Results_Exam_Questions_Detail extends Activity_Parent {
 			imgQ.setImageDrawable(null);
 		}
 		
+		//Hide Next Prev Relative Layout
+		
+		RelativeLayout rlyt = (RelativeLayout)findViewById(R.id.rlytNextPrev);
+		rlyt.setVisibility(View.GONE);
+		
+		ImageButton reportBtn  = (ImageButton)findViewById(R.id.imgBtnReport);
+		reportBtn.setVisibility(View.GONE);
 		
 		///Show Solution
 		ScrollView scrollConatinerSolutions = (ScrollView)findViewById(R.id.scrolViewSolution);
@@ -46,7 +55,7 @@ public class Activity_Results_Exam_Questions_Detail extends Activity_Parent {
 		if(objQues.solution != null && !objQues.solution.trim().equals("")){
 			TextView txtSolution= (TextView)findViewById(R.id.txtSolution);
 			txtSolution.setTextSize(Globals.getAppFontSize(this));
-			txtSolution.setText("Solution :  "+objQues.solution);
+			txtSolution.setText("Solution :  \n"+objQues.solution);
 			haveSolution = true;
 		}
 		

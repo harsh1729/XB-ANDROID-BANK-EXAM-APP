@@ -11,7 +11,7 @@
         android:id="@+id/llytHeader1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.2"
+        android:layout_weight="0.8"
         android:background="@color/app_black"
         android:gravity="center"
         android:orientation="vertical" >
@@ -20,7 +20,7 @@
             android:id="@+id/rlytHeaderChild"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="5dp"
+            android:padding="2dp"
             android:layout_weight="9.5" >
 
           
@@ -31,7 +31,7 @@
                 android:layout_centerInParent="true"
                 android:gravity="center"
                 android:text="Tutorial"
-                android:textColor="@color/app_black"
+                android:textColor="@color/app_white"
                 android:textSize="@dimen/txt_app_header_fontsize" />
             
             
@@ -40,10 +40,9 @@
                 android:id="@+id/imgBtnHeaderPlus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imgBtnHeaderPopup"
                 android:layout_alignParentLeft="true"
+               	android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:onClick="onClickPlus"

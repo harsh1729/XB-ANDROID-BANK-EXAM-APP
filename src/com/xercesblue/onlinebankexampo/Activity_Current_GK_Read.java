@@ -199,7 +199,7 @@ private void resizeImageButtons(Boolean hide) {
 				txtMsg.setText(text.trim());
 				txtMsg.setTextSize(Globals.getAppFontSize_Large(this));
 				txtMsg.setTextColor(this.getResources().getColor(
-						R.color.app_white));
+						R.color.app_black));
 				
 				txtMsg.setLayoutParams(lpText);
 				llH.addView(txtMsg);

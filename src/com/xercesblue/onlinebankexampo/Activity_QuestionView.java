@@ -133,7 +133,7 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 		txtHeader.setText(quesCatObj.name);	
 		TextView txtQ = (TextView)findViewById(R.id.txtQuestion);
 	
-		txtQ.setTextColor(getResources().getColor(R.color.app_white));
+		//txtQ.setTextColor(getResources().getColor(R.color.app_white));
 		txtQ.setTextSize( Globals.getAppFontSize(this));
 
 
@@ -176,6 +176,8 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 			totalmillisec = ((quesCatObj.durationHours*60) +(quesCatObj.durationMins))*60*1000;	
 		}
 
+		TextView txtsol =(TextView)findViewById(R.id.txtSolution);
+		txtsol.setTextSize(Globals.getAppFontSize(this));
 		
 	}
 	
@@ -341,7 +343,7 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 			txtAttemptLater.setVisibility(View.VISIBLE);
 			txtFavorite.setVisibility(View.VISIBLE);
 
-			int headerImageXY = rlytHeader.getHeight() *5/10;
+			int headerImageXY = rlytHeader.getHeight() *7/10;
 
 			if(quesCatObj.isParentCategory != 1 || isPractice){
 				imgBtnPlus.setVisibility(View.GONE);
@@ -539,16 +541,31 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 	
 			if(currentQues.isAnsShown)
 			{
-				if(!currentQues.solution.equals(""))
-				{
 					
 					TextView txtsol =(TextView)findViewById(R.id.txtSolution);
-					txtsol.setTextSize(Globals.getAppFontSize(this));
-					txtsol.setText("Solution :\n"+currentQues.solution);
+					ImageView imgSolution = (ImageView)findViewById(R.id.imgViewSolution);
 					
-					scrollConatinerSolutions.setVisibility(View.VISIBLE);
-				}
-				
+					if(currentQues.solution != null && !currentQues.solution.trim().equals("")){
+						
+						txtsol.setText("Solution :\n"+currentQues.solution);
+						scrollConatinerSolutions.setVisibility(View.VISIBLE);
+					}else{
+						txtsol.setText("");
+					}
+					
+	
+					if(currentQues.solutionImage != null){
+						Bitmap bm = BitmapFactory.decodeByteArray(currentQues.solutionImage, 0,currentQues.solutionImage.length);
+						imgSolution.setImageBitmap(bm);
+						
+						if(txtsol.getText().equals("")){
+							txtsol.setText("Solution :");
+						}
+						scrollConatinerSolutions.setVisibility(View.VISIBLE);
+					}else{
+						imgSolution.setImageDrawable(null);
+					}
+
 			}
 			else
 			{
@@ -613,20 +630,9 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 				v.setSelected(true);
 			
 				setOptions();
+
+				setSolution();
 				
-				Boolean haveSolution =false;
-				if(!currentQues.solution.equals(""))
-				{
-					TextView txtsol =(TextView)findViewById(R.id.txtSolution);
-					txtsol.setTextSize(Globals.getAppFontSize(this));
-					txtsol.setText("Solution :  \n"+currentQues.solution);
-					haveSolution =true;
-					
-				}
-				if(haveSolution)
-					scrollConatinerSolutions.setVisibility(View.VISIBLE);
-				else
-					scrollConatinerSolutions.setVisibility(View.GONE);
 				arrayQuesNoAnsShown.add(Integer.valueOf(currentQues.questionNo));
 			}
 

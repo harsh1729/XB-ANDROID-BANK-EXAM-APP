@@ -4,48 +4,25 @@
     android:layout_height="match_parent"
     android:background="@color/app_tranparent_black"
     android:orientation="vertical"
+    android:clickable="true"
+    android:onClick="onClickPopView"
+    android:gravity="center"
+    android:padding="25dp"
     tools:context=".Activity_PopUp_SelectExamCategory" >
 
-    <!-- Header aligned to top -->
-
-    <RelativeLayout
-        android:id="@+id/llytHeader"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.2"
-        android:gravity="right"
-        android:padding="10dp" >
-
-<!--         <Button -->
-<!--             android:id="@+id/btnCancel" -->
-<!--             android:layout_width="wrap_content" -->
-<!--             android:layout_height="wrap_content" -->
-<!--             android:layout_centerVertical="true" -->
-<!--             android:background="@color/app_transparent" -->
-<!--             android:onClick="btnCancelClick" -->
-<!--             android:text="X" -->
-<!--             android:textColor="@color/app_white" -->
-<!--             android:textSize="30sp" -->
-<!--             android:textStyle="bold" /> -->
-    </RelativeLayout>
+  
 
     <ListView
         android:id="@+id/listExamCategories"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/app_transparent"
+        android:layout_gravity="center_horizontal"
         android:divider="@null"
 		android:dividerHeight="0dp"
-		android:listSelector="@color/app_transparent"
-        android:layout_weight="7.8" >
+		android:listSelector="@color/app_transparent" >
     </ListView>
 
-    <LinearLayout
-        android:id="@+id/footer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical" >
-    </LinearLayout>
+
 
 </LinearLayout>

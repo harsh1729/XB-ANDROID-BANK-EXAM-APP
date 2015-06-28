@@ -47,7 +47,7 @@ import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.WebDialog;
 import com.facebook.widget.WebDialog.OnCompleteListener;
 
-public class Activity_Settings_DownloadMore extends Activity_Parent_IntertialAds {
+public class Activity_Settings_DownloadMore extends Activity_Parent {
 	//private Point p;
 	
 	private UiLifecycleHelper uiHelper;

@@ -105,7 +105,6 @@ public class Activity_Current_GK_Test extends Activity_Parent_Banner_Ads {
 		firstTime = true;
 		
 		TextView txtQ = (TextView)findViewById(R.id.txtQuestion);
-		txtQ.setTextColor(getResources().getColor(R.color.app_white));
 		txtQ.setTextSize( Globals.getAppFontSize(this));
 		
 		final ListView lv = (ListView)findViewById(R.id.listOptions);

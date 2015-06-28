@@ -11,7 +11,7 @@
         android:id="@+id/llytHeader"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:background="@color/app_black"
         android:gravity="center"
         android:orientation="vertical" >
@@ -26,15 +26,14 @@
                 android:id="@+id/txtTimer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
                 android:layout_alignParentTop="true"
-                android:layout_gravity="right"
-                android:gravity="right"
+                android:gravity="center"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text=""
                 android:textColor="@color/app_green"
-                android:textSize="@dimen/txt_app_notes_fontsize" />
+                android:textSize="@dimen/txt_app_labels_smallest_fontsize" />
 
             <TextView
                 android:id="@+id/txtHeader"
@@ -42,8 +41,9 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:gravity="center"
+                android:layout_marginTop="4dp"
                 android:text=""
-                android:textColor="@color/app_black"
+                android:textColor="@color/app_white"
                 android:textSize="@dimen/txt_app_header_fontsize" />
 
             <ImageButton
@@ -81,229 +81,8 @@
     </LinearLayout>
     <!-- Content below header and above footer -->
 
-    <LinearLayout
-        android:id="@+id/llytMainBody"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="7.8"
-        android:background="@drawable/bg_gradient_light_to_dark"
-        android:orientation="vertical" >
-
-        <ScrollView
-            android:id="@+id/scrolViewQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3.5"
-            android:background="@color/app_gray"
-            android:fadeScrollbars="false" >
-
-            <LinearLayout 
-                android:id="@+id/llytQuestionContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="top"
-                android:paddingBottom="2dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:paddingTop="2dp">
-            <LinearLayout
-                android:id="@+id/llytQuestion"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/txtQuestion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="" />
-
-                <ImageView
-                    android:id="@+id/imgViewQuestion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:contentDescription="Image" />
-            </LinearLayout>
-             	<ImageButton
-                android:id="@+id/imgBtnReport"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="0dp"
-                android:background="@android:color/transparent"
-                android:onClick="onClickReport"
-                android:scaleType="fitCenter"
-                android:src="@drawable/selector_question_report" />
-            </LinearLayout>
-        </ScrollView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/app_lightgray" >
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5.5"
-            android:orientation="vertical" >
-
-            <ListView
-                android:id="@+id/listOptions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@null"
-                android:fadeScrollbars="false" >
-            </ListView>
-        </LinearLayout>
-        <LinearLayout 
-             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            
-            android:orientation="vertical">
-              <ScrollView
-            android:id="@+id/scrolViewSolution"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            
-            android:background="@color/app_lightgray"
-            android:visibility="gone"
-            android:fadeScrollbars="false" >
-
-            <LinearLayout
-                android:id="@+id/llytSolution"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="5dp" >
-
-                <TextView
-                    android:id="@+id/txtSolution"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/app_black"
-                    
-                    android:scrollHorizontally="true"
-                    android:singleLine="false"
-                    android:text="TextView" />
-
-                <ImageView
-                    android:id="@+id/imgViewSolution"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:contentDescription="Image" />
-            </LinearLayout>
-        </ScrollView>
-        </LinearLayout>
-		
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/app_lightgray" >
-        </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/rlytNextPrev"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.2" >
-
-            <ImageButton
-                android:id="@+id/imgBtnPrev"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="30dp"
-                android:layout_toLeftOf="@+id/imgBtnStop"
-                android:background="@android:color/transparent"
-                android:onClick="onClickPrev"
-                android:scaleType="centerCrop"
-                android:src="@drawable/selector_question_prev" />
-
-            <ImageButton
-                android:id="@+id/imgBtnNext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="30dp"
-                android:layout_toRightOf="@+id/imgBtnStop"
-                android:background="@android:color/transparent"
-                android:onClick="onClickNext"
-                android:scaleType="centerCrop"
-                android:src="@drawable/selector_question_next" />
-
-            <LinearLayout
-                android:id="@+id/llytFavorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:gravity="center"
-                android:orientation="vertical" >
-
-                <ImageButton
-                    android:id="@+id/imgBtnFavorite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:onClick="onClickFav"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/selector_question_favourite" />
-
-                <TextView
-                    android:id="@+id/txtFavorites"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Favourite"
-                    android:textColor="@color/app_black"
-                    android:textSize="@dimen/txt_app_notes_fontsize" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:gravity="center"
-                android:orientation="vertical" >
-
-                <ImageButton
-                    android:id="@+id/imgBtnAttemptLater"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:onClick="onClickAttempLater"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/selector_question_attempt_later" />
-
-                <TextView
-                    android:id="@+id/txtAttemptLater"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Marked"
-                    android:textColor="@color/app_black"
-                    android:textSize="@dimen/txt_app_notes_fontsize" />
-            </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/imgBtnStop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:background="@android:color/transparent"
-                android:onClick="onClickStop"
-                android:scaleType="centerCrop"
-                android:src="@drawable/selector_question_stop" />
-        </RelativeLayout>
-       
-    </LinearLayout>
-
+  <include layout="@layout/app_question_view" />
+   
     <!-- Footer aligned to bottom -->
 
     <LinearLayout

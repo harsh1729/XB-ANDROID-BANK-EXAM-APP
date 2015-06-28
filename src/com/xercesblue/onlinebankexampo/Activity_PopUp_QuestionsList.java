@@ -76,9 +76,10 @@ public class Activity_PopUp_QuestionsList extends Activity {
 		btn.setLayoutParams(lp);
 		btn.setPadding(10, 10, 10, 10);
 		btn.setText(Globals.getChildCatName(catId, quesCatObj));
+		btn.setTextColor(this.getResources().getColor(R.color.app_white));
 		btn.setTypeface(null,Typeface.BOLD);
-		btn.setBackgroundResource(R.drawable.bg_green_black_border);
-		btn.setOnTouchListener(new Custom_ButtonOnTouchListener_WhiteBG(btn, this));
+		btn.setBackgroundResource(R.drawable.bg_white_black_border);
+		btn.setOnTouchListener(new Custom_ButtonOnTouchListener_GreenBG(btn, this));
 		btn.setTextSize(Globals.getAppFontSize(this));
 		//btn.quesCatId = catId;
 		btn.setOnClickListener(new OnClickListener() {			

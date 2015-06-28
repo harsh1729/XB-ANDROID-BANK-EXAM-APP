@@ -8,5 +8,6 @@
     <dimen name="txt_app_notes_fontsize">12sp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="txt_app_labels_smallest_fontsize">11sp</dimen>
 
 </resources>

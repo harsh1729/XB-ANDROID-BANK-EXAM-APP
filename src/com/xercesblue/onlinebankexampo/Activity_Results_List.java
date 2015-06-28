@@ -12,7 +12,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-public class Activity_Results_List extends Activity_Parent_IntertialAds {
+public class Activity_Results_List extends Activity_Parent {
 
 	private ArrayList<Object_Exam> listExams;
 	@Override
