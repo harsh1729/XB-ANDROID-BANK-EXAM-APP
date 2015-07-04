@@ -18,6 +18,7 @@ public class DBHandler_Questions extends SQLiteOpenHelper {
 
 	final static String TABLE_NAME_QUES = "Questions";
 	final static String KEY_QUES_ID = "QuesId";
+	final  String KEY_ROW_ID = "Id";
 	final static String KEY_QUES_CAT_ID = "QuesCatId";
 	final String KEY_QUES_IMAGE = "Image";
 	final static String KEY_QUES_TEXT = "Question";
@@ -158,7 +159,7 @@ public class DBHandler_Questions extends SQLiteOpenHelper {
 				" WHERE "+KEY_QUES_CAT_ID +" = "+catId+
 				" AND "+KEY_QUES_IF_FAV+" = 1 "+
 				//" AND "+KEY_QUES_LANG_ID+" = "+Globals.langId+
-				" ORDER BY "+KEY_QUES_ID;
+				" ORDER BY "+KEY_ROW_ID;
 		Cursor cursor = db.rawQuery(sqlQuery, null);
 
 		try{
@@ -349,7 +350,7 @@ public class DBHandler_Questions extends SQLiteOpenHelper {
 		if(quesCatID != 2)
 			sqlQuery+= " AND "+KEY_QUES_LANG_ID+" = "+Globals.getAppConfig(context).selectedLangId;
 				
-		sqlQuery+=" ORDER BY "+KEY_QUES_ID+" LIMIT 1 ";
+		sqlQuery+=" ORDER BY "+KEY_ROW_ID+" LIMIT 1 ";
 
 		Cursor cursor = db.rawQuery(sqlQuery, null);
 		Object_Question obj = null;

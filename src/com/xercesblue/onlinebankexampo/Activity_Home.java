@@ -2,6 +2,7 @@ package com.xercesblue.onlinebankexampo;
 
 import java.util.ArrayList;
 
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -59,6 +60,8 @@ public class Activity_Home extends Activity_Parent {
 		
 		Custom_AppEulaClass eula = new Custom_AppEulaClass(this);
 		eula.show();
+		
+		
 	}
 
 	

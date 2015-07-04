@@ -2,9 +2,6 @@ package com.xercesblue.onlinebankexampo;
 
 import java.util.Map;
 
-import mobi.vserv.android.ads.ViewNotEmptyException;
-import mobi.vserv.android.ads.VservController;
-import mobi.vserv.android.ads.VservManager;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -21,26 +18,32 @@ public class Activity_Parent_Banner_Ads extends Activity_Parent_IntertialAds {
 
 	private IMBanner banner;
 	
-	private VservController controller;
+	
 	
 	@Override
 		protected void onCreate(Bundle savedInstanceState) {
-			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
 			
+			try{
 			if(Globals.getAppConfig(this).showAdds ==Globals.APP_TRUE){
 				
 				if(Globals.getAppConfig(this).adTypeId == Globals.ADD_TYPE_INMOBI )
 					InMobi.initialize(this, Globals.AD_INMOBI_PROPERTY_ID);
+			}
+			}catch(Exception ex){
+				Log.i("HARSH", "Exception in Banner Init On create");
 			}
 			
 		}
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
-		setAddsVisibility();
+		try{
+			setAddsVisibility();
+		}catch(Exception ex){
+			Log.i("HARSH", "Exception in Banner Init On create");
+		}
 	}
 
 
@@ -54,22 +57,6 @@ public class Activity_Parent_Banner_Ads extends Activity_Parent_IntertialAds {
 		super.onDestroy();
 	}
 	
-	@Override
-	protected void onStart() {
-		if (null != controller) {
-			controller.resumeRefresh();
-		}
-		super.onStart();
-	}
-
-	@Override
-	protected void onStop() {
-
-		if (null != controller) {
-			controller.stopRefresh();
-		}
-		super.onStop();
-	}
 	
 	private void createAdds(){
 		// Create an ad.
@@ -83,10 +70,7 @@ public class Activity_Parent_Banner_Ads extends Activity_Parent_IntertialAds {
 			Log.i("HARSH", "Show Banner ADD_TYPE_INMOBI");
 			showInMobiAdd();
 			break;
-		case Globals.ADD_TYPE_VSERV:
-			Log.i("HARSH", "Show Banner ADD_TYPE_VSERV");
-			showVservAdd();
-			break;
+		
 		case Globals.ADD_TYPE_STARTAPP:
 			Log.i("HARSH", "Show Banner ADD_TYPE_STARTAPP");
 			showStartAppAdd();
@@ -139,21 +123,7 @@ public class Activity_Parent_Banner_Ads extends Activity_Parent_IntertialAds {
 		layout.addView(banner);
 	}
 	
-	private void showVservAdd(){
-		LinearLayout adView = (LinearLayout) findViewById(R.id.llytAdd);
-		if (adView != null) {
-			adView.removeAllViews();
-		}
-		VservManager renderAdManager = VservManager.getInstance(this);
-		try {
-			controller = renderAdManager.renderAd(Globals.VSERV_BANNER_ZONE_ID, adView);
-			if(controller!=null){
-				controller.setRefresh(30);
-			}
-		} catch (ViewNotEmptyException e) {
-			Log.e("HARSH ERROR", e.getMessage());
-		}
-	}
+	
 	
 	public void setAddsVisibility(){
 		Boolean hide = true;

@@ -186,7 +186,7 @@ private void resizeImageButtons(Boolean hide) {
 				if(key.trim().equalsIgnoreCase("errorNoMorePages")){
 					img.setImageResource(R.drawable.circle_red);
 				}else{
-					img.setImageResource(R.drawable.circle_green);
+					img.setImageResource(R.drawable.circle_blue);
 				}
 				img.setLayoutParams(lpImage);
 				llH.addView(img);
@@ -226,6 +226,7 @@ private void resizeImageButtons(Boolean hide) {
 		txtPageNo.setText("Loading...");
 		
 		downloadGkForPage(++currentPageNo);
+		questionCount = questionCount+ 3;
 	}
 
 	public void onClickPrev(View v) {

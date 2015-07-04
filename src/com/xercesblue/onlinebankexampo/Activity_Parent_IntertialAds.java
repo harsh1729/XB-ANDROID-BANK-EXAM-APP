@@ -2,25 +2,27 @@ package com.xercesblue.onlinebankexampo;
 
 import java.util.Map;
 
-import mobi.vserv.android.ads.AdPosition;
-import mobi.vserv.android.ads.AdType;
-import mobi.vserv.android.ads.VservManager;
-
 import android.os.Bundle;
 import android.util.Log;
 
+//import com.chartboost.sdk.CBLocation;
+//import com.chartboost.sdk.Chartboost;
 import com.inmobi.commons.InMobi;
 import com.inmobi.monetization.IMErrorCode;
 import com.inmobi.monetization.IMInterstitial;
 import com.inmobi.monetization.IMInterstitialListener;
 import com.startapp.android.publish.StartAppAd;
 import com.startapp.android.publish.StartAppSDK;
+//import mobi.vserv.android.ads.AdPosition;
+//import mobi.vserv.android.ads.AdType;
+//import mobi.vserv.android.ads.VservManager;
 
 public class Activity_Parent_IntertialAds extends Activity_Parent {
 
-	private VservManager manager;
+	//private VservManager manager;
 	protected StartAppAd startAppAd = null;
-	
+	protected int questionCount = 0;
+	private boolean showingChartboost = false;
 
 	IMInterstitial interstitial;
 	@Override
@@ -34,25 +36,25 @@ public class Activity_Parent_IntertialAds extends Activity_Parent {
 			else if(Globals.getAppConfig(this).adTypeInterId == Globals.ADD_TYPE_STARTAPP){
 				startAppAd = new StartAppAd(this);
 				StartAppSDK.init(this, Globals.STARTAPP_DEVELOPER_ID,  Globals.STARTAPP_APP_ID, true);
+			}else if(Globals.getAppConfig(this).adTypeInterId == Globals.ADD_TYPE_CHARTBOOST){
+				//Chartboost.startWithAppId(this, Globals.CHARTBOOST_APP_ID, Globals.CHARTBOOST_SIGNATURE_ID);
+			    //Chartboost.onCreate(this);
+			    showingChartboost = true;
 			}
 		}
 	}
 	
-	@Override
-	protected void onDestroy() {		
-		showAds();
-		super.onDestroy();
-	}
+	
 	
 	private void showAds(){
-		if(Globals.getAppConfig(this).showAdds ==Globals.APP_TRUE)
+		if(Globals.getAppConfig(this).showAdds ==Globals.APP_TRUE && questionCount > 15)//
 		{
 			switch (Globals.getAppConfig(this).adTypeInterId) {
 			case Globals.ADD_TYPE_INMOBI:
 				loadInMobiIntertial();
 				break;
-			case Globals.ADD_TYPE_VSERV:
-				showVservIntertial();
+			case Globals.ADD_TYPE_CHARTBOOST:
+				showChartBoostIntertial();
 				break;
 			case Globals.ADD_TYPE_STARTAPP:
 				showStartAppIntertial();
@@ -70,21 +72,8 @@ public class Activity_Parent_IntertialAds extends Activity_Parent {
 		}
 	}
 	
-	@Override
-	protected void onResume() {
-	    super.onResume();
-	    if(startAppAd != null)
-	    	startAppAd.onResume();
-	    
-	    
-	}
 	
-	@Override
-	protected void onPause() {
-	    super.onPause();
-	    if(startAppAd != null)
-	    	startAppAd.onPause();
-	}
+	
 	
 	private void loadInMobiIntertial(){
 		Log.i("HARSH", "INIT AD");
@@ -135,65 +124,69 @@ public class Activity_Parent_IntertialAds extends Activity_Parent {
 	    
 	  }
 	
-	private void showVservIntertial(){
+	private void showChartBoostIntertial(){
 		
-		Log.i("HARSH", "showVservIntertial called");
-		manager = VservManager.getInstance(this);
-		manager.setShowAt(AdPosition.START);
-		//manager.setGender(Gender.FEMALE);
-		manager.displayAd(Globals.VSERV_BILLBOARD_ZONE_ID, AdType.INTERSTITIAL);
+		Log.i("HARSH", "showChartBoostIntertial called");
+		//Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
+		//Chartboost.showInterstitial(CBLocation.LOCATION_DEFAULT);
+
 		
-		
-		
-		/*
-		if (null != controller) {
-			controller.stopRefresh();
-			controller = null;
-		}
-
-		manager = VservManager.getInstance(this);
-
-		manager.getAd(Globals.VSERV_BILLBOARD_ZONE_ID, AdOrientation.PORTRAIT,
-				new AdLoadCallback() {
-
-					@Override
-					public void onLoadSuccess(VservAd adObj) {
-						Toast.makeText(Activity_Results_Exam.this,
-								"Success in getting Ad", Toast.LENGTH_SHORT)
-								.show();
-						adObject = adObj;
-						Toast.makeText(
-								Activity_Results_Exam.this,
-								"Showing Ad for ZoneId "
-										+ adObject.getZoneId(),
-								Toast.LENGTH_SHORT).show();
-
-						if (null != controller) {
-							controller.stopRefresh();
-							controller = null;
-						}
-
-						if (null != adObject) {
-							adObject.setZoneId(Globals.VSERV_BILLBOARD_ZONE_ID);
-							adObject.overlay(Activity_Results_Exam.this);
-						}
-					}
-
-					@Override
-					public void onLoadFailure() {
-						Toast.makeText(Activity_Results_Exam.this,
-								"Failed in getting AD", Toast.LENGTH_SHORT)
-								.show();
-					}
-
-					@Override
-					public void onNoFill() {
-						Toast.makeText(Activity_Results_Exam.this, "No Ad Found",
-								Toast.LENGTH_SHORT).show();
-					}
-				});
-				
-				*/
 	}
+	
+	
+
+	@Override
+	protected void onResume() {
+	    super.onResume();
+	    if(startAppAd != null)
+	    	startAppAd.onResume();
+	    //if(showingChartboost)
+	    	//Chartboost.onResume(this);
+	        
+	}
+	
+	@Override
+	protected void onPause() {
+	    super.onPause();
+	    if(startAppAd != null)
+	    	startAppAd.onPause();
+	    //if(showingChartboost)
+	    	//Chartboost.onPause(this);
+	}
+	
+	@Override
+	protected void onDestroy() {		
+		showAds();
+		super.onDestroy();
+		//if(showingChartboost)
+			//Chartboost.onDestroy(this);
+	}
+	
+	/*
+	@Override
+	public void onStart() {
+	    super.onStart();
+	    //if(showingChartboost)
+	    	//Chartboost.onStart(this);
+	}
+	
+	
+        
+	@Override
+	public void onStop() {
+	    super.onStop();
+	    //if(showingChartboost)
+	    	//Chartboost.onStop(this);
+	}
+
+
+	@Override
+	public void onBackPressed() {
+	   // if (Chartboost.onBackPressed())
+	        //return;
+	    //else
+	        super.onBackPressed();
+	}
+	*/
 
 }

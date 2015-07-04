@@ -19,16 +19,18 @@
                 android:id="@+id/llytQuestionContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_gravity="top"
                 android:paddingBottom="2dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="2dp">
+                
+                
+                
             <LinearLayout
                 android:id="@+id/llytQuestion"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
@@ -46,15 +48,18 @@
                     android:layout_marginTop="10dp"
                     android:contentDescription="Image" />
             </LinearLayout>
-             	<ImageButton
+            
+            <ImageButton
                 android:id="@+id/imgBtnReport"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_gravity="right"
                 android:padding="0dp"
                 android:background="@android:color/transparent"
                 android:onClick="onClickReport"
                 android:scaleType="fitCenter"
-                android:src="@drawable/selector_question_report" />
+                android:src="@drawable/selector_question_report" /> 
+             	
             </LinearLayout>
         </ScrollView>
 

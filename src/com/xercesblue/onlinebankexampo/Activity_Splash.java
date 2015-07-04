@@ -23,6 +23,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 
+//import com.chartboost.sdk.Chartboost;
 import com.google.android.gcm.GCMRegistrar;
 //import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class Activity_Splash extends Activity {
 	
 	// Internet detector
     Custom_ConnectionDetector cd;
+    boolean canfinish = true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +59,9 @@ public class Activity_Splash extends Activity {
 		registerDeviceOnServer();
 		getAppConfigFromServer();
 		hideScreenAfterTimeOut();
-			
-			
+		
+		//Chartboost.startWithAppId(this, Globals.CHARTBOOST_APP_ID, Globals.CHARTBOOST_SIGNATURE_ID);
+	    //Chartboost.onCreate(this);	
 	}
 
 	private void registerDeviceOnServer(){
@@ -79,6 +82,7 @@ public class Activity_Splash extends Activity {
         // Check if Internet present
         if (cd.isConnectingToInternet())
         {
+        	
         	String regId = GCMRegistrar.getRegistrationId(this);
         	//Log.i("HARSH","At Line 70");
         	if (regId.equals("")) 
@@ -151,24 +155,27 @@ public class Activity_Splash extends Activity {
 			@Override
 			public void run() {
 				// This method will be executed once the timer is over
-				Intent i = null;
-				int selectLangId = 0;
 				
-				try{
-					selectLangId = Globals.getAppConfig(Activity_Splash.this).selectedLangId;
-				}catch(Exception ex){
-					Log.e("HARSH","Error in hideScreenAfterTimeOut , Activity Splash");
-				}
-				
-				if( selectLangId > 0){ // already selected
-					i = new Intent(Activity_Splash.this, Activity_Home.class);
-				}else{
-					i = new Intent(Activity_Splash.this, Activity_SelectLanguage.class);
-				}
+					Intent i = null;
+					int selectLangId = 0;
+					
+					try{
+						selectLangId = Globals.getAppConfig(Activity_Splash.this).selectedLangId;
+					}catch(Exception ex){
+						Log.e("HARSH","Error in hideScreenAfterTimeOut , Activity Splash");
+					}
+					
+					if( selectLangId > 0){ // already selected
+						i = new Intent(Activity_Splash.this, Activity_Home.class);
+					}else{
+						i = new Intent(Activity_Splash.this, Activity_SelectLanguage.class);
+					}
 
-				startActivity(i);
-				finish();
-			}
+					startActivity(i);
+					finish();
+					
+					
+				}
 		}, SPLASH_TIME_OUT);
 	}
 	
@@ -261,12 +268,26 @@ public class Activity_Splash extends Activity {
 					try {
 
 					    JSONObject obj = new JSONObject(jsonResponce);
-					    int showAds = obj.getInt("ShowAdvt");
-					    int adTypeId = obj.getInt("AdvtId");
-					    int adTypeIntertialId = obj.getInt("AdvtIntertialId");
-					    Log.i("HARSH", "showAds, adTypeId , adTypeIntertialId ::"+ showAds +","+ adTypeId +","+ adTypeIntertialId);
+					    int showAds = 1;
+					    int adTypeId = 3;
+					    int adTypeIntertialId = 3;
 					    
-					    Activity_Home.promotionalText = obj.getString("promotional_text");
+					    
+					    if(obj.has("ShowAdvt")){
+					     showAds = obj.getInt("ShowAdvt");
+					    }
+					    
+					    if(obj.has("AdvtId")){
+					    	adTypeId = obj.getInt("AdvtId");
+						    }
+					    
+					    if(obj.has("AdvtIntertialId")){
+					    	adTypeIntertialId = obj.getInt("AdvtIntertialId");
+						    }
+					    //Log.i("HARSH", "showAds, adTypeId , adTypeIntertialId ::"+ showAds +","+ adTypeId +","+ adTypeIntertialId);
+					    
+					    if(obj.has("promotional_text"))
+					    	Activity_Home.promotionalText = obj.getString("promotional_text");
 					    DBHandler_AppConfig dbH = new DBHandler_AppConfig(context);
 					    dbH.updateAppConfigurationAds(showAds,adTypeId,adTypeIntertialId);
 					} catch (Exception ex) {

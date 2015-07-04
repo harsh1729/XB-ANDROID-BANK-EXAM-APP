@@ -7,6 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -148,6 +151,7 @@ public class Activity_Current_GK_Test extends Activity_Parent_Banner_Ads {
 		}
 	}
 	
+	@SuppressLint("InlinedApi")
 	public void getQuesFromServer(final int qNo)
 	 {
 		Custom_ConnectionDetector cd = new Custom_ConnectionDetector(
@@ -166,7 +170,13 @@ public class Activity_Current_GK_Test extends Activity_Parent_Banner_Ads {
 		String month = Activity_Current_GK_Type_Select.getSelectedMonth();
 		String year = Activity_Current_GK_Type_Select.getSelectedYear();
 		
-		mDialog = new ProgressDialog(this);
+		
+		if (android.os.Build.VERSION.SDK_INT >= 14) 
+		{
+			mDialog = new ProgressDialog(this,ProgressDialog.THEME_DEVICE_DEFAULT_LIGHT);
+		}else{
+			mDialog = new ProgressDialog(this);
+		}
         mDialog.setMessage("Please wait...");
         mDialog.setCancelable(false);
         mDialog.show();
@@ -352,7 +362,7 @@ public class Activity_Current_GK_Test extends Activity_Parent_Banner_Ads {
 		if(currentQues != null){
 			qNo = currentQues.questionNo+1;
 		}
-
+		questionCount++;
 		getQuesFromServer(qNo);
 		
 		

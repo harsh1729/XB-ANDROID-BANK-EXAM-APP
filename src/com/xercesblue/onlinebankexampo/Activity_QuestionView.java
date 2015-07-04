@@ -224,6 +224,7 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 		txtQ.setText("Q."+ currentQues.questionNo+ "   "+currentQues.question.trim());
 		if(currentQues.image != null){
 			Bitmap bm = BitmapFactory.decodeByteArray(currentQues.image, 0,currentQues.image.length);
+			bm = Globals.scaleToWidth(bm, Globals.getScreenSize(this).x - 20);
 			imgQ.setImageBitmap(bm);
 		}else{
 			imgQ.setImageDrawable(null);
@@ -543,6 +544,7 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 	
 					if(currentQues.solutionImage != null){
 						Bitmap bm = BitmapFactory.decodeByteArray(currentQues.solutionImage, 0,currentQues.solutionImage.length);
+						bm = Globals.scaleToWidth(bm, Globals.getScreenSize(this).x - 20);
 						imgSolution.setImageBitmap(bm);
 						
 						if(txtsol.getText().equals("")){
@@ -573,6 +575,7 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 		if(qNo <= quesCatObj.totalQues)
 		{
 			setCurrentQuestionWithNumber(qNo);
+			questionCount = questionCount + 1;
 
 		}
 	

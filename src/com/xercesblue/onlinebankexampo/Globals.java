@@ -43,14 +43,17 @@ public class Globals {
 	public static final String AD_INMOBI_PROPERTY_ID = "0441626db6ee4cb2954475a95e7ad2ef";//"53d0ef05be81426ea33d9e7005a32a94";//
 	public static  String GCM_REG_ID = "";
 	
-	public static final String VSERV_BILLBOARD_ZONE_ID = "db51ffbf";
-	public static final String VSERV_BANNER_ZONE_ID = "4beee22e";
+	//public static final String VSERV_BILLBOARD_ZONE_ID = "db51ffbf";
+	//public static final String VSERV_BANNER_ZONE_ID = "4beee22e";
 	
 	public static final String STARTAPP_APP_ID = "209772601";
 	public static final String STARTAPP_DEVELOPER_ID = "109766035";
 	
+	public static final String CHARTBOOST_APP_ID = "5597787143150f6033624d71";
+	public static final String CHARTBOOST_SIGNATURE_ID = "b8be56e0882cb8351a308da45d44f0906f81a8ab";
+	
 	public static final int ADD_TYPE_INMOBI = 1;
-	public static final int ADD_TYPE_VSERV= 2;
+	public static final int ADD_TYPE_CHARTBOOST= 2;
 	public static final int ADD_TYPE_STARTAPP= 3;
 	
 	private static EditText etAlerrtMessage;

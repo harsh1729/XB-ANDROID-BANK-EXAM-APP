@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xercesblue.onlinebankexampo"
-    android:versionCode="8"
-    android:versionName="1.2" >
+    android:versionCode="9"
+    android:versionName="2.0" >
 
     <uses-sdk
-        android:minSdkVersion="7"
+        android:minSdkVersion="9"
         android:targetSdkVersion="21" android:maxSdkVersion="21"/>
 
     <!-- Permissions -->
@@ -29,7 +29,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+        android:hardwareAccelerated="true" >
         <activity
             android:name=".Activity_Splash"
             android:configChanges="orientation"

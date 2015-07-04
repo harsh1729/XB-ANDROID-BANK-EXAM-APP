@@ -15,6 +15,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -408,11 +409,17 @@ public class Activity_Settings_DownloadMore extends Activity_Parent {
 		}
 	};
 
+	@SuppressLint("InlinedApi")
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case progress_bar_type:
-			pDialog = new ProgressDialog(this);
+			if (android.os.Build.VERSION.SDK_INT >= 14) 
+			{
+				pDialog = new ProgressDialog(this,ProgressDialog.THEME_DEVICE_DEFAULT_LIGHT);
+			}else{
+				pDialog = new ProgressDialog(this);
+			}
 			pDialog.setMessage("Downloading questions. Please wait...");
 			pDialog.setIndeterminate(false);
 			pDialog.setMax(100);

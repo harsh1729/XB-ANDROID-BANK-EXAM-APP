@@ -35,6 +35,7 @@ public class Activity_Favourite_Question_Detail extends Activity_Parent {
 		txtQ.setText("Q.  "+objQues.question.trim());
 		if(objQues.image != null){
 			Bitmap bm = BitmapFactory.decodeByteArray(objQues.image, 0,objQues.image.length);
+			bm = Globals.scaleToWidth(bm, Globals.getScreenSize(this).x - 20);
 			imgQ.setImageBitmap(bm);
 		}else{
 			imgQ.setImageDrawable(null);
@@ -63,6 +64,7 @@ public class Activity_Favourite_Question_Detail extends Activity_Parent {
 		ImageView imgSolution = (ImageView)findViewById(R.id.imgViewSolution);
 		if(objQues.solutionImage != null){
 			Bitmap bm = BitmapFactory.decodeByteArray(objQues.solutionImage, 0,objQues.solutionImage.length);
+			bm = Globals.scaleToWidth(bm, Globals.getScreenSize(this).x - 20);
 			imgSolution.setImageBitmap(bm);
 			haveSolution = true;
 		}else{
