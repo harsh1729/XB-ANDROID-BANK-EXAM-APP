@@ -8,8 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -27,9 +25,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 
 public class Activity_Current_GK_Test extends Activity_Parent_Banner_Ads {
 
@@ -181,11 +179,11 @@ public class Activity_Current_GK_Test extends Activity_Parent_Banner_Ads {
         mDialog.setCancelable(false);
         mDialog.show();
         
-		final String url = ServerURL.getCurrent_GK_Test_link(qNo,langCode,date,month,year,Activity_Current_GK_Test.this); 
-		Log.i("HARSH", "URL IS -->" + url);
+		final String url = Custom_ServerURL_Params.getCurrent_GK_Test_link(); 
+		Log.i("SUSHIL", "URL IS -->" + url);
 		
 		// prepare the Request
-		JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+		/*JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 		    new Response.Listener<JSONObject>() 
 		    {
 		        @Override
@@ -247,7 +245,75 @@ public class Activity_Current_GK_Test extends Activity_Parent_Banner_Ads {
 		);
 		 
 		// add it to the RequestQueue   
-		Globals.getRequestQueue(this).add(getRequest);
+		Globals.getRequestQueue(this).add(getRequest);*/
+		
+		Custom_VolleyObjectRequest jsonObjectRQST = new Custom_VolleyObjectRequest(
+				Request.Method.POST,
+				url,
+				Custom_ServerURL_Params.getParams_GK_Test(qNo,langCode,date,month,year,Activity_Current_GK_Test.this),
+				new Listener<JSONObject>() {
+
+					@Override
+					public void onResponse(JSONObject response) {
+						if(mDialog!= null){
+			        		mDialog.dismiss();
+			        	}
+			        	
+			            Log.i("HARSH","Response "+ response.toString());
+			            
+			            if(response.has("errorNoMoreQuestions")){
+			            	
+			            	try {
+								Globals.showAlertDialogOneButton("Error ", response.getString("errorNoMoreQuestions"), Activity_Current_GK_Test.this, "OK", null, false);
+								
+			            	} catch (JSONException e) {
+								e.printStackTrace();
+							}
+			            	
+			            	return;
+			            }else if(response.has("errorNoQuestions")){
+			            	
+			            	try {
+			            		OnClickListener listnerPositive = new OnClickListener() {
+
+			            			@Override
+			            			public void onClick(DialogInterface dialog, int arg1) {
+			            				dialog.dismiss();
+			            				Activity_Current_GK_Test.this.finish();
+			            			}
+			            		};
+			            		
+								Globals.showAlertDialogOneButton("Error ", response.getString("errorNoQuestions"), Activity_Current_GK_Test.this, "OK", listnerPositive, false);
+								
+			            	} catch (JSONException e) {
+								e.printStackTrace();
+							}
+			            	
+			            	return;
+			            }
+			            
+			            createQuestionObject(response,qNo);
+			            		            
+			        
+					}
+
+				}, new ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError err) {
+						//Log.i("SUSHIL", "ERROR VolleyError");
+						if(mDialog!= null){
+			        		mDialog.dismiss();
+			        	}
+		            //Log.i("HARSH","Error.Response"+ error.networkResponse.toString());
+		            Globals.showAlertDialogOneButton("Error", "Some Error has occured, try again.",Activity_Current_GK_Test.this, "OK", null, true);
+						
+					}
+				});
+
+		Custom_VolleyAppController.getInstance().addToRequestQueue(
+				jsonObjectRQST);
+		
+		
 	 }
 
 	

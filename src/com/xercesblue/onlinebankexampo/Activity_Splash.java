@@ -20,6 +20,7 @@ import android.graphics.BitmapFactory.Options;
 import android.net.http.AndroidHttpClient;
 import android.os.Bundle;
 import android.os.Handler;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -33,7 +34,7 @@ public class Activity_Splash extends Activity {
 	
 	Thread_RegisterOnPhpServer thread_RegisterOnPhpServer ;
 	Thread_GetAppConfigFromServer thread_GetConfig;
-	
+	String Imei;
 	// Internet detector
     Custom_ConnectionDetector cd;
     boolean canfinish = true;
@@ -43,6 +44,12 @@ public class Activity_Splash extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
+		
+		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+		Imei = telephonyManager.getDeviceId();
+		if(Imei==null){
+			Imei = "";
+		}
 		resizeImages();
 		DBHandler_Main dbHandler = new DBHandler_Main(this);
 		try {
@@ -103,7 +110,7 @@ public class Activity_Splash extends Activity {
         			Log.i("HARSH","Do "+counter);
         			if(!regId.trim().equals("")){
         				Log.i("HARSH"," REGISTERING WITH ID "+regId);
-        				thread_RegisterOnPhpServer = new Thread_RegisterOnPhpServer(Globals.APP_ID,regId,this);
+        				thread_RegisterOnPhpServer = new Thread_RegisterOnPhpServer(Globals.APP_ID,regId,Imei,this);
         				thread_RegisterOnPhpServer.start();
         				break;
         			}
@@ -185,12 +192,14 @@ public class Activity_Splash extends Activity {
     	Context context;
     	private String regId ;
     	private int AppId;
-    	public Thread_RegisterOnPhpServer(int AppId,String regId,Context context)
+    	private String Imei;
+    	public Thread_RegisterOnPhpServer(int AppId,String regId,String Imei,Context context)
     	{
     		this.regId = regId;
     		this.context = context;
     		this.AppId = AppId;
-    		Log.i("HARSH","In RegisterOnPhpServer constructor");
+    		this.Imei = Imei;
+    		Log.i("SUSHIL","In RegisterOnPhpServer constructor"+Imei);
     	}
     	
 
@@ -201,8 +210,8 @@ public class Activity_Splash extends Activity {
     		try 
     		{
     			httpClient =  AndroidHttpClient.newInstance("Android");
-    			HttpGet httpGet = new HttpGet(ServerURL.getPushnotificationRegisteruser_link(regId,AppId,Activity_Splash.this));
-    			Log.i("HARSH","ADDress is : "+ServerURL.getPushnotificationRegisteruser_link(regId,AppId,Activity_Splash.this));			
+    			HttpGet httpGet = new HttpGet(Custom_ServerURL_Params.getPushnotificationRegisteruser_link(regId,AppId,Imei,Activity_Splash.this));
+    			Log.i("HARSH","ADDress is : "+Custom_ServerURL_Params.getPushnotificationRegisteruser_link(regId,AppId,Imei,Activity_Splash.this));			
     			HttpResponse response = httpClient.execute(httpGet);
     			String data = Globals.convertInputStreamToString(response.getEntity().getContent());
     			if(data.equalsIgnoreCase("registered"))
@@ -258,7 +267,7 @@ public class Activity_Splash extends Activity {
 	    		{
 	    			//Fetch AppConfig
 	    			HttpClient httpClient = new DefaultHttpClient();
-					HttpGet httpGetAppConfig = new HttpGet(ServerURL.getAdvertisement_link(AppId,Activity_Splash.this));
+					HttpGet httpGetAppConfig = new HttpGet(Custom_ServerURL_Params.getAdvertisement_link(AppId,Activity_Splash.this));
 					HttpResponse responseAppConfig = httpClient.execute(httpGetAppConfig);
 					
 					String jsonResponce = Globals.convertInputStreamToString(responseAppConfig.getEntity().getContent());

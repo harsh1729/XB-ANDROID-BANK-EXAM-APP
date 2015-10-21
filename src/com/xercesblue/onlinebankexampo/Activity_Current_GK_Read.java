@@ -1,16 +1,10 @@
 package com.xercesblue.onlinebankexampo;
-  
-import java.io.IOException;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,10 +20,15 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+
 public class Activity_Current_GK_Read extends Activity_Parent_Banner_Ads {
 
 	public static InputStream xmlStream;
-	DownloadCurrentGKXml downloadThread = null;
+	//DownloadCurrentGKXml downloadThread = null;
 	Boolean firstTime = true;
 	int currentPageNo;
 	Boolean nextDisabled = false;
@@ -83,14 +82,17 @@ public class Activity_Current_GK_Read extends Activity_Parent_Banner_Ads {
 
 			String langCode = dbH.getLangCode(appConfig.selectedLangId);
 
-			if (downloadThread != null) { // && downloadThread.isAlive()
+			/*if (downloadThread != null) { // && downloadThread.isAlive()
 				// downloadThread.interrupt();
 				downloadThread = null;
 			}
 
 			downloadThread = new DownloadCurrentGKXml(Globals.APP_ID, langCode,
 					pageNo, this);
-			downloadThread.start();
+			downloadThread.start();*/
+			getRead_GK_Server(Globals.APP_ID, langCode,
+					pageNo, this);
+			
 		} else {
 			Globals.showAlertDialogError(this, "No Internet Connectivity");
 			parentLayout.removeAllViews();
@@ -243,8 +245,43 @@ private void resizeImageButtons(Boolean hide) {
 			downloadGkForPage(--currentPageNo);
 		}
 	}
+	
+	private void getRead_GK_Server(int AppId, String langCode, final int pageNo,
+			Context context){
+		
+		String date = Activity_Current_GK_Type_Select.getSelectedDate();
+		String month = Activity_Current_GK_Type_Select.getSelectedMonth();
+		String year = Activity_Current_GK_Type_Select.getSelectedYear();
+		
+		
+		Custom_VolleyObjectRequest jsonObjectRQST = new Custom_VolleyObjectRequest(
+				Request.Method.POST,
+				Custom_ServerURL_Params.getCurrent_GK_Read_link(),
+				Custom_ServerURL_Params.getParams_GK_Read(pageNo,langCode,AppId,date,month,year,Activity_Current_GK_Read.this),
+				new Listener<JSONObject>() {
 
-	class DownloadCurrentGKXml extends Thread {
+					@Override
+					public void onResponse(JSONObject response) {
+						
+						showJSonGKData(response, pageNo);
+			        }
+
+				}, new ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError err) {
+						//Log.i("SUSHIL", "ERROR VolleyError");
+						
+						
+					}
+				});
+
+		Custom_VolleyAppController.getInstance().addToRequestQueue(
+				jsonObjectRQST);
+		
+	}
+	
+
+	/*class DownloadCurrentGKXml extends Thread {
 		Context context;
 		private int AppId;
 		private int pageNo;
@@ -267,7 +304,7 @@ private void resizeImageButtons(Boolean hide) {
 				String date = Activity_Current_GK_Type_Select.getSelectedDate();
 				String month = Activity_Current_GK_Type_Select.getSelectedMonth();
 				String year = Activity_Current_GK_Type_Select.getSelectedYear();
-				Log.i("HARSH",
+				Log.i("SUSHIL",
 						"URL is : "+ ServerURL.getCurrent_GK_Read_link(pageNo,langCode,AppId,date,month,year,Activity_Current_GK_Read.this));
 				
 				HttpGet httpGet = new HttpGet(ServerURL.getCurrent_GK_Read_link(pageNo,langCode,AppId,date,month,year,Activity_Current_GK_Read.this));
@@ -308,6 +345,6 @@ private void resizeImageButtons(Boolean hide) {
 
 		}
 
-	}
+	}*/
 
 }

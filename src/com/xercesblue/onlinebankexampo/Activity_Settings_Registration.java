@@ -70,7 +70,7 @@ public class Activity_Settings_Registration extends Activity_Parent implements T
 		if(validate()){
 			Button btn = (Button)findViewById(R.id.btnRegister);
 			btn.setEnabled(false);
-			String url = ServerURL.getRegistration_link(Activity_Settings_Registration.this);
+			String url = Custom_ServerURL_Params.getRegistration_link(Activity_Settings_Registration.this);
 			StringRequest postRequest = new StringRequest(Request.Method.POST, url, 
 			    new Response.Listener<String>() 
 			    {

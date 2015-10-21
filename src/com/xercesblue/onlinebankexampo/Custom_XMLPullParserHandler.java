@@ -15,7 +15,10 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 
 public class Custom_XMLPullParserHandler 
@@ -211,6 +214,11 @@ public class Custom_XMLPullParserHandler
 			  public void run() {
 				  if(questionsList.size() == 0){
 					  context.noNewQuestions();
+				  }else{
+					  Toast.makeText(context, "Questions downloaded successfully", Toast.LENGTH_SHORT).show();
+					     ((Activity) context).finish();
+					     Intent i = ((Activity) context).getIntent();
+					     ((Activity) context).startActivity(i);
 				  }
 			  }
 			});

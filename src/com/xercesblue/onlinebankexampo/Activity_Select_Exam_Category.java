@@ -29,7 +29,7 @@ public class Activity_Select_Exam_Category extends Activity_Parent {
 		
 	}
 
-	public static Object_QuesCategory quesCategory = null;;
+	public static Object_QuesCategory quesCategory = null;
 	
 	
 	@SuppressLint("NewApi")

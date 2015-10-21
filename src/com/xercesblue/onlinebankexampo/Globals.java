@@ -29,7 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.inmobi.monetization.IMBanner;
 
 public class Globals {
-
+	public static final int VOLLEY_TIMEOUT_MILLISECS = 10000;
 	private static Object_AppConfig objAppConfig ;
 	private static RequestQueue mRequestQueue;
 	

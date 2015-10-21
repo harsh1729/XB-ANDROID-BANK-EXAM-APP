@@ -6,27 +6,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.facebook.FacebookException;
-import com.facebook.FacebookOperationCanceledException;
-import com.facebook.Request;
-import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.UiLifecycleHelper;
-import com.facebook.model.GraphUser;
-import com.facebook.widget.FacebookDialog;
-import com.facebook.widget.WebDialog;
-import com.facebook.widget.WebDialog.OnCompleteListener;
 
 public class Custom_AppShare {
 
@@ -280,7 +266,7 @@ public class Custom_AppShare {
 		
     	Intent sendIntent = new Intent();
 		sendIntent.setAction(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_TEXT,ServerURL.getShareAppMsg()+ "\n "+ServerURL.getShareLinkWhatsapp());
+		sendIntent.putExtra(Intent.EXTRA_TEXT,Custom_ServerURL_Params.getShareAppMsg()+ "\n "+Custom_ServerURL_Params.getShareLinkWhatsapp());
 		sendIntent.setPackage("com.whatsapp");
 		sendIntent.setType("text/plain");
 		if(activity != null)

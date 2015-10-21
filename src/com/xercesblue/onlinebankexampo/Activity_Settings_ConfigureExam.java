@@ -121,14 +121,30 @@ public class Activity_Settings_ConfigureExam extends Activity_Parent {
 
 	
 	Boolean validateEntries(){
+		String errorMsg = "";
 		
 		EditText ed1=(EditText)findViewById(R.id.edtNoOfQuestions);
 		EditText ed2=(EditText)findViewById(R.id.edtHours);
 		EditText ed3=(EditText)findViewById(R.id.edtMinutes);
-		int totalQuestions = Integer.parseInt(ed1.getText().toString());
-		int hours = Integer.parseInt(ed2.getText().toString());
-		int minutes = Integer.parseInt(ed3.getText().toString());
+		if(ed1.getText().toString().trim().equals("")){
+			
+			errorMsg = "Please enter number of Questions. ";
+		}else if(ed2.getText().toString().trim().equals("")){
+			
+			errorMsg = "Please enter time in Hours. ";
+		}else if(ed3.getText().toString().trim().equals("")){
+			errorMsg = "Please enter time in Minutes. ";
+		}
 		
+         if(!errorMsg.equals("")){
+ 			Globals.showAlertDialogOneButton("Error", errorMsg, this, "OK", null, false);
+ 			return false;
+ 		}
+		
+        int totalQuestions = Integer.parseInt(ed1.getText().toString());
+ 		int hours = Integer.parseInt(ed2.getText().toString());
+ 		int minutes = Integer.parseInt(ed3.getText().toString());
+         
 		if(totalQuestions>MAX_QUESTIONS){
 			Toast.makeText(this, "Questions cannot be greater than "+MAX_QUESTIONS, Toast.LENGTH_SHORT).show();
 			return false;

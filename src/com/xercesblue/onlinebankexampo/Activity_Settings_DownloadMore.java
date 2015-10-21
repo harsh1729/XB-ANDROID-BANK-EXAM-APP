@@ -15,6 +15,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.android.volley.Request.Method;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -27,7 +29,9 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Xml;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,29 +41,19 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.FacebookException;
-import com.facebook.FacebookOperationCanceledException;
-import com.facebook.Request;
-import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.UiLifecycleHelper;
-import com.facebook.model.GraphUser;
-import com.facebook.widget.FacebookDialog;
-import com.facebook.widget.WebDialog;
-import com.facebook.widget.WebDialog.OnCompleteListener;
-
 public class Activity_Settings_DownloadMore extends Activity_Parent {
-	//private Point p;
-	
+	// private Point p;
+
 	private UiLifecycleHelper uiHelper;
-	DownloadXmlThread downloadThread ;
+	DownloadXmlThread downloadThread;
 
 	private String deviceImei;
 	private long qusNumber;
 	private ProgressDialog pDialog;
 	// Progress dialog type (0 - for Horizontal progress bar)
-	public static final int progress_bar_type = 0; 
+	public static final int progress_bar_type = 0;
 	Boolean canKillDownloadThread = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,51 +64,56 @@ public class Activity_Settings_DownloadMore extends Activity_Parent {
 		setFooterAndHeader(-1,
 				getResources().getString(R.string.header_download_more));
 		createDynamicControls();
-		//printHashKey();
+		getRemainingQuestion();
+		// printHashKey();
 	}
 
 	/*
-	public void printHashKey() {
-
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo("com.xercesblue.onlinebankexam",
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-               System.out.println("HASH KEY :" + Base64.encodeToString(md.digest(), Base64.DEFAULT));
-               Log.i("HARSH", "HASH KEY :" + Base64.encodeToString(md.digest(), Base64.DEFAULT));
-                       
-            }
-        } catch (NameNotFoundException e) {
-
-        } catch (NoSuchAlgorithmException e) {
-
-        }
-
-    }
-	*/
+	 * public void printHashKey() {
+	 * 
+	 * try { PackageInfo info =
+	 * getPackageManager().getPackageInfo("com.xercesblue.onlinebankexam",
+	 * PackageManager.GET_SIGNATURES); for (Signature signature :
+	 * info.signatures) { MessageDigest md = MessageDigest.getInstance("SHA");
+	 * md.update(signature.toByteArray()); System.out.println("HASH KEY :" +
+	 * Base64.encodeToString(md.digest(), Base64.DEFAULT)); Log.i("HARSH",
+	 * "HASH KEY :" + Base64.encodeToString(md.digest(), Base64.DEFAULT));
+	 * 
+	 * } } catch (NameNotFoundException e) {
+	 * 
+	 * } catch (NoSuchAlgorithmException e) {
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
 	private void createDynamicControls() {
 
 		LinearLayout l1 = (LinearLayout) findViewById(R.id.llytMainBodyDownload);
 		LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);
 		Point btnSize = Globals.getAppButtonSize(this);
-		LayoutParams lpbtn = new LayoutParams(LayoutParams.WRAP_CONTENT, btnSize.y);// (btnWidth,
+		LayoutParams lpbtn = new LayoutParams(LayoutParams.WRAP_CONTENT,
+				btnSize.y);// (btnWidth,
 		// btnWidth)
 
 		Point sceenSize = Globals.getScreenSize(this);
 		TextView tv = new TextView(this);
-		tv.setText("Need new questions for exam ?\nClick below to download more questions.");//share on facebook first and then
+		tv.setText("Need new questions for exam ?\nClick below to download more questions.");// share
+																								// on
+																								// facebook
+																								// first
+																								// and
+																								// then
 		tv.setTextColor(this.getResources().getColor(R.color.app_black));
 		tv.setTextSize(Globals.getAppFontSize(this));
 
 		tv.setLayoutParams(lp);
 		l1.addView(tv);
-		
+
 		lpbtn.gravity = Gravity.CENTER;
 		lpbtn.topMargin = sceenSize.y / 10; // only for first button
-		
+
 		Button btnShare = new Button(this);
 		btnShare.setOnClickListener(new OnClickListener() {
 
@@ -129,58 +128,113 @@ public class Activity_Settings_DownloadMore extends Activity_Parent {
 		btnShare.setLayoutParams(lpbtn);
 		btnShare.setTextSize(Globals.getAppFontSize_Large(this));
 		btnShare.setBackgroundResource(R.drawable.bg_white_black_border);
-		btnShare.setOnTouchListener(new Custom_ButtonOnTouchListener_GreenBG(btnShare,
-				this));
+		btnShare.setOnTouchListener(new Custom_ButtonOnTouchListener_GreenBG(
+				btnShare, this));
 		l1.addView(btnShare);
-		
+
 	}
 
-	private void downloadClick(){
+	private void getRemainingQuestion() {
+		String[] cateName = { "Reasoning questions left :",
+				"English questions left       :",
+				"Maths questions left         :",
+				"GK questions left               :",
+				"Computer questions left  :" };
+		LinearLayout l1 = (LinearLayout) findViewById(R.id.llytMainBodyDownload);
+		// LinearLayout linear =
+		// (LinearLayout)findViewById(R.id.llytRemainingQuestion);
+		DBHandler_ExamQuestions dbH = new DBHandler_ExamQuestions(this);
+		int size = (Globals.getScreenSize(this).x * 75) / 100;
+		for (int i = 1; i <= 5; i++) {
+			TextView txt = new TextView(this);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(size,
+					LayoutParams.WRAP_CONTENT);
+			txt.setLayoutParams(lp);
+			long noOfQues = dbH.questionsRemaining(i, 0);
+			if (i == 1) {
+				txt.setPadding(0, 30, 0, 0);
+			}
+			txt.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+			txt.setText(cateName[i - 1] + "- " + noOfQues);
 
-		Custom_ConnectionDetector cd = new Custom_ConnectionDetector(getApplicationContext());
-		if(cd.isConnectingToInternet()){
-			//shareOnFaceBook();
+			txt.setTextColor(this.getResources().getColor(R.color.app_black));
+			txt.setTextSize(Globals.getAppFontSize(this));
+			/*
+			 * shrinkTextToFit((float) size, txt, Globals.getAppFontSize(this),
+			 * Globals.getAppFontSize(this));
+			 */
+			l1.addView(txt);
+		}
+		// l1.addView(linear);
+	}
+
+	public static void shrinkTextToFit(float availableWidth, TextView textView,
+			float startingTextSize, float minimumTextSize) {
+
+		CharSequence text = textView.getText();
+		float textSize = startingTextSize;
+		textView.setTextSize(startingTextSize);
+		while (text != (TextUtils.ellipsize(text, textView.getPaint(),
+				availableWidth, TextUtils.TruncateAt.END))) {
+			textSize -= 1;
+			if (textSize < minimumTextSize) {
+				break;
+			} else {
+				textView.setTextSize(textSize);
+			}
+		}
+	}
+
+	private void downloadClick() {
+
+		Custom_ConnectionDetector cd = new Custom_ConnectionDetector(
+				getApplicationContext());
+		if (cd.isConnectingToInternet()) {
+			// shareOnFaceBook();
 			downloadQuestions();
-		}
-		else{
+		} else {
 			Log.i("HARSH", "NO INTERNET");
-			Globals.showAlertDialogOneButton("Alert", "No Internet connection", this, "OK", null, true);
+			Globals.showAlertDialogOneButton("Alert", "No Internet connection",
+					this, "OK", null, true);
 		}
 	}
 
-	private void downloadQuestions(){
+	private void downloadQuestions() {
 
-		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+		TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 		deviceImei = telephonyManager.getDeviceId();
 		DBHandler_Questions dbH = new DBHandler_Questions(this);
 		qusNumber = dbH.getMaxQuestionId();
 
-		DBHandler_Language dbH2 = new DBHandler_Language(this);		
-		String langCode = dbH2.getLangCode(Globals.getAppConfig(this).selectedLangId);
-		
-		System.out.println(qusNumber);
-		System.out.println("LAngCode is "+langCode);
-		downloadThread = new DownloadXmlThread(deviceImei,qusNumber,langCode);
+		DBHandler_Language dbH2 = new DBHandler_Language(this);
+		String langCode = dbH2
+				.getLangCode(Globals.getAppConfig(this).selectedLangId);
+
+		Log.i("SUSHIL", "QUS NUMBER IS DOWNLOAD  " + qusNumber);
+		Log.i("SUSHIL", "Lan. code is  " + langCode);
+		// System.out.println(qusNumber);
+		// System.out.println("LAngCode is "+langCode);
+		downloadThread = new DownloadXmlThread(deviceImei, qusNumber, langCode);
 		try {
-		downloadThread.start();
-		}catch (RuntimeException e) {
-		      System.out.println("** RuntimeException from main");
-	    }
+			downloadThread.start();
+		} catch (RuntimeException e) {
+			System.out.println("** RuntimeException from main");
+		}
 	}
-	/*
-	@Override
+
+	/*@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		int[] location = new int[2];
 
-		btn.getLocationOnScreen(location);
+		// btn.getLocationOnScreen(location);
 
 		// Initialize the Point with x, and y positions
-		//p = new Point();
-		//p.x = location[0];
-		//p.y = location[1];
+		// p = new Point();
+		// p.x = location[0];
+		// p.y = location[1];
 
-	}
-	*/
+	}*/
+
 	private void shareOnFaceBook() {
 		if (FacebookDialog.canPresentShareDialog(getApplicationContext(),
 				FacebookDialog.ShareDialogFeature.SHARE_DIALOG)) {
@@ -317,11 +371,12 @@ public class Activity_Settings_DownloadMore extends Activity_Parent {
 
 	public void killDownloadThread() {
 		canKillDownloadThread = true;
-	       if(downloadThread != null && downloadThread.isAlive() && !downloadThread.isInterrupted()){
-	    	   downloadThread.interrupt();
-	       }
-	   }
-	
+		if (downloadThread != null && downloadThread.isAlive()
+				&& !downloadThread.isInterrupted()) {
+			downloadThread.interrupt();
+		}
+	}
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -341,68 +396,55 @@ public class Activity_Settings_DownloadMore extends Activity_Parent {
 		killDownloadThread();
 	}
 
-	public void insertQuestionsToDatabase()
-	{
-		//Environment.getExternalStorageDirectory().toString();
-		Custom_XMLPullParserHandler parser = new Custom_XMLPullParserHandler(this);
-		File file = new File( Environment.getExternalStorageDirectory().toString()+"/qusDatabase.xml" );
-		try 
-		{
-			parser.parse(new FileInputStream(file)  );
+	public void insertQuestionsToDatabase() {
+		// Environment.getExternalStorageDirectory().toString();
+		Custom_XMLPullParserHandler parser = new Custom_XMLPullParserHandler(
+				this);
+		File file = new File(Environment.getExternalStorageDirectory()
+				.toString() + "/qusDatabase.xml");
+		try {
+			parser.parse(new FileInputStream(file));
 			this.runOnUiThread(new Runnable() {
-				
+
 				@Override
 				public void run() {
-					Toast.makeText(Activity_Settings_DownloadMore.this, "Questions downloaded successfully", Toast.LENGTH_SHORT).show();
-					
+					// Toast.makeText(Activity_Settings_DownloadMore.this,
+					// "Questions downloaded successfully",
+					// Toast.LENGTH_SHORT).show();
+
 				}
 			});
-			
-		}
-		catch (FileNotFoundException e) 
-		{
+
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} 
-		finally
-		{
-			if(file.delete())
-			{
+		} finally {
+			if (file.delete()) {
 				System.out.println("temporary file is deleted!");
 			}
 		}
 
 	}
 
-	public Handler handler = new Handler()
-	{
+	public Handler handler = new Handler() {
 		@SuppressWarnings("deprecation")
-		public void handleMessage(Message msg)
-		{
+		public void handleMessage(Message msg) {
 			Bundle bundle = msg.getData();
-			if(bundle.getString("percentage") != null)
-			{
+			if (bundle.getString("percentage") != null) {
 
 				String returnVal = bundle.getString("percentage");
 
 				// setting progress percentage
 				pDialog.setProgress(Integer.parseInt(returnVal));
 
-			}
-			else if(bundle.getString("showDialog") != null)
-			{
-				if(bundle.getString("showDialog").equals("true"))
-				{
+			} else if (bundle.getString("showDialog") != null) {
+				if (bundle.getString("showDialog").equals("true")) {
 					showDialog(progress_bar_type);
-					pDialog.setProgress(0);					
-				}
-				else if(bundle.getString("showDialog").equals("false"))
-				{
-					//System.out.println("Thread state:"+downloadThread.getState());
+					pDialog.setProgress(0);
+				} else if (bundle.getString("showDialog").equals("false")) {
+					// System.out.println("Thread state:"+downloadThread.getState());
 					dismissDialog(progress_bar_type);
 				}
-			}
-			else if(bundle.getString("insertingQuestions") != null)
-			{
+			} else if (bundle.getString("insertingQuestions") != null) {
 				pDialog.setMessage("Adding downloaded questions. Please wait...");
 			}
 
@@ -414,10 +456,10 @@ public class Activity_Settings_DownloadMore extends Activity_Parent {
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case progress_bar_type:
-			if (android.os.Build.VERSION.SDK_INT >= 14) 
-			{
-				pDialog = new ProgressDialog(this,ProgressDialog.THEME_DEVICE_DEFAULT_LIGHT);
-			}else{
+			if (android.os.Build.VERSION.SDK_INT >= 14) {
+				pDialog = new ProgressDialog(this,
+						ProgressDialog.THEME_DEVICE_DEFAULT_LIGHT);
+			} else {
 				pDialog = new ProgressDialog(this);
 			}
 			pDialog.setMessage("Downloading questions. Please wait...");
@@ -437,75 +479,85 @@ public class Activity_Settings_DownloadMore extends Activity_Parent {
 		canKillDownloadThread = true;
 		super.onBackPressed();
 	}
-	
-	class DownloadXmlThread extends Thread
-	{
-		String deviceImei,langCode;
+
+	class DownloadXmlThread extends Thread {
+		String deviceImei, langCode;
 		long qusNumber;
-		
-		public DownloadXmlThread(String imei,long qn,String lcode) 
-		{
+
+		public DownloadXmlThread(String imei, long qn, String lcode) {
 			deviceImei = imei;
 			qusNumber = qn;
 			langCode = lcode;
 		}
 
-		//TODO HARSH
-		//private final ReentrantLock lock = new ReentrantLock();
+		// TODO HARSH
+		// private final ReentrantLock lock = new ReentrantLock();
 
-		public void run()
-		{
+		public void run() {
 
-			//sendmessage as data to create progress bar;
+			// sendmessage as data to create progress bar;
 			Message msg = new Message();
 			Bundle bundle = new Bundle();
-			bundle.putString("showDialog","true");
+			bundle.putString("showDialog", "true");
 
 			msg.setData(bundle);
 			handler.sendMessage(msg);
 
 			int count;
-			try 
-			{
+			try {
+				Log.i("SUSHIL",
+						"link  "
+								+ Custom_ServerURL_Params
+										.getDownload_question_link(
+												qusNumber,
+												deviceImei,
+												langCode,
+												Activity_Settings_DownloadMore.this));
 				HttpClient httpClient = new DefaultHttpClient();
-				HttpGet httpGet = new HttpGet(ServerURL.getDownload_question_link(qusNumber,deviceImei,langCode,Activity_Settings_DownloadMore.this));
+				HttpGet httpGet = new HttpGet(
+						Custom_ServerURL_Params.getDownload_question_link(
+								qusNumber, deviceImei, langCode,
+								Activity_Settings_DownloadMore.this));
 
 				HttpResponse response = httpClient.execute(httpGet);
 
-				int lengthOfFile = (int) response.getEntity().getContentLength();
+				int lengthOfFile = (int) response.getEntity()
+						.getContentLength();
 
-
-				
 				/*
-				  Header []valPair = response.getAllHeaders();
-				for(Header key : valPair)
-				{
-					//System.out.println("key is: "+key+" value is :"+valPair.get(key).get(0));
-					System.out.println("key is: "+key.getName()+" value is :"+key.getValue());
+				 * Header []valPair = response.getAllHeaders(); for(Header key :
+				 * valPair) {
+				 * //System.out.println("key is: "+key+" value is :"+valPair
+				 * .get(key).get(0));
+				 * System.out.println("key is: "+key.getName()
+				 * +" value is :"+key.getValue());
+				 * 
+				 * } //int lengthOfFile = 0;
+				 */
 
-				}
-				//int lengthOfFile = 0;
-				*/
-
-				System.out.println("length of file:"+lengthOfFile);
-				
-				Log.i("HARSH", "File Input is "+response.toString());
-				InputStream inputStream = new BufferedInputStream(response.getEntity().getContent(),32);
-				OutputStream output = new FileOutputStream( Environment.getExternalStorageDirectory().toString()+"/qusDatabase.xml" );
-				byte packet[] = new byte[2];
+				// System.out.println("length of file:"+lengthOfFile);
+				Log.i("SUSHIL", "lenth of file " + lengthOfFile);
+				Log.i("SUSHIL", "File Input is " + response.toString());
+				InputStream inputStream = new BufferedInputStream(response
+						.getEntity().getContent(), 8192);
+				OutputStream output = new FileOutputStream(Environment
+						.getExternalStorageDirectory().toString()
+						+ "/qusDatabase.xml");
+				byte packet[] = new byte[1024];
 
 				long total = 0;
-				while ((count = inputStream.read(packet)) != -1 && !canKillDownloadThread) 
-				{
-					//System.out.println("downloaded! Count is"+count);
+				while ((count = inputStream.read(packet)) != -1
+						&& !canKillDownloadThread) {
+					// System.out.println("downloaded! Count is"+count);
 					total += count;
 					// writing data to file
 					output.write(packet, 0, count);
 
-					//sendmessage as data for update progress bar;
+					// sendmessage as data for update progress bar;
 					Message msg1 = new Message();
 					Bundle bundle1 = new Bundle();
-					bundle1.putString("percentage", ""+(int)((total*100)/lengthOfFile));
+					bundle1.putString("percentage", ""
+							+ (int) ((total * 100) / lengthOfFile));
 
 					msg1.setData(bundle1);
 					handler.sendMessage(msg1);
@@ -518,42 +570,35 @@ public class Activity_Settings_DownloadMore extends Activity_Parent {
 				output.close();
 				inputStream.close();
 
-				if(!canKillDownloadThread){
+				if (!canKillDownloadThread) {
 					Message msg2 = new Message();
 					Bundle bundle2 = new Bundle();
 					msg2 = new Message();
 					bundle2 = new Bundle();
-					bundle2.putString("insertingQuestions","true");
+					bundle2.putString("insertingQuestions", "true");
 
 					msg2.setData(bundle2);
 					handler.sendMessage(msg2);
-				
+
 					insertQuestionsToDatabase();
 				}
-				//sendmessage as data for dismiss progress bar;
+				// sendmessage as data for dismiss progress bar;
 				Message msg3 = new Message();
 				Bundle bundle3 = new Bundle();
 				msg3 = new Message();
 				bundle3 = new Bundle();
-				bundle3.putString("showDialog","false");
+				bundle3.putString("showDialog", "false");
 
 				msg3.setData(bundle3);
 				handler.sendMessage(msg3);
 
-
-			} 
-			catch (ClientProtocolException e) 
-			{
+			} catch (ClientProtocolException e) {
 				Log.i("HARSH", "Exception in downloading 1");
 				e.printStackTrace();
-			} 
-			catch (IOException e) 
-			{
+			} catch (IOException e) {
 				Log.i("HARSH", "Exception in downloading 2");
 				e.printStackTrace();
-			}
-			catch (Exception e) 
-			{
+			} catch (Exception e) {
 				Log.i("HARSH", "Exception in downloading 3");
 				e.printStackTrace();
 			}
@@ -562,8 +607,10 @@ public class Activity_Settings_DownloadMore extends Activity_Parent {
 
 	}
 
-	public void noNewQuestions(){
-		Globals.showAlertDialogOneButton("Alert", "No new questions on server , please try after some days",this,"OK", null, true);
+	public void noNewQuestions() {
+		Globals.showAlertDialogOneButton("Alert",
+				"No new questions on server , please try after some days",
+				this, "OK", null, true);
 		dismissDialog(progress_bar_type);
 	}
 

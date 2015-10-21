@@ -660,7 +660,7 @@ public class Activity_QuestionView extends Activity_Parent_Banner_Ads {
 				// Write your code here to execute after dialog closed
 				
 					
-					String url = ServerURL.getBug_Report_Wrong_Question_link(Activity_QuestionView.this);
+					String url = Custom_ServerURL_Params.getBug_Report_Wrong_Question_link(Activity_QuestionView.this);
 					StringRequest postRequest = new StringRequest(Request.Method.POST, url, 
 					    new Response.Listener<String>() 
 					    {

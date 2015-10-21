@@ -69,7 +69,7 @@ public class DBHandler_ExamQuestions extends SQLiteOpenHelper {
 	}
 	
 	
-	public  long questionsRemaining(int quesCatID,int isParentCategory){
+	public long questionsRemaining(int quesCatID,int isParentCategory){
 		//SELECT  COUNT(*) AS QuestionsLeft  FROM Questions WHERE QuesId NOT IN 
 		//(SELECT QuesId FROM ExamsQuestion) AND QuesCatId = 1 And LangId = 1
 		
