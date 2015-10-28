@@ -64,7 +64,17 @@ public class GCMIntentService extends GCMBaseIntentService {
 			try {
 				screenId=Integer.parseInt(data.getStringExtra("ScreenId"));
 			}catch(NumberFormatException ex){
-				
+
+			}
+
+			try{
+				pushMessage = data.getStringExtra("message");
+			}
+			catch(Exception ex){
+				return;
+			}
+			if(pushMessage.isEmpty()){
+				return ;
 			}
 
 			System.out.println("Message recieved is : " + pushMessage + " ID is "+screenId);
@@ -85,12 +95,12 @@ public class GCMIntentService extends GCMBaseIntentService {
 				break;
 			case KEY_REGISTER_SCREEN:
 
-				 SharedPreferences prefs = this.getSharedPreferences("appregister", 0);				 
-				 if(prefs.getBoolean("register_done", false)){
-					 cls = Activity_Home.class;
-				 }else{
-					 cls = Activity_Settings_Registration.class;
-				 }
+				SharedPreferences prefs = this.getSharedPreferences("appregister", 0);				 
+				if(prefs.getBoolean("register_done", false)){
+					cls = Activity_Home.class;
+				}else{
+					cls = Activity_Settings_Registration.class;
+				}
 				break;
 			case KEY_EXAMALERT_SCREEN:
 				cls = Activity_ExamAlert.class;

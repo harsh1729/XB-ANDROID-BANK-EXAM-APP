@@ -70,8 +70,8 @@ public class Activity_Tutorial extends Activity_Parent {
 			tv1.setText(objc.name);
 		tv1.setPadding(10, 10, 10, 10);
 		tv1.setGravity(Gravity.CENTER);
-		tv1.setBackgroundResource(R.color.app_darkoffwhite);
-		tv1.setTextColor(getResources().getColor(R.color.app_black));
+		tv1.setBackgroundResource(R.color.app_lightgray);	
+		tv1.setTextColor(getResources().getColor(R.color.app_white));
 		tv1.setTextSize( Globals.getAppFontSize_Large(this));
 		tv1.setLayoutParams(txtParams);
 
@@ -114,7 +114,7 @@ public class Activity_Tutorial extends Activity_Parent {
 			RelativeLayout rlytHeader = (RelativeLayout)findViewById(R.id.rlytHeaderChild);
 			ImageButton imgBtnPlus = (ImageButton)findViewById(R.id.imgBtnHeaderPlus);
 
-			int headerImageXY = rlytHeader.getHeight() *5/10;
+			int headerImageXY = rlytHeader.getHeight() *7/10;
 			imgBtnPlus.getLayoutParams().height = headerImageXY;
 			imgBtnPlus.getLayoutParams().width = headerImageXY;
 

@@ -5,9 +5,12 @@ import android.content.Context;
 public class ServerURL {
 
 	public static String getDownload_question_link(long qusNumber ,String deviceImei, String langCode,Context con ) {
-		return  "http://xercesblue.in/newOnlineXamserver_samequestion/liquid_data/xport_xml.php?lastQuestionNumber="+qusNumber+"&appId="+Globals.APP_ID+"&deviceIMEI="+deviceImei+"&LangCode="+langCode+"&gcmId="+Globals.GCM_REG_ID+"&version_code="+Globals.getversion_code(con);
-				// "http://xercesblue.in/newOnlineXamserver_samequestion/liquid_data/xport_xml_all_setwise.php";
-				//"http://www.xercesblue.in/onlinexamserver/liquid_data/xport_xml.php?lastQuestionNumber="+qusNumber+"&appId="+Globals.APP_ID+"&deviceIMEI="+deviceImei+"&LangCode="+langCode+"&gcmId="+Globals.GCM_REG_ID+"&version_code="+Globals.getversion_code(con);
+		String link =  "http://xercesblue.in/newOnlineXamserver_samequestion/liquid_data/xport_xml.php?lastQuestionNumber="+qusNumber+"&appId="+Globals.APP_ID+"&deviceIMEI="+deviceImei+"&LangCode="+langCode+"&gcmId="+Globals.GCM_REG_ID+"&version_code="+Globals.getversion_code(con);
+		 				// "http://xercesblue.in/newOnlineXamserver_samequestion/liquid_data/xport_xml_all_setwise.php";
+		 				//"http://www.xercesblue.in/onlinexamserver/liquid_data/xport_xml.php?lastQuestionNumber="+qusNumber+"&appId="+Globals.APP_ID+"&deviceIMEI="+deviceImei+"&LangCode="+langCode+"&gcmId="+Globals.GCM_REG_ID+"&version_code="+Globals.getversion_code(con);
+				//Log.i("HARSH", "getDownload_question_link -->\n" +link);
+				
+		return link;
 	}
 	
 	public final static String getExam_Alert_link(Context con)

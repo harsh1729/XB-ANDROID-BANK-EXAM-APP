@@ -47,7 +47,7 @@ public class Activity_Parent_IntertialAds extends Activity_Parent {
 	
 	
 	private void showAds(){
-		if(Globals.getAppConfig(this).showAdds ==Globals.APP_TRUE && questionCount > 15)//
+		if(Globals.getAppConfig(this).showAdds ==Globals.APP_TRUE && questionCount > 20)//
 		{
 			switch (Globals.getAppConfig(this).adTypeInterId) {
 			case Globals.ADD_TYPE_INMOBI:

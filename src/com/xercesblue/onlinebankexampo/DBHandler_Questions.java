@@ -283,6 +283,56 @@ public class DBHandler_Questions extends SQLiteOpenHelper {
 		return arrayQues;
 	}
 
+	public  Object_Question getExamQuestionNextOrPrev(long examId , int quesNo , boolean isNext){
+		
+				//SELECT  Q.* ,E.AttemptLater,E.OptionNoSelected,E.QuestionNo,E.Id  FROM ExamsQuestion E 
+				//INNER JOIN Questions Q ON Q.QuesId = E.QuesId WHERE E.ExamId=3 AND Q.LangId = 1
+				Object_Question obj = null;
+				SQLiteDatabase db = this.getReadableDatabase();
+				String orderType = "";
+				String sqlQuery = "SELECT Q.* ,E."+DBHandler_ExamQuestions.KEY_EXAMQUESTIONS_ATTEMPT_LATER+
+						" , E."+DBHandler_ExamQuestions.KEY_EXAMQUESTIONS_OPTION_NO_SELECTED+
+						" , E."+DBHandler_ExamQuestions.KEY_EXAMQUESTIONS_QUESTION_NO+
+						" , E."+DBHandler_ExamQuestions.KEY_EXAMQUESTIONS_ID+
+						" FROM "+DBHandler_ExamQuestions.TABLE_NAME_EXAMQUESTIONS +" E "+
+						" INNER JOIN "+TABLE_NAME_QUES +" Q ON Q."+KEY_QUES_ID+
+						" = E."+DBHandler_ExamQuestions.KEY_EXAMQUESTIONS_QUES_ID +
+						" WHERE  E."+DBHandler_ExamQuestions.KEY_EXAMQUESTIONS_EXAM_ID+" = "+examId;
+						if(isNext){
+							sqlQuery+=" AND E."+DBHandler_ExamQuestions.KEY_EXAMQUESTIONS_QUESTION_NO+" > "+quesNo ;
+							orderType = " ASC ";
+						}else{
+							sqlQuery+=" AND E."+DBHandler_ExamQuestions.KEY_EXAMQUESTIONS_QUESTION_NO+" < "+quesNo ;
+							orderType = " DESC ";
+						}
+						sqlQuery+=" ORDER BY E."+DBHandler_ExamQuestions.KEY_EXAMQUESTIONS_QUESTION_NO +orderType+" LIMIT 1";
+				Cursor cursor = db.rawQuery(sqlQuery, null);
+		
+				try{
+					if(cursor != null){
+		
+						if(cursor.moveToFirst()){
+								
+								obj = getQuestion(cursor);
+								obj.questionNo = cursor.getInt(cursor.getColumnIndex(DBHandler_ExamQuestions.KEY_EXAMQUESTIONS_QUESTION_NO));
+								obj.attemptLater = cursor.getInt(cursor.getColumnIndex(DBHandler_ExamQuestions.KEY_EXAMQUESTIONS_ATTEMPT_LATER));
+								obj.optionSelected = cursor.getInt(cursor.getColumnIndex(DBHandler_ExamQuestions.KEY_EXAMQUESTIONS_OPTION_NO_SELECTED));
+								obj.examQuestionId =  cursor.getInt(cursor.getColumnIndex(DBHandler_ExamQuestions.KEY_EXAMQUESTIONS_ID));
+							
+						}
+					}
+				}
+				finally{
+					if (cursor != null)
+						cursor.close();
+				}
+		
+		
+				db.close();
+		
+				return obj;
+			}
+	
 	public  ArrayList<Object_Question> getExamQuestionsWithText(long examId){
 
 		//SELECT  Q.* ,E.AttemptLater,E.OptionNoSelected,E.QuestionNo,E.Id  FROM ExamsQuestion E 
