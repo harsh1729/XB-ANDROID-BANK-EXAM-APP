@@ -163,7 +163,7 @@ public class Activity_Settings_DownloadMore extends Activity_Parent {
 				txt.setPadding(0, 30, 0, 0);
 			}
 			txt.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-			txt.setText(cateName[i - 1] + "- " + noOfQues);
+			txt.setText(cateName[i - 1] + " " + noOfQues);
 
 			txt.setTextColor(this.getResources().getColor(R.color.app_black));
 			txt.setTextSize(Globals.getAppFontSize(this));

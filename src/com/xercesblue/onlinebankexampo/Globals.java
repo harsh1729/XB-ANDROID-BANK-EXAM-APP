@@ -26,7 +26,6 @@ import android.widget.ListView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.inmobi.monetization.IMBanner;
 
 public class Globals {
 	public static final int VOLLEY_TIMEOUT_MILLISECS = 10000;
@@ -40,6 +39,9 @@ public class Globals {
 	//public static final String AD_UNIT_ID_BANNER = "ca-app-pub-4880866047187616/3018903684";//"ca-app-pub-1764326035133434/9755228502";//"ca-app-pub-1764326035133434/3454466504";
 	//public static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-4880866047187616/4495636880";//"ca-app-pub-1764326035133434/3708694908";//"ca-app-pub-1764326035133434/6407932906";
 	
+	public static final long AD_INMOBI_BANNER_PLACEMENT_ID =Long.parseLong("1431974061373053") ;
+	public static final long AD_INMOBI_INTERTIAL_PLACEMENT_ID = Long.parseLong("1431974061374244");
+	public static final String AD_INMOBI_ACCOUNT_ID ="e38831527b0b4e8f9cf1411dbc59304d";
 	public static final String AD_INMOBI_PROPERTY_ID = "0441626db6ee4cb2954475a95e7ad2ef";//"53d0ef05be81426ea33d9e7005a32a94";//
 	public static  String GCM_REG_ID = "";
 	
@@ -269,25 +271,7 @@ public static int getversion_code(Context con)
 	}
 	
 }
-	public static Integer getOptimalSlotSize(Activity ctxt) {
-		 Display display = ((WindowManager) ctxt
-		 .getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-		        DisplayMetrics displayMetrics = new DisplayMetrics();
-		        display.getMetrics(displayMetrics);
-		        double density = displayMetrics.density;
-		        double width = displayMetrics.widthPixels;
-		        double height = displayMetrics.heightPixels;
-		int[][] maparray = { { IMBanner.INMOBI_AD_UNIT_728X90, 728, 90 }, {
-		            IMBanner.INMOBI_AD_UNIT_468X60, 468, 60 }, {
-		                IMBanner.INMOBI_AD_UNIT_320X50, 320, 50 } };
-		        for (int i = 0; i < maparray.length; i++) {
-		                if (maparray[i][1] * density <= width
-		                        && maparray[i][2] * density <= height) {
-		                    return maparray[i][0];
-		                }
-		            }
-		        return IMBanner.INMOBI_AD_UNIT_320X50;
-		    }
+	
 	static public Object_QuesCategory getQuesCatObj(int catId , ArrayList<Object_QuesCategory> arrayOfQuesCatObj){
 		Object_QuesCategory objCat=null;
 		for(Object_QuesCategory obj : arrayOfQuesCatObj){

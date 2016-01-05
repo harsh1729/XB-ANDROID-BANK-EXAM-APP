@@ -2,21 +2,21 @@ package com.xercesblue.onlinebankexampo;
 
 import java.util.Map;
 
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.inmobi.commons.InMobi;
-import com.inmobi.monetization.IMBanner;
-import com.inmobi.monetization.IMBannerListener;
-import com.inmobi.monetization.IMErrorCode;
+import com.inmobi.ads.InMobiAdRequestStatus;
+import com.inmobi.ads.InMobiBanner;
+import com.inmobi.ads.InMobiBanner.BannerAdListener;
+import com.inmobi.sdk.InMobiSdk;
+import com.startapp.android.publish.StartAppSDK;
 import com.startapp.android.publish.banner.Banner;
 
 public class Activity_Parent_Banner_Ads extends Activity_Parent_IntertialAds {
 
-	private IMBanner banner;
+	private InMobiBanner banner;
 	
 	
 	
@@ -27,8 +27,11 @@ public class Activity_Parent_Banner_Ads extends Activity_Parent_IntertialAds {
 			try{
 			if(Globals.getAppConfig(this).showAdds ==Globals.APP_TRUE){
 				
-				if(Globals.getAppConfig(this).adTypeId == Globals.ADD_TYPE_INMOBI )
-					InMobi.initialize(this, Globals.AD_INMOBI_PROPERTY_ID);
+				if(Globals.getAppConfig(this).adTypeId == Globals.ADD_TYPE_INMOBI && Globals.getAppConfig(this).adTypeInterId != Globals.ADD_TYPE_INMOBI )
+					//InMobi.initialize(this, Globals.AD_INMOBI_PROPERTY_ID);
+					InMobiSdk.init(this, Globals.AD_INMOBI_ACCOUNT_ID);
+				else if(Globals.getAppConfig(this).adTypeId == Globals.ADD_TYPE_STARTAPP && Globals.getAppConfig(this).adTypeInterId != Globals.ADD_TYPE_STARTAPP)
+					StartAppSDK.init(this, Globals.STARTAPP_DEVELOPER_ID,  Globals.STARTAPP_APP_ID, true);
 			}
 			}catch(Exception ex){
 				Log.i("HARSH", "Exception in Banner Init On create");
@@ -50,10 +53,10 @@ public class Activity_Parent_Banner_Ads extends Activity_Parent_IntertialAds {
 	/** Called before the activity is destroyed. */
 	@Override
 	public void onDestroy() {
-		if(banner!= null){
-			banner.destroy();
+		//if(banner!= null){
+			//banner.destroy();
 			
-		}
+		//}
 		super.onDestroy();
 	}
 	
@@ -85,41 +88,41 @@ public class Activity_Parent_Banner_Ads extends Activity_Parent_IntertialAds {
 
 		LinearLayout layout = (LinearLayout) findViewById(R.id.llytAdd);
 		
-		banner = new IMBanner(this,Globals.AD_INMOBI_PROPERTY_ID,Globals.getOptimalSlotSize(this)); //IMBanner.INMOBI_AD_UNIT_320X50);
+		//banner = new IMBanner(this,Globals.AD_INMOBI_PROPERTY_ID,Globals.getOptimalSlotSize(this)); //IMBanner.INMOBI_AD_UNIT_320X50);
+		banner = new InMobiBanner(this, Globals.AD_INMOBI_BANNER_PLACEMENT_ID);
 		final float scale = getResources().getDisplayMetrics().density;
-		int width = (int) (320 * scale + 0.5f);
-		int height = (int) (50 * scale + 0.5f);		
+		
+		int width =Globals.getScreenSize(this).x; //(int) (layout.getLayoutParams().width );//320* scale + 0.5f);
+		int height = (int) (50 * scale + 0.5f);	
+		Log.i("HARSH", "layout.getWidth() "+ width);
 		banner.setLayoutParams(new LinearLayout.LayoutParams(width, height));
 		banner.setRefreshInterval(30);
-		banner.setIMBannerListener(new IMBannerListener() {
-	        @Override
-	        public void onShowBannerScreen(IMBanner arg0) {
-	        	Log.i("HARSH", "onShowBannerScreen");
-	                }
-	            @Override
-	        public void onLeaveApplication(IMBanner arg0) {
-	            	Log.i("HARSH", "onLeaveApplication");
-	        }
-	        @Override
-	        public void onDismissBannerScreen(IMBanner arg0) {
-	        	Log.i("HARSH", "onDismissBannerScreen");
-	        }
-	                @Override
-	        public void onBannerRequestFailed(IMBanner banner, IMErrorCode errorCode) {
-	                	Log.i("HARSH", "onBannerRequestFailed");
-	                	banner.loadBanner();
-	        }
-	        @Override
-	        public void onBannerRequestSucceeded(IMBanner arg0) {
-	        	Log.i("HARSH", "onBannerRequestSucceeded");
-	                }
-	                @Override
-	        public void onBannerInteraction(IMBanner arg0, Map<String, String> arg1) {
-	                	Log.i("HARSH", "onBannerInteraction");
-	        }
-	    });
+		banner.setListener(new BannerAdListener() {
+			@Override
+			public void onAdLoadSucceeded(InMobiBanner ad){ 
+			}
+			@Override
+			public void onAdLoadFailed(InMobiBanner ad, InMobiAdRequestStatus statusCode){
+			}
+			@Override
+			public void onAdDisplayed(InMobiBanner ad) {
+			}
+			@Override
+			public void onAdDismissed(InMobiBanner ad) {
+			}
+			@Override
+			public void onAdInteraction(InMobiBanner ad, Map<Object, Object> params) {
+			}
+			@Override
+			public void onUserLeftApplication(InMobiBanner ad) {
+			}
+			@Override
+			public void onAdRewardActionCompleted(InMobiBanner ad, Map<Object, Object> rewards){
+			}
+			});
 		
-		banner.loadBanner();
+		banner.setAnimationType(InMobiBanner.AnimationType.ROTATE_HORIZONTAL_AXIS);
+		banner.load();
 		layout.addView(banner);
 	}
 	
@@ -147,7 +150,7 @@ public class Activity_Parent_Banner_Ads extends Activity_Parent_IntertialAds {
 		// Create new StartApp banner
 		Banner startAppBanner = new Banner(this);
 		final float scale = getResources().getDisplayMetrics().density;
-		int width = (int) (320 * scale + 0.5f);
+		int width = Globals.getScreenSize(this).x;// (int) (320 * scale + 0.5f);
 		int height = (int) (50 * scale + 0.5f);
 		LinearLayout.LayoutParams bannerParameters = 
 				new LinearLayout.LayoutParams(

@@ -12,8 +12,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
@@ -138,7 +136,7 @@ public class Activity_Splash extends Activity {
 		//ImageView imgViewName = (ImageView)findViewById(R.id.imgLogoName);
 
 		int screenWidth = Globals.getScreenSize(this).x;
-		int logoWidth = screenWidth/100 * 60 ;// 17%
+		int logoWidth = screenWidth/100 * 80 ;// 17%
 		//int nameWidth = screenWidth/100 * 78 ;// 64%
 
 		Options options = new BitmapFactory.Options();

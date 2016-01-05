@@ -11,12 +11,12 @@ import android.graphics.BitmapFactory.Options;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
@@ -61,6 +61,17 @@ public class Activity_Home extends Activity_Parent {
 		Custom_AppEulaClass eula = new Custom_AppEulaClass(this);
 		eula.show();
 		
+		//Resize Image Promo ratio is 700 x 243
+		ImageView imgPromo = (ImageView)findViewById(R.id.imgPromotional);
+		int width = Globals.getScreenSize(this).x;
+		int height = (int) ((float)width  * (float)243 / 700.0);
+		
+		LinearLayout.LayoutParams params =(LinearLayout.LayoutParams)imgPromo.getLayoutParams();
+		
+		params.height = height;
+		params.width = width;
+		Log.i("HARSH", "Height" + height + "  Width "+ width);
+		imgPromo.setLayoutParams(params);
 		
 	}
 
@@ -78,7 +89,7 @@ public class Activity_Home extends Activity_Parent {
 		Log.i("HARSH", "TotalWidth" + width);
 		Log.i("HARSH", "IconWidth" + btnWidth);
 		int btnPadding = Globals.getButtonsPadding(btnWidth);
-		Log.i("HARSH", "IconPAdding" + btnPadding);
+		Log.i("HARSH", "IconPadding" + btnPadding);
 		//btnWidth = btnWidth - 2 *btnPadding;
 
 		ArrayList<Object_Category> listCat = db.getCategories();
@@ -86,7 +97,7 @@ public class Activity_Home extends Activity_Parent {
 
 		LinearLayout llRow = null;	
 		LayoutParams llParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);		
-		llParams.topMargin =3*btnSpace/4;
+		llParams.topMargin =btnSpace/4;
 
 		for(int i = 0 ; i<listCat.size();i++){
 

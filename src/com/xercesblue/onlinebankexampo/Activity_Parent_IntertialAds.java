@@ -5,12 +5,11 @@ import java.util.Map;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.inmobi.ads.InMobiAdRequestStatus;
+import com.inmobi.ads.InMobiInterstitial;
+import com.inmobi.sdk.InMobiSdk;
 //import com.chartboost.sdk.CBLocation;
 //import com.chartboost.sdk.Chartboost;
-import com.inmobi.commons.InMobi;
-import com.inmobi.monetization.IMErrorCode;
-import com.inmobi.monetization.IMInterstitial;
-import com.inmobi.monetization.IMInterstitialListener;
 import com.startapp.android.publish.StartAppAd;
 import com.startapp.android.publish.StartAppSDK;
 //import mobi.vserv.android.ads.AdPosition;
@@ -22,9 +21,9 @@ public class Activity_Parent_IntertialAds extends Activity_Parent {
 	//private VservManager manager;
 	protected StartAppAd startAppAd = null;
 	protected int questionCount = 0;
-	private boolean showingChartboost = false;
+	//private boolean showingChartboost = false;
 
-	IMInterstitial interstitial;
+	InMobiInterstitial interstitial;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,14 +31,15 @@ public class Activity_Parent_IntertialAds extends Activity_Parent {
 		if(Globals.getAppConfig(this).showAdds ==Globals.APP_TRUE){
 						
 			if(Globals.getAppConfig(this).adTypeInterId == Globals.ADD_TYPE_INMOBI )
-				InMobi.initialize(this, Globals.AD_INMOBI_PROPERTY_ID);
+				//InMobi.initialize(this, Globals.AD_INMOBI_PROPERTY_ID);
+				InMobiSdk.init(this, Globals.AD_INMOBI_ACCOUNT_ID);
 			else if(Globals.getAppConfig(this).adTypeInterId == Globals.ADD_TYPE_STARTAPP){
 				startAppAd = new StartAppAd(this);
 				StartAppSDK.init(this, Globals.STARTAPP_DEVELOPER_ID,  Globals.STARTAPP_APP_ID, true);
 			}else if(Globals.getAppConfig(this).adTypeInterId == Globals.ADD_TYPE_CHARTBOOST){
 				//Chartboost.startWithAppId(this, Globals.CHARTBOOST_APP_ID, Globals.CHARTBOOST_SIGNATURE_ID);
 			    //Chartboost.onCreate(this);
-			    showingChartboost = true;
+			   // showingChartboost = true;
 			}
 		}
 	}
@@ -81,48 +81,38 @@ public class Activity_Parent_IntertialAds extends Activity_Parent {
 		if(interstitial == null){
 			System.out.println("interstitial is null");
 		
-		interstitial = new IMInterstitial(this, Globals.AD_INMOBI_PROPERTY_ID);
-		interstitial.setIMInterstitialListener(new IMInterstitialListener() {
-	        public void onShowInterstitialScreen(IMInterstitial arg0) {
-	        	System.out.println("onShowInterstitialScreen");
-	        }
-	        @Override
-	        public void onLeaveApplication(IMInterstitial arg0) {
-	        	System.out.println("onLeaveApplication");
-	        }
-	        @Override
-	        public void onDismissInterstitialScreen(IMInterstitial arg0) {
-	        	System.out.println("onDismissInterstitialScreen");
-	        }
-	        @Override
-	        public void onInterstitialLoaded(IMInterstitial arg0) {
-	        	System.out.println("onInterstitialLoaded");
-	        	showInMobiInterstitial();
-	        }
-	        @Override
-	        public void onInterstitialInteraction(IMInterstitial interstitial, Map<String, String> params) {                
-	        	System.out.println("onInterstitialInteraction");
-	        }
-	        @Override
-	        public void onInterstitialFailed(IMInterstitial arg0, IMErrorCode arg1) {
-	        	System.out.println("onInterstitialFailed");
-	        	interstitial.loadInterstitial();
-	        }
-	    }); 
-		
+			InMobiInterstitial.InterstitialAdListener interstitialAdListener = new InMobiInterstitial.InterstitialAdListener() {
+				@Override
+				public void onAdLoadSucceeded(InMobiInterstitial ad) {
+				if(ad.isReady()){
+				ad.show();
+				}
+				}
+				@Override
+				public void onAdDisplayed(InMobiInterstitial ad) {}
+				@Override
+				public void onAdDismissed(InMobiInterstitial ad) {}
+				@Override
+				public void onAdInteraction(InMobiInterstitial ad, Map<Object, Object> params) {}
+				@Override
+				public void onAdRewardActionCompleted(InMobiInterstitial ad, Map<Object, Object> rewards) {}
+				@Override
+				public void onUserLeftApplication(InMobiInterstitial ad) {}
+				@Override
+				public void onAdLoadFailed(InMobiInterstitial arg0,
+						InMobiAdRequestStatus arg1) {
+					// TODO Auto-generated method stub
+					
+				}
+				};
+				
+		interstitial = new InMobiInterstitial(this, Globals.AD_INMOBI_INTERTIAL_PLACEMENT_ID, interstitialAdListener);
+
 		}
 	   
-		interstitial.loadInterstitial();
+		interstitial.load();
 	}
-	private void showInMobiInterstitial() {
-		Log.i("HARSH", "showInterstitial");
-		if (interstitial.getState() ==IMInterstitial.State.READY)
-    		interstitial.show();
-    	else {
-	      Log.i("HARSH", "Interstitial ad was not ready to be shown.");
-	    }
-	    
-	  }
+	
 	
 	private void showChartBoostIntertial(){
 		
