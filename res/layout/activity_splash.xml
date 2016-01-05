@@ -8,15 +8,15 @@
     tools:context=".Activity_Splash" >
 
 
-    <ImageView
-        android:id="@+id/imgLogoName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="40dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/bankkabila" />
+<!--     <ImageView -->
+<!--         android:id="@+id/imgLogoName" -->
+<!--         android:layout_width="match_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_centerHorizontal="true" -->
+<!--         android:layout_alignParentTop="true" -->
+<!--         android:layout_marginTop="40dp" -->
+<!--         android:scaleType="fitCenter" -->
+<!--         android:src="@drawable/bankkabila" /> -->
 
 
 
@@ -24,9 +24,8 @@
         android:id="@+id/imgLogoXB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
+        android:layout_centerInParent="true"
+        android:paddingTop="100dp"
         android:src="@drawable/xb" />
     
 </RelativeLayout>
